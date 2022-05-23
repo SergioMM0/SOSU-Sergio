@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="510.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.NewPatientCTLL">
+   <children>
+      <Label layoutX="45.0" layoutY="50.0" text="Name" />
+      <Label layoutX="45.0" layoutY="120.0" text="Date of Birth" />
+      <TextField fx:id="nameField" layoutX="160.0" layoutY="45.0" prefHeight="0.0" prefWidth="280.0" />
+      <Label layoutX="45.0" layoutY="260.0" text="CPR" />
+      <Label layoutX="45.0" layoutY="295.0" text="Phone Number" />
+      <Label layoutX="45.0" layoutY="155.0" text="Gender" />
+      <Label layoutX="45.0" layoutY="190.0" text="Weight" />
+      <Label layoutX="45.0" layoutY="225.0" text="Height" />
+      <Label layoutX="45.0" layoutY="85.0" text="Family name" />
+      <TextField fx:id="familyNameField" layoutX="160.0" layoutY="80.0" prefHeight="0.0" prefWidth="280.0" />
+      <ComboBox fx:id="genderComboBox" layoutX="160.0" layoutY="150.0" prefHeight="0.0" prefWidth="280.0" />
+      <TextField fx:id="weightField" layoutX="160.0" layoutY="185.0" prefHeight="0.0" prefWidth="280.0" />
+      <TextField fx:id="heightField" layoutX="160.0" layoutY="220.0" prefHeight="0.0" prefWidth="280.0" />
+      <TextField fx:id="phoneNumberField" layoutX="160.0" layoutY="290.0" prefHeight="0.0" prefWidth="280.0" />
+      <TextField fx:id="cprField" layoutX="160.0" layoutY="255.0" prefHeight="0.0" prefWidth="280.0" />
+      <Label layoutX="45.0" layoutY="330.0" text="Observations" />
+      <TextField fx:id="observationsField" layoutX="160.0" layoutY="325.0" prefHeight="115.0" prefWidth="280.0" />
+      <Button fx:id="createButton" layoutX="340.0" layoutY="460.0" mnemonicParsing="false" onAction="#createPatient" prefHeight="25.0" prefWidth="100.0" text="Create" />
+      <Button fx:id="cancelButton" layoutX="40.0" layoutY="460.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="100.0" text="Cancel" />
+      <DatePicker fx:id="dateOfBirthPicker" layoutX="160.0" layoutY="115.0" prefHeight="26.0" prefWidth="280.0" />
+   </children>
+</AnchorPane>

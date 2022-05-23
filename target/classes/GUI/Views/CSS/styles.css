@@ -1,0 +1,36 @@
+
+.insertimages1{
+    -fx-background-image: url("/res/one.png");
+}
+
+.insertimages2{
+    -fx-background-image: url("/res/two.png");
+}
+
+.insertimages3{
+    -fx-background-image: url("/res/three.png");
+}
+
+.insertimages4{
+    -fx-background-image: url("/res/four.png");
+}
+
+.insertimages5{
+     -fx-background-image: url("/res/five.png");
+ }
+
+.button{
+    -fx-background-color: #FE776F;
+}
+
+#loginBtn{
+    -fx-background-color: #ff3c2f;
+}
+.lightgreen:hover{
+    -fx-background-color: #76c39b;
+    -fx-font-weight: Bold;
+}
+
+
+
+

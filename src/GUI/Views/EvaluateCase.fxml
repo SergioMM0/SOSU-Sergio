@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="660.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.EvaluateCaseCTLL">
+    <children>
+        <Label layoutX="75.0" layoutY="44.0" prefHeight="17.0" prefWidth="77.0" text="Category" />
+        <Button layoutX="792.0" layoutY="535.0" mnemonicParsing="false" onAction="#close" text="Back" />
+        <Button layoutX="684.0" layoutY="535.0" mnemonicParsing="false" onAction="#openQuestionnaire" text="Evaluate case" />
+        <Label fx:id="categoryNameLabel" layoutX="240.0" layoutY="44.0" text="Name" />
+        <Label layoutX="75.0" layoutY="105.0" text="SubCategory" />
+        <Label fx:id="subCategoryLabel" layoutX="240.0" layoutY="105.0" text="Issue" />
+        <Label layoutX="75.0" layoutY="191.0" text="Case Id" />
+        <Label fx:id="caseIdLabel" layoutX="240.0" layoutY="191.0" text="&lt;case id&gt;" />
+        <Label layoutX="75.0" layoutY="245.0" text="CaseName" />
+        <Label fx:id="caseNameLabel" layoutX="240.0" layoutY="245.0" text="&lt;case name&gt;" />
+        <Label layoutX="75.0" layoutY="305.0" text="Description of the condition " />
+        <Label layoutX="75.0" layoutY="362.0" text="Cause" />
+        <Label fx:id="causeLabel" layoutX="240.0" layoutY="362.0" text="&lt;text&gt;" />
+        <Label fx:id="descriptionLabel" layoutX="240.0" layoutY="305.0" text="&lt;description&gt;" />
+        <Label layoutX="75.0" layoutY="418.0" text="Causal diagnose" />
+        <Label fx:id="diagonseLabel" layoutX="240.0" layoutY="418.0" text="&lt;causal diagnose&gt;" />
+        <Label layoutX="75.0" layoutY="474.0" text="Causal condition" />
+        <Label fx:id="conditionLabel" layoutX="240.0" layoutY="474.0" text="&lt;causal_condition&gt;" />
+        <Label layoutX="75.0" layoutY="536.0" text="Citizens want goal" />
+        <Label fx:id="goalLabel" layoutX="240.0" layoutY="536.0" text="&lt;citizens want goal&gt;" />
+        <Separator layoutX="45.0" layoutY="163.0" prefHeight="0.0" prefWidth="269.0" />
+        <Label layoutX="520.0" layoutY="98.0" text="First name" />
+        <Label fx:id="firstNameLabel" layoutX="700.0" layoutY="98.0" text="&lt;first name&gt;" />
+        <Label layoutX="520.0" layoutY="144.0" text="Last name" />
+        <Label fx:id="lastNameLabel" layoutX="700.0" layoutY="135.0" text="&lt;last name&gt;" />
+        <Label layoutX="520.0" layoutY="191.0" text="Date of Birth  " />
+        <Label fx:id="dataOfBirthLabel" layoutX="700.0" layoutY="171.0" text="&lt;date of birth&gt;  " />
+        <Label layoutX="520.0" layoutY="245.0" text="CPR number" />
+        <Label fx:id="cprLabel" layoutX="700.0" layoutY="237.0" text="&lt;cpr&gt;" />
+        <Label layoutX="520.0" layoutY="305.0" text="phone number" />
+        <Label fx:id="phoneLabel" layoutX="700.0" layoutY="305.0" text="&lt;phone number&gt;" />
+        <Separator layoutX="441.0" layoutY="42.0" orientation="VERTICAL" prefHeight="558.0" prefWidth="6.0" />
+    </children>
+</AnchorPane>

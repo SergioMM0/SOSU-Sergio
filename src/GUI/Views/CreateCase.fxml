@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.NewCaseCTLL">
+   <children>
+      <Label fx:id="caseNameLBL" layoutX="40.0" layoutY="40.0" text="Case name:" />
+      <Label layoutX="490.0" layoutY="40.0" text="Category" />
+      <ComboBox fx:id="subcategoryComboBox" layoutX="575.0" layoutY="75.0" prefHeight="26.0" prefWidth="220.0" />
+      <Label layoutX="490.0" layoutY="80.0" text="Subcategory" />
+      <ComboBox fx:id="categoryComboBox" layoutX="575.0" layoutY="35.0" onAction="#catSelected" prefHeight="26.0" prefWidth="220.0" />
+      <Label layoutX="40.0" layoutY="100.0" prefHeight="18.0" prefWidth="170.0" text="Description of the condition:" />
+      <Button fx:id="saveChangesBtn" layoutX="689.0" layoutY="634.0" mnemonicParsing="false" onAction="#saveNewCase" prefHeight="40.0" prefWidth="130.0" text="Create case" />
+      <TextField fx:id="nameField" layoutX="125.0" layoutY="36.0" prefHeight="26.0" prefWidth="320.0" />
+      <Button fx:id="cancelBtn" layoutX="35.0" layoutY="634.0" mnemonicParsing="false" onAction="#cancelCreate" prefHeight="40.0" prefWidth="130.0" text="Cancel" />
+      <TextArea fx:id="descriptionOfConditionText" layoutX="40.0" layoutY="135.0" prefHeight="480.0" prefWidth="780.0" />
+   </children>
+</AnchorPane>

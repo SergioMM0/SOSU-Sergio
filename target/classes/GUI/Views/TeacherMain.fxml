@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+<TabPane fx:id="tabPane" prefHeight="660.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.TeacherMainCTLL">
+   <tabs>
+      <Tab fx:id="studentsGroupsTab" text="Students/Groups">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="305.0" layoutY="45.0" mnemonicParsing="false" onAction="#addNewStudent" prefHeight="35.0" prefWidth="120.0" text="Add new student" />
+                  <TableView fx:id="studentsTable" layoutX="40.0" layoutY="45.0" prefHeight="525.0" prefWidth="230.0">
+                    <columns>
+                      <TableColumn fx:id="studentNameCol" prefWidth="249.60001220703126" text="Students" />
+                    </columns>
+                  </TableView>
+                  <Button layoutX="305.0" layoutY="100.0" mnemonicParsing="false" onAction="#editStudent" prefHeight="35.0" prefWidth="120.0" text="Edit student" />
+                  <Button layoutX="305.0" layoutY="155.0" mnemonicParsing="false" onAction="#deleteStudent" prefHeight="35.0" prefWidth="120.0" text="Delete student" />
+                  <Button layoutX="450.0" layoutY="45.0" mnemonicParsing="false" onAction="#createGroup" prefHeight="35.0" prefWidth="120.0" text="Create group" />
+                  <Button layoutX="450.0" layoutY="100.0" mnemonicParsing="false" onAction="#editGroup" prefHeight="35.0" prefWidth="120.0" text="Edit group" />
+                  <Button layoutX="450.0" layoutY="155.0" mnemonicParsing="false" onAction="#deleteGroup" prefHeight="35.0" prefWidth="120.0" text="Delete group" />
+                  <TableView fx:id="groupsTable" layoutX="605.0" layoutY="45.0" onMouseClicked="#groupIsSelected" prefHeight="320.0" prefWidth="250.0">
+                     <columns>
+                        <TableColumn fx:id="groupNameCol" prefWidth="249.60001220703126" text="Groups" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="320.0" layoutY="235.0" mnemonicParsing="false" onAction="#addStudentToGroup" prefHeight="35.0" prefWidth="240.0" text="Add student to group..." />
+                  <Button layoutX="320.0" layoutY="285.0" mnemonicParsing="false" onAction="#removeStudentFromGroup" prefHeight="35.0" prefWidth="240.0" text="Remove student from group" />
+                  <TableView fx:id="participantsTable" layoutX="605.0" layoutY="390.0" prefHeight="180.0" prefWidth="250.0">
+                     <columns>
+                        <TableColumn fx:id="participantsNameCol" prefWidth="249.60001220703126" text="Participants" />
+                     </columns>
+                  </TableView>
+                  <Line endX="-280.0" endY="96.0" layoutX="575.0" layoutY="120.0" startX="5.0" startY="96.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Templates">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="860.0">
+               <children>
+                  <Button layoutX="660.0" layoutY="100.0" mnemonicParsing="false" onAction="#addNewPatient" prefHeight="40.0" prefWidth="180.0" text="Add new patient" />
+                  <Button layoutX="660.0" layoutY="155.0" mnemonicParsing="false" onAction="#addNewCase" prefHeight="40.0" prefWidth="180.0" text="Add new case" />
+                  <Button layoutX="660.0" layoutY="45.0" mnemonicParsing="false" onAction="#assignCaseToGroup" prefHeight="40.0" prefWidth="180.0" text="Assign case to group" />
+                  <Button layoutX="660.0" layoutY="555.0" mnemonicParsing="false" onAction="#logOut" prefHeight="40.0" prefWidth="180.0" text="Close session" />
+                  <Button layoutX="660.0" layoutY="265.0" mnemonicParsing="false" onAction="#duplicatePatient" prefHeight="40.0" prefWidth="180.0" text="Duplicate patient" />
+                  <Button layoutX="660.0" layoutY="320.0" mnemonicParsing="false" onAction="#duplicateCase" prefHeight="40.0" prefWidth="180.0" text="Duplicate case" />
+                  <Button layoutX="660.0" layoutY="375.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="40.0" prefWidth="180.0" text="Delete patient" />
+                  <Button layoutX="660.0" layoutY="430.0" mnemonicParsing="false" onAction="#deleteCase" prefHeight="40.0" prefWidth="180.0" text="Delete case" />
+                  <TableView fx:id="casesListGV" layoutX="40.0" layoutY="45.0" onMouseClicked="#caseIsSelected" prefHeight="550.0" prefWidth="270.0">
+                     <columns>
+                        <TableColumn fx:id="nameColCasesGV" prefWidth="269.6000122070312" text="Case templates" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="patientsListGV" layoutX="350.0" layoutY="45.0" onMouseClicked="#patientIsSelected" prefHeight="550.0" prefWidth="270.0">
+                     <columns>
+                        <TableColumn fx:id="nameColPatientsGV" prefWidth="269.6000122070312" text="Patient templates" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="groupTab" text="Group info">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="269.0" layoutY="110.0" mnemonicParsing="false" onAction="#openGradeCase" prefHeight="35.0" prefWidth="150.0" text="Grade case" />
+                  <Button layoutX="269.0" layoutY="170.0" mnemonicParsing="false" onAction="#markCaseAsGraded" prefHeight="35.0" prefWidth="150.0" text="Mark case as graded" />
+                  <Button layoutX="458.0" layoutY="170.0" mnemonicParsing="false" onAction="#unmarkCaseAsGraded" prefHeight="35.0" prefWidth="150.0" text="Unmark case as graded" />
+                  <AnchorPane layoutX="40.0" layoutY="14.0" prefHeight="65.0" prefWidth="800.0" style="-fx-background-color: ffffff;">
+                     <children>
+                        <Label layoutX="66.0" layoutY="8.0" text="Group name:" />
+                        <Label layoutX="66.0" layoutY="38.0" text="Students:" />
+                        <Label fx:id="studentNamesLBL" layoutX="166.0" layoutY="38.0" prefWidth="350.0" text="&lt;Student names&gt;" />
+                        <Label fx:id="groupNameLBL" layoutX="166.0" layoutY="8.0" prefWidth="350.0" text="&lt;Group name&gt;" />
+                        <Button layoutX="550.0" layoutY="17.0" mnemonicParsing="false" onAction="#openManageGroup" prefHeight="30.0" prefWidth="150.0" text="Manage group" />
+                     </children>
+                  </AnchorPane>
+                  <Button layoutX="269.0" layoutY="290.0" mnemonicParsing="false" onAction="#unassignSelectedCase" prefHeight="35.0" prefWidth="150.0" text="Unassign case" textOverrun="CLIP" />
+                  <Button layoutX="458.0" layoutY="110.0" mnemonicParsing="false" onAction="#openGradedCase" prefHeight="35.0" prefWidth="150.0" text="See graded case" />
+                  <TableView fx:id="casesAssignedList" layoutX="40.0" layoutY="110.0" onMouseClicked="#assignedCaseIsSelected" prefHeight="465.0" prefWidth="200.0">
+                     <columns>
+                        <TableColumn fx:id="nameColCases" prefWidth="199.20001220703125" text="Cases assigned" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="casesGradedList" layoutX="640.0" layoutY="110.0" onMouseClicked="#gradedCaseIsSelected" prefHeight="465.0" prefWidth="200.0">
+                     <columns>
+                        <TableColumn fx:id="nameColCasesGraded" prefWidth="199.20001220703125" text="Cases graded" />
+                     </columns>
+                  </TableView>
+               </children></AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="caseTab" text="Case info">
+         <content>
+            <AnchorPane prefHeight="470.0" prefWidth="860.0">
+               <children>
+                  <Label layoutX="40.0" layoutY="40.0" text="Case name:" />
+                  <Label layoutX="514.0" layoutY="40.0" text="Category" />
+                  <ComboBox fx:id="caseSubcategoryComboBox" layoutX="599.0" layoutY="75.0" prefHeight="26.0" prefWidth="220.0" />
+                  <Label layoutX="514.0" layoutY="79.0" text="Subcategory" />
+                  <ComboBox fx:id="caseCategoryComboBox" layoutX="599.0" layoutY="35.0" onMouseClicked="#categorySelected" prefHeight="26.0" prefWidth="220.0" />
+                  <Label layoutX="40.0" layoutY="100.0" prefHeight="18.0" prefWidth="170.0" text="Description of the case:" />
+                  <Button layoutX="689.0" layoutY="540.0" mnemonicParsing="false" onAction="#saveChangesOnCase" prefHeight="40.0" prefWidth="130.0" text="Save changes" />
+                  <TextField fx:id="caseNameField" layoutX="125.0" layoutY="36.0" prefHeight="26.0" prefWidth="320.0" />
+                  <TextArea fx:id="descriptionOfConditionText" layoutX="40.0" layoutY="137.0" prefHeight="380.0" prefWidth="780.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="patientOverviewTab" text="Patient overview">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="40.0" layoutY="40.0" text="Name" />
+                  <Label layoutX="40.0" layoutY="120.0" text="Date of Birth" />
+                  <Label layoutX="40.0" layoutY="280.0" text="CPR" />
+                  <Label layoutX="40.0" layoutY="320.0" text="Phone Number" />
+                  <Label layoutX="40.0" layoutY="160.0" text="Gender" />
+                  <Label layoutX="40.0" layoutY="200.0" text="Weight" />
+                  <Label layoutX="40.0" layoutY="240.0" text="Height" />
+                  <Label layoutX="40.0" layoutY="80.0" text="Family name" />
+                  <Line endX="-100.0" endY="465.0" layoutX="245.0" layoutY="110.0" startX="-100.0" startY="-85.0" />
+                  <Line endX="-100.0" endY="465.0" layoutX="565.0" layoutY="110.0" startX="-100.0" startY="-85.0" />
+                  <Button layoutX="230.0" layoutY="536.0" mnemonicParsing="false" onAction="#newObservation" prefHeight="35.0" prefWidth="150.0" text="New observation" />
+                  <Label fx:id="medicalHistoryLBL" layoutX="635.0" layoutY="30.0" text="Medical history" />
+                  <TextArea fx:id="medicalHistoryTextArea" layoutX="485.0" layoutY="67.0" prefHeight="505.0" prefWidth="365.0" />
+                  <Button layoutX="230.0" layoutY="351.0" mnemonicParsing="false" onAction="#updatePatient" prefHeight="35.0" prefWidth="150.0" text="Update patient" />
+                  <TextField fx:id="nameField" layoutX="165.0" layoutY="35.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextField fx:id="familyNameField" layoutX="165.0" layoutY="75.0" prefHeight="25.0" prefWidth="280.0" />
+                  <ComboBox fx:id="genderComboBox" layoutX="165.0" layoutY="155.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextField fx:id="weightField" layoutX="165.0" layoutY="195.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextField fx:id="heightField" layoutX="165.0" layoutY="235.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextField fx:id="phoneNumberField" layoutX="165.0" layoutY="315.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextField fx:id="cprField" layoutX="165.0" layoutY="275.0" prefHeight="25.0" prefWidth="280.0" />
+                  <DatePicker fx:id="dateOfBirthPicker" layoutX="165.0" layoutY="115.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextArea fx:id="newObservationTextArea" layoutX="165.0" layoutY="430.0" prefHeight="95.0" prefWidth="280.0" />
+                  <Label layoutX="40.0" layoutY="465.0" text="New observation:" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>

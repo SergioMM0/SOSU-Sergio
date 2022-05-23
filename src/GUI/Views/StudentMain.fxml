@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+<TabPane prefHeight="660.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.StudentMainCTLL">
+   <tabs>
+      <Tab text="General">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="evaluateCaseButton" disable="true" layoutX="340.0" layoutY="130.0" mnemonicParsing="false" onAction="#evaluateCase" prefHeight="50.0" prefWidth="200.0" text="Evaluate case" />
+                  <Button layoutX="340.0" layoutY="207.0" mnemonicParsing="false" onAction="#seeGradedCase" prefHeight="50.0" prefWidth="200.0" text="See graded case" />
+                  <AnchorPane layoutX="40.0" layoutY="14.0" prefHeight="65.0" prefWidth="800.0" style="-fx-background-color: ffffff;">
+                     <children>
+                        <Label layoutX="66.0" layoutY="8.0" text="Group name:" />
+                        <Label layoutX="66.0" layoutY="38.0" text="Students:" />
+                        <Label fx:id="studentLBL" layoutX="166.0" layoutY="38.0" prefWidth="350.0" text="&lt;Student names&gt;" />
+                        <Label fx:id="groupLBL" layoutX="166.0" layoutY="8.0" prefWidth="350.0" text="&lt;Group name&gt;" />
+                     </children>
+                  </AnchorPane>
+                  <TableView fx:id="casesAssignedList" layoutX="40.0" layoutY="100.0" onMouseClicked="#caseAssignedIsSelected" prefHeight="480.0" prefWidth="250.0">
+                    <columns>
+                      <TableColumn fx:id="nameCOLCasesAssigned" prefWidth="249.60001220703126" text="Cases assigned" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="casesGradedList" layoutX="590.0" layoutY="100.0" onMouseClicked="#caseGradedIsSelected" prefHeight="480.0" prefWidth="250.0">
+                     <columns>
+                        <TableColumn fx:id="nameCOLCasesGraded" prefWidth="249.60001220703126" text="Cases graded" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="caseTab" text="Case info">
+         <content>
+            <AnchorPane prefHeight="470.0" prefWidth="860.0">
+               <children>
+                  <Label layoutX="40.0" layoutY="40.0" text="Case name:" />
+                  <Label layoutX="514.0" layoutY="40.0" text="Category" />
+                  <ComboBox fx:id="caseSubcategoryComboBox" layoutX="599.0" layoutY="75.0" prefHeight="26.0" prefWidth="220.0" />
+                  <Label layoutX="514.0" layoutY="79.0" text="Subcategory" />
+                  <ComboBox fx:id="caseCategoryComboBox" layoutX="599.0" layoutY="35.0" onMouseClicked="#categorySelected" prefHeight="26.0" prefWidth="220.0" />
+                  <Label layoutX="40.0" layoutY="100.0" prefHeight="18.0" prefWidth="170.0" text="Description of the case:" />
+                  <Button layoutX="689.0" layoutY="540.0" mnemonicParsing="false" onAction="#saveChangesOnCase" prefHeight="40.0" prefWidth="130.0" text="Save changes" />
+                  <TextField fx:id="caseNameField" layoutX="125.0" layoutY="36.0" prefHeight="26.0" prefWidth="320.0" />
+                  <TextArea fx:id="descriptionOfConditionText" layoutX="40.0" layoutY="137.0" prefHeight="380.0" prefWidth="780.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="patientOverviewTab" text="Patient overview">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="40.0" layoutY="40.0" text="Name" />
+                  <Label layoutX="40.0" layoutY="120.0" text="Date of Birth" />
+                  <Label layoutX="40.0" layoutY="280.0" text="CPR" />
+                  <Label layoutX="40.0" layoutY="320.0" text="Phone Number" />
+                  <Label layoutX="40.0" layoutY="160.0" text="Gender" />
+                  <Label layoutX="40.0" layoutY="200.0" text="Weight" />
+                  <Label layoutX="40.0" layoutY="240.0" text="Height" />
+                  <Label layoutX="40.0" layoutY="80.0" text="Family name" />
+                  <Line endX="-100.0" endY="465.0" layoutX="245.0" layoutY="110.0" startX="-100.0" startY="-85.0" />
+                  <Line endX="-100.0" endY="465.0" layoutX="565.0" layoutY="110.0" startX="-100.0" startY="-85.0" />
+                  <Button layoutX="230.0" layoutY="536.0" mnemonicParsing="false" onAction="#newObservation" prefHeight="35.0" prefWidth="150.0" text="New observation" />
+                  <Label fx:id="medicalHistoryLBL" layoutX="635.0" layoutY="30.0" text="Medical history" />
+                  <TextArea fx:id="medicalHistoryTextArea" layoutX="485.0" layoutY="67.0" prefHeight="505.0" prefWidth="365.0" />
+                  <Button layoutX="230.0" layoutY="351.0" mnemonicParsing="false" onAction="#updatePatient" prefHeight="35.0" prefWidth="150.0" text="Update patient" />
+                  <TextField fx:id="nameField" layoutX="165.0" layoutY="35.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextField fx:id="familyNameField" layoutX="165.0" layoutY="75.0" prefHeight="25.0" prefWidth="280.0" />
+                  <ComboBox fx:id="genderComboBox" layoutX="165.0" layoutY="155.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextField fx:id="weightField" layoutX="165.0" layoutY="195.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextField fx:id="heightField" layoutX="165.0" layoutY="235.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextField fx:id="phoneNumberField" layoutX="165.0" layoutY="315.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextField fx:id="cprField" layoutX="165.0" layoutY="275.0" prefHeight="25.0" prefWidth="280.0" />
+                  <DatePicker fx:id="dateOfBirthPicker" layoutX="165.0" layoutY="115.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextArea fx:id="newObservationTextArea" layoutX="165.0" layoutY="430.0" prefHeight="95.0" prefWidth="280.0" />
+                  <Label layoutX="40.0" layoutY="465.0" text="New observation:" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>
