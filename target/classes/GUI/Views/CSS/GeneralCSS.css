@@ -1,0 +1,20 @@
+.button{
+    -fx-background-color: #FE776F;
+}
+.button:hover{
+    -fx-background-color: #ff3c2f;
+}
+.table-row-cell:odd:hover{
+    -fx-background-color: #FE776F;
+}
+.table-row-cell:even:hover{
+    -fx-background-color: #FE776F;
+}
+.table-row-cell:selected {
+    -fx-background-color: #FE776F;
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+}
+.table-row-cell:selected:hover{
+    -fx-background-color: #484848;
+}
