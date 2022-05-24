@@ -1,12 +1,6 @@
 package BLL;
 
-import BE.User;
-import BLL.Exceptions.BLLException;
-import DAL.util.DalException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BLLManagerTest {
 

@@ -1,7 +1,7 @@
-package DAL.util;
+package DAL.Exceptions;
 
 public class CopyChecker {
-
+/*
     private static CopyChecker instance;
 
     private CopyChecker(){}
@@ -13,7 +13,9 @@ public class CopyChecker {
         return instance;
     }
 
-    public boolean checkIfCopy(int integer){
+
+ */
+    public static boolean checkIfCopy(int integer){
         return integer != 0;
     }
 }

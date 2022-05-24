@@ -4,7 +4,7 @@ import BE.*;
 import BLL.BLLFacade;
 import BLL.BLLManager;
 import BLL.Exceptions.BLLException;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class StudentQuestionMOD {
             StudentQuestion firstQuestion = bll.getFirstQuestion();     //get first question from bll
             this.questionnaireId = firstQuestion.getQuestionaireId();        //set questionaire Id
             return firstQuestion;
-        } catch (DalException e) {
+        } catch (DALException e) {
             e.printStackTrace();
         }
         return null;
@@ -32,7 +32,7 @@ public class StudentQuestionMOD {
         answer.setQuestionnaireId(questionnaireId);           //using questionaire Id in answers
         try {
             bll.saveStudentQuestionAnswer(answer);
-        } catch (DalException e) {
+        } catch (DALException e) {
             e.printStackTrace();
         }
     }
@@ -40,7 +40,7 @@ public class StudentQuestionMOD {
     public StudentQuestion getNextQuestion(StudentQuestion question) {
         try {
                 return bll.getNextQuestion(question);       //getting next question
-        } catch (DalException | BLLException e ) {
+        } catch (DALException | BLLException e ) {
             e.printStackTrace();
         }
         return null;
@@ -51,7 +51,7 @@ public class StudentQuestionMOD {
             return bll.getPreviousQuestion(currentQuestionId);
         } catch (BLLException e) {
             e.printStackTrace();
-        } catch (DalException e) {
+        } catch (DALException e) {
             e.printStackTrace();
         }
         return null;
@@ -60,7 +60,7 @@ public class StudentQuestionMOD {
     public StudentQuestionnaireAnswer getAnswer(int questionId) {
         try {
             return bll.getQuestionaireAnswer(questionId, questionnaireId);
-        } catch (DalException e) {
+        } catch (DALException e) {
             e.printStackTrace();
         }
         return null;
@@ -68,7 +68,7 @@ public class StudentQuestionMOD {
     public List<StudentQuestion> getQuestionnaireQuestions(){  //get all questions that exist in current questionnaire as list
         try {
             return bll.getQuestionnaireQuestions(questionnaireId);
-        } catch (DalException e) {
+        } catch (DALException e) {
             e.printStackTrace();
         }
         return new ArrayList<>();
@@ -77,7 +77,7 @@ public class StudentQuestionMOD {
     public void setCurrentSickPatientId(Patient currentPatient, Case currentCase, Group currentGroup) {
         try {
             bll.UpdateQuestionnaire(questionnaireId,currentCase,currentPatient,currentGroup);
-        } catch (DalException e) {
+        } catch (DALException e) {
             e.printStackTrace();
         }
     }
@@ -89,7 +89,7 @@ public class StudentQuestionMOD {
     public int getQuestionnaireId(int caseId, int groupId) {
         try {
             return  bll.getQuestionnaireOf(caseId,groupId);
-        } catch (DalException e) {
+        } catch (DALException e) {
             e.printStackTrace();
         }
         return -1;

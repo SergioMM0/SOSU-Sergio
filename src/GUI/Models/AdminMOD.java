@@ -3,7 +3,7 @@ package GUI.Models;
 import BE.School;
 import BE.User;
 import BLL.BLLManager;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -27,7 +27,7 @@ public class AdminMOD {
         return AdminSingleton;
     }
 
-    public ObservableList<School> getAllSchools() throws DalException {
+    public ObservableList<School> getAllSchools() throws DALException {
         schools = FXCollections.observableArrayList();
 
             schools.addAll(manager.getAllSchools());
@@ -35,7 +35,7 @@ public class AdminMOD {
         return schools;
     }
 
-    public ObservableList<User> getAllSudents(int schoolid) throws DalException{
+    public ObservableList<User> getAllSudents(int schoolid) throws DALException {
         students = FXCollections.observableArrayList();
 
        students.addAll(manager.getALLUsers(schoolid , "STUDENT"));
@@ -43,7 +43,7 @@ public class AdminMOD {
        return students;
     }
 
-    public ObservableList<User> getAllTeachers(int schoolid) throws DalException{
+    public ObservableList<User> getAllTeachers(int schoolid) throws DALException {
         teachers = FXCollections.observableArrayList();
 
         teachers.addAll(manager.getALLUsers(schoolid , "TEACHER"));
@@ -51,42 +51,42 @@ public class AdminMOD {
         return teachers;
     }
 
-    public void createSchools(String name) throws DalException {
+    public void createSchools(String name) throws DALException {
          manager.createSchool(new School(1 , name));
          updatethelist();
     }
 
-    public void deleteSchool(School school) throws DalException {
+    public void deleteSchool(School school) throws DALException {
         manager.deleteSchool(school);
         updatethelist();
     }
 
-    public void updateSchool(School school) throws DalException {
+    public void updateSchool(School school) throws DALException {
         manager.updateSchool(school);
         updatethelist();
     }
 
-    public void updatethelist() throws DalException {
+    public void updatethelist() throws DALException {
         schools.setAll(manager.getAllSchools());
     }
 
-    public void createUser(User user) throws DalException {
+    public void createUser(User user) throws DALException {
         manager.addNewStudent(user);
         updatethelist();
     }
 
-    public void removeUser(User user ) throws DalException {
+    public void removeUser(User user ) throws DALException {
         manager.deleteStudent(user);
         updatethelist();
     }
 
-    public ObservableList<User> filter(ObservableList<User> allusers ,String q )throws DalException{
+    public ObservableList<User> filter(ObservableList<User> allusers ,String q )throws DALException {
         allusers  = FXCollections.observableArrayList();
         allusers.addAll(manager.searchForUser(q));
 
        return allusers;
     }
-    public ObservableList<User> getallusers(int schoolid , String utype) throws DalException {
+    public ObservableList<User> getallusers(int schoolid , String utype) throws DALException {
       users = FXCollections.observableArrayList();
       //users.addAll(manager.getAllUSERS(schoolid , utype));
       if(utype.equals("TEACHER")){

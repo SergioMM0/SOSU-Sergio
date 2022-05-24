@@ -6,7 +6,7 @@ import BE.Patient;
 import BE.User;
 import BLL.BLLFacade;
 import BLL.BLLManager;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -40,17 +40,17 @@ public class TeacherMainMOD {
         groupParticipants = FXCollections.observableArrayList();
     }
 
-    public ObservableList<Group> getAllGroups(int schoolID) throws DalException {
+    public ObservableList<Group> getAllGroups(int schoolID) throws DALException {
         allGroups.addAll(bllFacade.getAllGroups(schoolID));
         return allGroups;
     }
 
-    public ObservableList<Case> getAllCases(int schoolID) throws DalException {
+    public ObservableList<Case> getAllCases(int schoolID) throws DALException {
         allCases.addAll(bllFacade.getAllCases(schoolID));
         return allCases;
     }
 
-    public ObservableList<Patient> getAllPatients(int schoolID) throws DalException {
+    public ObservableList<Patient> getAllPatients(int schoolID) throws DALException {
         allPatients.addAll(bllFacade.getAllPatients(schoolID));
         return allPatients;
     }
@@ -71,7 +71,7 @@ public class TeacherMainMOD {
         return allCases;
     }
 
-    public void updateCase(Case newCase) throws DalException {
+    public void updateCase(Case newCase) throws DALException {
         bllFacade.updateCase(newCase);
     }
 
@@ -80,8 +80,6 @@ public class TeacherMainMOD {
             if (c.getName().equals(oldCase.getName())) {
                 c.setName(oldCase.getName());
                 c.setConditionDescription(oldCase.getConditionDescription());
-                c.setCategory(oldCase.getCategory());
-                c.setSubCategory(oldCase.getSubCategory());
             }
         }
     }
@@ -111,7 +109,7 @@ public class TeacherMainMOD {
         }
     }
 
-    public void deleteStudent(User student) throws DalException {
+    public void deleteStudent(User student) throws DALException {
         bllFacade.deleteStudent(student);
     }
 
@@ -119,12 +117,12 @@ public class TeacherMainMOD {
         allStudents.remove(student);
     }
 
-    public ObservableList<User> getAllStudents(int schoolID) throws DalException {
+    public ObservableList<User> getAllStudents(int schoolID) throws DALException {
         allStudents.addAll(bllFacade.getAllStudent(schoolID));
         return allStudents;
     }
 
-    public void updatePatient(Patient patient) throws DalException {
+    public void updatePatient(Patient patient) throws DALException {
         bllFacade.updatePatient(patient);
     }
 
@@ -158,7 +156,7 @@ public class TeacherMainMOD {
         return groupParticipants;
     }
 
-    public void addStudentToGroup(Group group, User student) throws DalException {
+    public void addStudentToGroup(Group group, User student) throws DALException {
         bllFacade.addStudentToGroup(group, student);
     }
 
@@ -168,11 +166,11 @@ public class TeacherMainMOD {
         updateObservableGroup(group);
     }
 
-    public void removeParticipant(Group group, User user) throws DalException {
+    public void removeParticipant(Group group, User user) throws DALException {
         bllFacade.removeParticipant(group, user);
     }
 
-    public void deleteGroup(Group group) throws DalException {
+    public void deleteGroup(Group group) throws DALException {
         bllFacade.deleteGroup(group);
     }
 
@@ -186,7 +184,7 @@ public class TeacherMainMOD {
         }
     }
 
-    public void deleteCase(Case selectedCase) throws DalException {
+    public void deleteCase(Case selectedCase) throws DALException {
         bllFacade.deleteCase(selectedCase);
     }
 
@@ -194,7 +192,7 @@ public class TeacherMainMOD {
         allCases.remove(selectedItem);
     }
 
-    public void deletePatient(Patient selectedPatient) throws DalException {
+    public void deletePatient(Patient selectedPatient) throws DALException {
         bllFacade.deletePatient(selectedPatient);
     }
 
@@ -202,11 +200,11 @@ public class TeacherMainMOD {
         allPatients.remove(selectedItem);
     }
 
-    public void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DalException {
+    public void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DALException {
         bllFacade.assignCaseToGroup(selectedCase, group, patient);
     }
 
-    public ObservableList<Case> getCasesAssignedToGroup(Group group) throws DalException {
+    public ObservableList<Case> getCasesAssignedToGroup(Group group) throws DALException {
         casesAssigned.clear();
         casesAssigned.addAll(bllFacade.getCasesAssignedTo(group));
         return casesAssigned;
@@ -216,7 +214,7 @@ public class TeacherMainMOD {
         return casesAssigned;
     }
 
-    public Patient getPatientOfCaseInGroup(Case selectedCase, Group group) throws DalException {
+    public Patient getPatientOfCaseInGroup(Case selectedCase, Group group) throws DALException {
         this.patientOfCase = bllFacade.getPatientOfCase(selectedCase, group);
         return patientOfCase;
     }
@@ -224,7 +222,7 @@ public class TeacherMainMOD {
         return this.patientOfCase;
     }
 
-    public void unassignCase(Case selectedItem) throws DalException{
+    public void unassignCase(Case selectedItem) throws DALException {
         bllFacade.unassignCase(selectedItem);
     }
 
@@ -232,11 +230,11 @@ public class TeacherMainMOD {
         casesAssigned.remove(caseAssigned);
     }
 
-    public void markCaseAsGraded(Case selectedItem) throws DalException {
+    public void markCaseAsGraded(Case selectedItem) throws DALException {
         bllFacade.markCaseAsGraded(selectedItem);
     }
 
-    public void unmarkCaseAsGraded(Case selectedItem) throws DalException {
+    public void unmarkCaseAsGraded(Case selectedItem) throws DALException {
         bllFacade.unmarkCaseAsGraded(selectedItem);
     }
 
@@ -254,13 +252,13 @@ public class TeacherMainMOD {
         casesAssigned.add(selectedItem);
     }
 
-    public ObservableList<Case> getCasesGradedOfGroup(Group group) throws DalException {
+    public ObservableList<Case> getCasesGradedOfGroup(Group group) throws DALException {
         casesGraded.clear();
         casesGraded.addAll(bllFacade.getCasesGradedOf(group));
         return casesGraded;
     }
 
-    public void addObservationToPatient(String text, Patient currentPatient) throws DalException {
+    public void addObservationToPatient(String text, Patient currentPatient) throws DALException {
         bllFacade.addObservationToPatient(text,currentPatient);
     }
 

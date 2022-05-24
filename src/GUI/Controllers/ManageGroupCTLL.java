@@ -2,7 +2,7 @@ package GUI.Controllers;
 
 import BE.Group;
 import BE.User;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.ManageGroupMOD;
 import javafx.event.ActionEvent;
@@ -24,11 +24,9 @@ public class ManageGroupCTLL {
     private TeacherMainCTLL teacherMainCTLL;
     private int operationType = 0;
     private ManageGroupMOD model;
-    private static SoftAlert softAlert;
 
     public ManageGroupCTLL(){
         model = new ManageGroupMOD();
-        softAlert = SoftAlert.getInstance();
     }
 
     @FXML
@@ -49,9 +47,9 @@ public class ManageGroupCTLL {
                     );
                     teacherMainCTLL.addGroupToList(model.createNewGroup(group));
                     closeWindow();
-                }catch (DalException dalException){
+                }catch (DALException dalException){
                     dalException.printStackTrace();
-                    softAlert.displayAlert(dalException.getMessage());
+                    SoftAlert.displayAlert(dalException.getMessage());
                 }
             }
         }
@@ -63,8 +61,8 @@ public class ManageGroupCTLL {
                     teacherMainCTLL.updateGroupInList(selectedGroup);
                     teacherMainCTLL.setUpGroup(selectedGroup);
                     closeWindow();
-                }catch (DalException dalException){
-                    softAlert.displayAlert(dalException.getMessage());
+                }catch (DALException dalException){
+                    SoftAlert.displayAlert(dalException.getMessage());
                 }
             }
         }
@@ -76,7 +74,7 @@ public class ManageGroupCTLL {
 
     private boolean fieldsAreFilled(){
         if(nameField.getText().isEmpty()){
-            softAlert.displayAlert("Please introduce a name for the group");
+            SoftAlert.displayAlert("Please introduce a name for the group");
             return false;
         }else return true;
     }

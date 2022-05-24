@@ -110,9 +110,7 @@
                <children>
                   <Label layoutX="40.0" layoutY="40.0" text="Case name:" />
                   <Label layoutX="514.0" layoutY="40.0" text="Category" />
-                  <ComboBox fx:id="caseSubcategoryComboBox" layoutX="599.0" layoutY="75.0" prefHeight="26.0" prefWidth="220.0" />
                   <Label layoutX="514.0" layoutY="79.0" text="Subcategory" />
-                  <ComboBox fx:id="caseCategoryComboBox" layoutX="599.0" layoutY="35.0" onMouseClicked="#categorySelected" prefHeight="26.0" prefWidth="220.0" />
                   <Label layoutX="40.0" layoutY="100.0" prefHeight="18.0" prefWidth="170.0" text="Description of the case:" />
                   <Button layoutX="689.0" layoutY="540.0" mnemonicParsing="false" onAction="#saveChangesOnCase" prefHeight="40.0" prefWidth="130.0" text="Save changes" />
                   <TextField fx:id="caseNameField" layoutX="125.0" layoutY="36.0" prefHeight="26.0" prefWidth="320.0" />
@@ -142,10 +140,6 @@
                   <TextField fx:id="nameField" layoutX="165.0" layoutY="35.0" prefHeight="25.0" prefWidth="280.0" />
                   <TextField fx:id="familyNameField" layoutX="165.0" layoutY="75.0" prefHeight="25.0" prefWidth="280.0" />
                   <ComboBox fx:id="genderComboBox" layoutX="165.0" layoutY="155.0" prefHeight="25.0" prefWidth="280.0" />
-                  <TextField fx:id="weightField" layoutX="165.0" layoutY="195.0" prefHeight="25.0" prefWidth="280.0" />
-                  <TextField fx:id="heightField" layoutX="165.0" layoutY="235.0" prefHeight="25.0" prefWidth="280.0" />
-                  <TextField fx:id="phoneNumberField" layoutX="165.0" layoutY="315.0" prefHeight="25.0" prefWidth="280.0" />
-                  <TextField fx:id="cprField" layoutX="165.0" layoutY="275.0" prefHeight="25.0" prefWidth="280.0" />
                   <DatePicker fx:id="dateOfBirthPicker" layoutX="165.0" layoutY="115.0" prefHeight="25.0" prefWidth="280.0" />
                   <TextArea fx:id="newObservationTextArea" layoutX="165.0" layoutY="430.0" prefHeight="95.0" prefWidth="280.0" />
                   <Label layoutX="40.0" layoutY="465.0" text="New observation:" />

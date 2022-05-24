@@ -1,9 +1,8 @@
 package GUI.Controllers;
 
 import BE.User;
-import BLL.BLLFacade;
 import BLL.Exceptions.BLLException;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.LoginMOD;
 import javafx.event.ActionEvent;
@@ -23,6 +22,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginCTLL implements Initializable {
+
     @FXML
     private AnchorPane anchorPane;
 
@@ -44,12 +44,10 @@ public class LoginCTLL implements Initializable {
     private User logedUser;
     private final String generalCSS = "GUI/Views/CSS/GeneralCSS.css";
     private LoginMOD loginMOD;
-    private static SoftAlert softAlert;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loginMOD = new LoginMOD();
-        softAlert = SoftAlert.getInstance();
     }
 
     @FXML
@@ -58,17 +56,17 @@ public class LoginCTLL implements Initializable {
             try{
                 logedUser = loginMOD.checkCredentials(emailField.getText(),passwordField.getText());
                 switch (logedUser.getUserType()) {
-                    case "STUDENT":
+                    case 3:
                         openView("GUI/Views/StudentMain.fxml", generalCSS, "FS3 for Students", 880, 660, false, logedUser);
                         break;
-                    case "TEACHER":
+                    case 2:
                         openView("GUI/Views/TeacherMain.fxml", generalCSS, "Simulation platform FS3", 880, 660, false, logedUser);
                         break;
-                    case "ADMIN":
+                    case 1:
                         openView("GUI/Views/TeacherMain.fxml", generalCSS,"Admin view", 880,660,false, logedUser);
                 }
-            }catch (DalException | BLLException exception){ //TODO review message in DAL
-                softAlert.displayAlert(exception.getMessage());
+            }catch (DALException | BLLException exception){
+                SoftAlert.displayAlert(exception.getMessage());
             }
         }
     }
@@ -88,15 +86,15 @@ public class LoginCTLL implements Initializable {
         assert root != null;
         root.getStylesheets().add(css);
         switch (logedUser.getUserType()) {
-            case "STUDENT" -> {
+            case 3 -> {
                 loader.<StudentMainCTLL>getController().setUser(logedUser);
                 loader.<StudentMainCTLL>getController().initializeView();
             }
-            case "TEACHER" -> {
+            case 2 -> {
                 loader.<TeacherMainCTLL>getController().setUser(logedUser);
                 loader.<TeacherMainCTLL>getController().initializeView();
             }
-            case "ADMIN" -> loader.<AdminCTLL>getController().setUser(logedUser);
+            case 1 -> loader.<AdminCTLL>getController().setUser(logedUser);
         }
         Stage stage = new Stage();
         stage.setTitle(title);

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="200.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Views.ChooseName">
+<AnchorPane prefHeight="200.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.AdminCTLL">
    <children>
       <Label layoutX="116.0" layoutY="33.0" text="Please choose a name for the duplicate" />
       <Label layoutX="52.0" layoutY="81.0" text="Name:" />

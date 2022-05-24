@@ -3,7 +3,7 @@ package GUI.Controllers;
 import BE.Case;
 import BE.Group;
 import BE.Patient;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.TeacherMainMOD;
 import javafx.event.ActionEvent;
@@ -34,11 +34,9 @@ public class AssignCaseCTLL {
     private Case selectedCase;
     private TeacherMainCTLL teacherMainCTLL;
     private static TeacherMainMOD teacherMainMOD;
-    private static SoftAlert softAlert;
 
     public AssignCaseCTLL(){
         teacherMainMOD = TeacherMainMOD.getInstance();
-        softAlert = SoftAlert.getInstance();
     }
 
     public void initializeView(){
@@ -57,9 +55,9 @@ public class AssignCaseCTLL {
             try {
                 teacherMainMOD.assignCaseToGroup(selectedCase,
                         group, patient);
-            }catch (DalException dalException){
+            }catch (DALException dalException){
                 dalException.printStackTrace();
-                softAlert.displayAlert(dalException.getMessage());
+                SoftAlert.displayAlert(dalException.getMessage());
             }
             teacherMainCTLL.populateCasesAssigned(group);
             closeView();

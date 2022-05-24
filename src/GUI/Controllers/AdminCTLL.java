@@ -2,7 +2,7 @@ package GUI.Controllers;
 
 import BE.School;
 import BE.User;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 import GUI.Alerts.ConfirmationAlert;
 import GUI.Models.AdminMOD;
 import javafx.collections.ObservableList;
@@ -100,7 +100,7 @@ public class AdminCTLL implements Initializable {
                 StudentTableView.setItems(adminMOD.getAllSudents(schoolTalbeView.getSelectionModel().getSelectedItem().getId()));
             }
 
-        } catch (DalException e) {
+        } catch (DALException e) {
            new ConfirmationAlert("couldn't retrieve data from the database ");
         }
     }
@@ -111,7 +111,7 @@ public class AdminCTLL implements Initializable {
             public void run() {
                 try {
                     schoolTalbeView.setItems(adminMOD.getAllSchools());
-                } catch (DalException e) {
+                } catch (DALException e) {
                     e.printStackTrace();
                 }
             }
@@ -133,7 +133,7 @@ public class AdminCTLL implements Initializable {
                     StudentTableView.setItems(foundStudents);
 
                 }
-            } catch (DalException |NullPointerException e) {
+            } catch (DALException |NullPointerException e) {
                 new ConfirmationAlert("please select school");
             }
     }
@@ -157,7 +157,7 @@ public class AdminCTLL implements Initializable {
         button.setOnAction(event1 -> {
             try {
                 adminMOD.createSchools(name.getText());
-            } catch (DalException e) {
+            } catch (DALException e) {
               new ConfirmationAlert("please insert valid name");
             }
         });
@@ -193,8 +193,8 @@ public class AdminCTLL implements Initializable {
             int i = Integer.parseInt(String.valueOf(school.getText()));
 
             try {
-                adminMOD.createUser(new User(1,i ,username.getText(),email.getText(),text));
-            } catch (DalException e) {
+                adminMOD.createUser(new User(1,i ,username.getText(),email.getText(),1)); //TODO Changed the usertype, so check it
+            } catch (DALException e) {
                 new ConfirmationAlert("please enter valid data ");
             }
         });
@@ -212,7 +212,7 @@ public class AdminCTLL implements Initializable {
         try {
             if(schoolTalbeView.getSelectionModel().getSelectedIndex() != -1)
             adminMOD.deleteSchool(schoolTalbeView.getSelectionModel().getSelectedItem());
-        } catch (DalException e) {
+        } catch (DALException e) {
             new ConfirmationAlert("please select school ");
         }
     }
@@ -222,7 +222,7 @@ public class AdminCTLL implements Initializable {
                 if(teacherTableView.getSelectionModel().getSelectedIndex() != -1 ) {
                     adminMOD.removeUser(teacherTableView.getSelectionModel().getSelectedItem());
                 }
-            } catch (DalException e) {
+            } catch (DALException e) {
                new ConfirmationAlert("please select a Teacher ");
             }
 
@@ -233,7 +233,7 @@ public class AdminCTLL implements Initializable {
             if(StudentTableView.getSelectionModel().getSelectedIndex() != -1 ) {
                 adminMOD.removeUser(StudentTableView.getSelectionModel().getSelectedItem());
             }
-        } catch (DalException e) {
+        } catch (DALException e) {
             new ConfirmationAlert("please select a Student ");
         }
     }
@@ -256,7 +256,7 @@ public class AdminCTLL implements Initializable {
             try {
                 teacherTableView.setItems(adminMOD.getAllTeachers(schoolTalbeView.getSelectionModel().getSelectedItem().getId()));
                 StudentTableView.setItems(adminMOD.getAllSudents(schoolTalbeView.getSelectionModel().getSelectedItem().getId()));
-            } catch (DalException e) {
+            } catch (DALException e) {
                 new ConfirmationAlert("No Users Found");
             }
         }

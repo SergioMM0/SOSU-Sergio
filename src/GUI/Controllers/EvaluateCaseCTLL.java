@@ -66,14 +66,10 @@ public class EvaluateCaseCTLL {
         if (currentCase == null || currentPatient == null) return;
         caseIdLabel.setText(currentCase.getId() + "");
         caseNameLabel.setText(currentCase.getName());
-        categoryNameLabel.setText(currentCase.getCategory());
-        subCategoryLabel.setText(currentCase.getSubCategory());
         conditionLabel.setText(currentCase.getConditionDescription());
         firstNameLabel.setText(currentPatient.getFirst_name());
         lastNameLabel.setText(currentPatient.getLast_name());
-        cprLabel.setText(currentPatient.getCpr());
         dataOfBirthLabel.setText(currentPatient.getDateOfBirth().toString());
-        phoneLabel.setText(currentPatient.getPhoneNumber());
     }
 
     @FXML

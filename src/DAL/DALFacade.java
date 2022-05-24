@@ -1,106 +1,106 @@
 package DAL;
 
 import BE.*;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 
 import java.util.List;
 
 public interface DALFacade {
 
-    List<Case> getAllCases(int schoolid) throws DalException;
+    List<Case> getAllCases(int schoolid) throws DALException;
 
-    Case createCase(Case c)throws DalException;
+    Case createCase(Case c)throws DALException;
 
-    void updateCase(Case c)throws  DalException ;
+    void updateCase(Case c)throws DALException;
 
-    void deleteCase(Case c) throws DalException ;
+    void deleteCase(Case c) throws DALException;
 
-    User verifyUsers(String useremail, String password) throws DalException;
+    User checkCredentials(String useremail, String password) throws DALException;
 
-    List<User> getAllUsers(int schoolid) throws DalException;
+    List<User> getAllStudents(int schoolid) throws DALException;
 
-    void updateuser(User user) throws DalException;  //
+    void updateStudent(User user) throws DALException;  //
 
-    void deleteuser(User user) throws DalException;
+    void deleteStudent(User user) throws DALException;
 
-    User addUser(User user ) throws DalException; //
+    User addNewStudent(User user ) throws DALException; //
 
-    List<User> searchForUser (String query) throws DalException;
+    List<User> searchForUser (String query) throws DALException;
 
-    List<Patient> getAllPatients(int schoolid) throws DalException;
+    List<Patient> getAllPatients(int schoolid) throws DALException;
 
-    Patient createPatient(Patient patient ) throws DalException;
+    Patient createPatient(Patient patient ) throws DALException;
     //
-    void updatePatient(Patient patient) throws DalException;
+    void updatePatient(Patient patient) throws DALException;
         //
-    void deletePatient(Patient patient)throws DalException ;
+    void deletePatient(Patient patient)throws DALException;
 
-    List<School> getAllSchhol() throws DalException;
+    List<School> getAllSchhol() throws DALException;
 
-    void createSchool(School school)throws DalException;
+    void createSchool(School school)throws DALException;
         //
-    void updateSchool(School school)throws DalException;
+    void updateSchool(School school)throws DALException;
         //
-    void deleteSchool(School school)throws DalException;
+    void deleteSchool(School school)throws DALException;
 
-    List<Group> getAllGroups(int schoolID)throws DalException;
+    List<Group> getAllGroups(int schoolID)throws DALException;
 
-    Group createGroup(Group group)throws DalException;
+    Group createGroup(Group group)throws DALException;
         //
-    void updateGroup(Group group)throws DalException;
+    void updateGroup(Group group)throws DALException;
         //
-    void deleteGroup(Group group)throws DalException;
+    void deleteGroup(Group group)throws DALException;
 
-    List<User> getUsersInGroup(int id)throws DalException;
+    List<User> getUsersInGroup(int id)throws DALException;
 
-    void addUsertoGroup(Group group , User user)throws DalException;
+    void addUsertoGroup(Group group , User user)throws DALException;
 
-    void removeUserFromGroup(User user)throws DalException;
+    void removeUserFromGroup(User user)throws DALException;
 
-    void assignCaseToGroup(Patient p , Case c , Group g) throws DalException;
-
-
-    void addStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException;
-
-    StudentQuestion getFirstStudentQuestion() throws DalException;
-
-    StudentQuestion getNextStudentQuestion(int id) throws DalException;
-
-    StudentQuestion getPreviousQuestion(int currentQuestionId) throws DalException;
-
-    StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException;
-
-     void removeUserAndGroup(User user , Group group)throws DalException;
-
-     List<Case> getCasesAssignedTo(Group group)throws DalException;
+    void assignCaseToGroup(Patient p , Case c , Group g) throws DALException;
 
 
-    List<User> getAllUSERS(int schoolId  ,String utype) throws DalException;
+    void addStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DALException;
 
-     List<User> getALLUsers(int schoolid , String utype) throws DalException;
+    StudentQuestion getFirstStudentQuestion() throws DALException;
 
-    Group getGroupOf(User student) throws DalException;
+    StudentQuestion getNextStudentQuestion(int id) throws DALException;
 
-    StudentQuestionnaire getQuestionnaireOf(Group group) throws DalException;
+    StudentQuestion getPreviousQuestion(int currentQuestionId) throws DALException;
 
-    List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DalException;
-    Patient getPatientOfCase(Case selectedCase, Group group) throws DalException;
+    StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DALException;
 
-    void unassignCase(Case selectedItem) throws DalException;
+     void removeParticipant(User user , Group group)throws DALException;
 
-    void markCaseAsGraded(Case selectedItem) throws DalException;
+     List<Case> getCasesAssignedTo(Group group)throws DALException;
 
-    void unmarkCaseAsGraded(Case selectedItem) throws DalException;
 
-    List<Case> getCasesGradedOf(Group group) throws DalException;
+    List<User> getAllUSERS(int schoolId  ,String utype) throws DALException;
 
-    void addObservationToPatient(String text, Patient currentPatient) throws DalException;
+     List<User> getALLUsers(int schoolid , String utype) throws DALException;
 
-    StudentQuestionnaire getQuestionnaire(int questionnaireId) throws DalException;
+    Group getGroupOf(User student) throws DALException;
 
-    int getSickPatientId(Patient currentPatient, Case currentCase, Group currentGroup) throws DalException;
+    StudentQuestionnaire getQuestionnaireOf(Group group) throws DALException;
 
-    void updateQuestionnaire(StudentQuestionnaire questionnaire) throws DalException;
+    List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DALException;
+    Patient getPatientOfCase(Case selectedCase, Group group) throws DALException;
 
-    int getQuestionnaireOf(int caseId, int groupId) throws DalException;
+    void unassignCase(Case selectedItem) throws DALException;
+
+    void markCaseAsGraded(Case selectedItem) throws DALException;
+
+    void unmarkCaseAsGraded(Case selectedItem) throws DALException;
+
+    List<Case> getCasesGradedOf(Group group) throws DALException;
+
+    void addObservationToPatient(String text, Patient currentPatient) throws DALException;
+
+    StudentQuestionnaire getQuestionnaire(int questionnaireId) throws DALException;
+
+    int getSickPatientId(Patient currentPatient, Case currentCase, Group currentGroup) throws DALException;
+
+    void updateQuestionnaire(StudentQuestionnaire questionnaire) throws DALException;
+
+    int getQuestionnaireOf(int caseId, int groupId) throws DALException;
 }

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Views.AssignCaseToStudent">
+<AnchorPane prefHeight="400.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.TeacherMainCTLL">
    <children>
       <Label layoutX="30.0" layoutY="30.0" text="Group name:" />
       <Label layoutX="140.0" layoutY="30.0" prefWidth="235.0" text="&lt;Group name&gt;" textAlignment="CENTER" />

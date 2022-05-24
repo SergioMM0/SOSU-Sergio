@@ -1,7 +1,7 @@
 package GUI.Controllers;
 
 import BE.User;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.ManageStudentMOD;
 import javafx.event.ActionEvent;
@@ -24,11 +24,9 @@ public class ManageStudentCTLL {
     private int operationType = 0;
     private ManageStudentMOD model;
     private User student;
-    private static SoftAlert softAlert;
 
     public ManageStudentCTLL(){
         model = new ManageStudentMOD();
-        softAlert = SoftAlert.getInstance();
     }
 
     @FXML
@@ -45,12 +43,12 @@ public class ManageStudentCTLL {
                             logedUser.getSchoolID(),
                             nameField.getText(),
                             emailField.getText(),
-                            "STUDENT"
+                            3
                     );
                     teacherMainCTLL.addStudentToTable(model.addNewStudent(user));
                     closeWindow();
-                } catch (DalException dalException) {
-                    softAlert.displayAlert(dalException.getMessage());
+                } catch (DALException dalException) {
+                    SoftAlert.displayAlert(dalException.getMessage());
                 }
             }
         }
@@ -62,8 +60,8 @@ public class ManageStudentCTLL {
                     model.updateStudent(student);
                     teacherMainCTLL.updateStudentInTable(student);
                     closeWindow();
-                }catch (DalException dalException){
-                    softAlert.displayAlert(dalException.getMessage());
+                }catch (DALException dalException){
+                    SoftAlert.displayAlert(dalException.getMessage());
                 }
             }
             if(fieldsAreFilled() && isTheSame()){
@@ -79,10 +77,10 @@ public class ManageStudentCTLL {
 
     private boolean fieldsAreFilled() {
         if (nameField.getText().isEmpty()) {
-            softAlert.displayAlert("Please introduce a name for the student");
+            SoftAlert.displayAlert("Please introduce a name for the student");
             return false;
         } else if (emailField.getText().isEmpty()) {
-            softAlert.displayAlert("Please introduce an email for the student");
+            SoftAlert.displayAlert("Please introduce an email for the student");
             return false;
         } else return true;
     }

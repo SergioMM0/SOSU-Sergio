@@ -4,14 +4,10 @@ import BE.*;
 import BLL.Exceptions.BLLException;
 import DAL.DALFacade;
 import DAL.Manager;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 import javafx.collections.ObservableList;
 
 import java.security.InvalidParameterException;
-import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 public class BLLManager implements BLLFacade {
@@ -23,8 +19,8 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public User checkCredentials(String email, String password) throws DalException, BLLException {
-        User logedUser = dalFacade.verifyUsers(email, password);
+    public User checkCredentials(String email, String password) throws DALException, BLLException {
+        User logedUser = dalFacade.checkCredentials(email, password);
         if (logedUser == null) {
             throw new BLLException("Wrong email or password, please try again", new InvalidParameterException());
         }
@@ -32,120 +28,120 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public Case createCase(Case newCase) throws DalException {
+    public Case createCase(Case newCase) throws DALException {
         return dalFacade.createCase(newCase);
     }
 
     @Override
-    public Patient createPatient(Patient patient) throws DalException {
+    public Patient createPatient(Patient patient) throws DALException {
         return dalFacade.createPatient(patient);
     }
 
     @Override
-    public List<Group> getAllGroups(int schoolID) throws DalException {
+    public List<Group> getAllGroups(int schoolID) throws DALException {
         return dalFacade.getAllGroups(schoolID);
     }
 
     @Override
-    public List<Case> getAllCases(int schoolID) throws DalException {
+    public List<Case> getAllCases(int schoolID) throws DALException {
         return dalFacade.getAllCases(schoolID);
     }
 
     @Override
-    public List<Patient> getAllPatients(int schoolID) throws DalException {
+    public List<Patient> getAllPatients(int schoolID) throws DALException {
         return dalFacade.getAllPatients(schoolID);
     }
 
     @Override
-    public User addNewStudent(User user) throws DalException {
-        return dalFacade.addUser(user);
+    public User addNewStudent(User student) throws DALException {
+        return dalFacade.addNewStudent(student);
     }
 
     @Override
-    public void updateStudent(User student) throws DalException {
-        dalFacade.updateuser(student);
+    public void updateStudent(User student) throws DALException {
+        dalFacade.updateStudent(student);
     }
 
     @Override
-    public void deleteStudent(User student) throws DalException {
-        dalFacade.deleteuser(student);
+    public void deleteStudent(User student) throws DALException {
+        dalFacade.deleteStudent(student);
     }
 
     @Override
-    public List<User> getAllStudent(int schoolID) throws DalException {
-        return dalFacade.getAllUsers(schoolID);
+    public List<User> getAllStudent(int schoolID) throws DALException {
+        return dalFacade.getAllStudents(schoolID);
     }
 
     @Override
-    public void updatePatient(Patient patient) throws DalException {
+    public void updatePatient(Patient patient) throws DALException {
         dalFacade.updatePatient(patient);
     }
 
     @Override
-    public Group createNewGroup(Group group) throws DalException {
+    public Group createNewGroup(Group group) throws DALException {
         return dalFacade.createGroup(group);
     }
 
     @Override
-    public void updateGroup(Group selectedGroup) throws DalException {
+    public void updateGroup(Group selectedGroup) throws DALException {
         dalFacade.updateGroup(selectedGroup);
     }
 
 
     @Override
-    public void addStudentToGroup(Group group, User student) throws DalException {
+    public void addStudentToGroup(Group group, User student) throws DALException {
         dalFacade.addUsertoGroup(group, student);
     }
 
     @Override
-    public void deleteGroup(Group group) throws DalException {
+    public void deleteGroup(Group group) throws DALException {
         dalFacade.deleteGroup(group);
     }
 
     @Override
-    public void removeParticipant(Group group, User user) throws DalException {
-        dalFacade.removeUserAndGroup(user, group);
+    public void removeParticipant(Group group, User user) throws DALException {
+        dalFacade.removeParticipant(user, group);
         //TODO Implement
     }
 
     @Override
-    public void updateCase(Case newCase) throws DalException {
+    public void updateCase(Case newCase) throws DALException {
         dalFacade.updateCase(newCase);
         //TODO implement
     }
 
     @Override
-    public void deleteCase(Case selectedCase) throws DalException {
+    public void deleteCase(Case selectedCase) throws DALException {
         dalFacade.deleteCase(selectedCase);
     }
 
     @Override
-    public void deletePatient(Patient selectedPatient) throws DalException {
+    public void deletePatient(Patient selectedPatient) throws DALException {
         dalFacade.deletePatient(selectedPatient);
     }
 
     @Override
-    public List<School> getAllSchools() throws DalException {
+    public List<School> getAllSchools() throws DALException {
         return dalFacade.getAllSchhol();
     }
 
     @Override
-    public void createSchool(School school) throws DalException {
+    public void createSchool(School school) throws DALException {
         dalFacade.createSchool(school);
     }
 
     @Override
-    public void updateSchool(School school) throws DalException {
+    public void updateSchool(School school) throws DALException {
         dalFacade.updateSchool(school);
     }
 
     @Override
-    public void deleteSchool(School school) throws DalException {
+    public void deleteSchool(School school) throws DALException {
         dalFacade.deleteSchool(school);
     }
 
     @Override
-    public void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DalException {
+    public void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DALException {
         String groupDistinctiveCase = selectedCase.getName() + " - " + group.getName();
         selectedCase.setName(groupDistinctiveCase);
         selectedCase.setCopy(true);
@@ -156,14 +152,12 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public List<Case> getCasesAssignedTo(Group group) throws DalException {
+    public List<Case> getCasesAssignedTo(Group group) throws DALException {
         return dalFacade.getCasesAssignedTo(group);
-        //TODO IMPLEMENT
-
     }
 
     @Override
-    public List<User> getALLUsers(int schoolid, String utype) throws DalException {
+    public List<User> getALLUsers(int schoolid, String utype) throws DALException {
         List<User> sortedusers = dalFacade.getAllUSERS(schoolid , utype);
       sortedusers.sort((o1, o2) -> o2.getName().compareTo(o1.getName()));
 
@@ -178,59 +172,59 @@ public class BLLManager implements BLLFacade {
 
 
     @Override
-    public Group getGroupOf(User student) throws DalException {
+    public Group getGroupOf(User student) throws DALException {
         return dalFacade.getGroupOf(student);
     }
 
     @Override
-    public StudentQuestionnaire getQuestionnaireOf(Group group) throws DalException {
+    public StudentQuestionnaire getQuestionnaireOf(Group group) throws DALException {
         return dalFacade.getQuestionnaireOf(group);
     }
 
-    public List<User> searchForUser(String query) throws DalException {
+    public List<User> searchForUser(String query) throws DALException {
         return dalFacade.searchForUser(query);
     }
 
     @Override
-    public List<User> getAllUSERS(int schoolId , String utype) throws DalException {
+    public List<User> getAllUSERS(int schoolId , String utype) throws DALException {
         return dalFacade.getAllUSERS(schoolId , utype);
     }
 
     @Override
-    public List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DalException {
+    public List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DALException {
         return dalFacade.getQuestionnaireQuestions(questionnaireId);
     }
-    public Patient getPatientOfCase(Case selectedCase, Group group) throws DalException {
+    public Patient getPatientOfCase(Case selectedCase, Group group) throws DALException {
         return dalFacade.getPatientOfCase(selectedCase, group);
     }
 
     @Override
-    public void unassignCase(Case selectedItem) throws DalException {
+    public void unassignCase(Case selectedItem) throws DALException {
         dalFacade.unassignCase(selectedItem);
     }
 
     @Override
-    public void markCaseAsGraded(Case selectedItem) throws DalException {
+    public void markCaseAsGraded(Case selectedItem) throws DALException {
         dalFacade.markCaseAsGraded(selectedItem);
     }
 
     @Override
-    public void unmarkCaseAsGraded(Case selectedItem) throws DalException {
+    public void unmarkCaseAsGraded(Case selectedItem) throws DALException {
         dalFacade.unmarkCaseAsGraded(selectedItem);
     }
 
     @Override
-    public List<Case> getCasesGradedOf(Group group) throws DalException {
+    public List<Case> getCasesGradedOf(Group group) throws DALException {
         return dalFacade.getCasesGradedOf(group);
     }
 
     @Override
-    public void addObservationToPatient(String text, Patient currentPatient) throws DalException {
+    public void addObservationToPatient(String text, Patient currentPatient) throws DALException {
         dalFacade.addObservationToPatient(text, currentPatient);
     }
 
     @Override
-    public void UpdateQuestionnaire(int questionnaireId, Case currentCase, Patient currentPatient, Group currentGroup) throws DalException {
+    public void UpdateQuestionnaire(int questionnaireId, Case currentCase, Patient currentPatient, Group currentGroup) throws DALException {
         StudentQuestionnaire questionnaire=dalFacade.getQuestionnaire(questionnaireId);
         int sickPatientId = dalFacade.getSickPatientId(currentPatient, currentCase, currentGroup);
         if(sickPatientId<0)return;
@@ -239,36 +233,36 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public int getQuestionnaireOf(int caseId, int groupId) throws DalException {
+    public int getQuestionnaireOf(int caseId, int groupId) throws DALException {
         return dalFacade.getQuestionnaireOf(caseId,groupId);
     }
 
     @Override
-    public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
+    public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DALException {
         dalFacade.addStudentQuestionAnswer(answer);
     }
 
     @Override
-    public StudentQuestion getFirstQuestion() throws DalException {
+    public StudentQuestion getFirstQuestion() throws DALException {
         return dalFacade.getFirstStudentQuestion();
     }
 
     @Override
-    public StudentQuestion getNextQuestion(StudentQuestion question) throws DalException, BLLException {
+    public StudentQuestion getNextQuestion(StudentQuestion question) throws DALException, BLLException {
         StudentQuestion s = dalFacade.getNextStudentQuestion(question.getId());
 
         return s;
     }
 
     @Override
-    public StudentQuestion getPreviousQuestion(int currentQuestionId) throws BLLException, DalException {
+    public StudentQuestion getPreviousQuestion(int currentQuestionId) throws BLLException, DALException {
         StudentQuestion s = dalFacade.getPreviousQuestion(currentQuestionId);
 
         return s;
     }
 
     @Override
-    public StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException {
+    public StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DALException {
         return dalFacade.getQuestionaireAnswer(questionId, questionaireId);
     }
 

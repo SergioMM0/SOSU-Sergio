@@ -4,7 +4,7 @@ import BE.User;
 import BLL.BLLFacade;
 import BLL.BLLManager;
 import BLL.Exceptions.BLLException;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 
 public class LoginMOD {
 
@@ -14,7 +14,7 @@ public class LoginMOD {
         bllFacade = new BLLManager();
     }
 
-    public User checkCredentials(String email, String password)throws DalException, BLLException{
+    public User checkCredentials(String email, String password)throws DALException, BLLException{
         return bllFacade.checkCredentials(email, password);
     }
 

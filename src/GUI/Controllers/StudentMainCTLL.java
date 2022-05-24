@@ -5,12 +5,10 @@ import BE.Case;
 import BE.Group;
 import BE.Patient;
 import BE.User;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.StudentMOD;
-import GUI.Util.StaticData;
 import GUI.Util.FieldsManager;
-import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,13 +26,7 @@ import java.util.List;
 public class StudentMainCTLL {
 
     @FXML
-    private ComboBox<String> caseCategoryComboBox;
-
-    @FXML
     private TextField caseNameField;
-
-    @FXML
-    private ComboBox<String> caseSubcategoryComboBox;
 
     @FXML
     private Tab caseTab;
@@ -44,9 +36,6 @@ public class StudentMainCTLL {
 
     @FXML
     private TableView<Case> casesGradedList;
-
-    @FXML
-    private TextField cprField;
 
     @FXML
     private DatePicker dateOfBirthPicker;
@@ -62,9 +51,6 @@ public class StudentMainCTLL {
 
     @FXML
     private Label groupLBL;
-
-    @FXML
-    private TextField heightField;
 
     @FXML
     private Label medicalHistoryLBL;
@@ -88,13 +74,8 @@ public class StudentMainCTLL {
     private Tab patientOverviewTab;
 
     @FXML
-    private TextField phoneNumberField;
-
-    @FXML
     private Label studentLBL;
 
-    @FXML
-    private TextField weightField;
     @FXML
     private Button evaluateCaseButton;
 
@@ -102,18 +83,12 @@ public class StudentMainCTLL {
     private Group currentGroup;
     private Patient currentPatient;
     private Case currentCase;
-    private static SoftAlert softAlert;
-    private static StaticData catAndSubC;
     private StudentMOD model;
     private final String generalCSS = "";
     private ArrayList<Stage> listOfStages = new ArrayList<>();
-    private FieldsManager fieldsManager;
 
     public StudentMainCTLL() {
         model = new StudentMOD();
-        softAlert = SoftAlert.getInstance();
-        catAndSubC = StaticData.getInstance();
-        fieldsManager = new FieldsManager();
     }
 
     protected void initializeView() {
@@ -146,22 +121,12 @@ public class StudentMainCTLL {
         caseTab.setDisable(true);
     }
 
-    private void blockPatientTab() {
-        patientOverviewTab.setDisable(true);
-        patientOverviewTab.setText("Patient info");
-    }
-
-    private void blockCaseTab() {
-        caseTab.setDisable(true);
-        caseTab.setText("Case info");
-    }
-
     private void populateCasesAssigned() {
         try {
             casesAssignedList.getItems().addAll(model.getCasesAssignedTo(currentGroup));
             nameCOLCasesAssigned.setCellValueFactory(new PropertyValueFactory<>("name"));
-        } catch (DalException dalException) {
-            softAlert.displayAlert(dalException.getMessage());
+        } catch (DALException dalException) {
+            SoftAlert.displayAlert(dalException.getMessage());
         }
     }
 
@@ -169,17 +134,8 @@ public class StudentMainCTLL {
         try {
             casesGradedList.getItems().addAll(model.getCasesGradedOf(currentGroup));
             nameCOLCasesGraded.setCellValueFactory(new PropertyValueFactory<>("name"));
-        } catch (DalException dalException) {
-            softAlert.displayAlert(dalException.getMessage());
-        }
-    }
-
-    @FXML
-    private void categorySelected(MouseEvent event) {
-        if (caseCategoryComboBox.getValue() != null) {
-            caseSubcategoryComboBox.getItems().clear();
-            caseSubcategoryComboBox.getItems().addAll(
-                    StaticData.getInstance().getSubcategoriesOf(caseCategoryComboBox.getValue()));
+        } catch (DALException dalException) {
+            SoftAlert.displayAlert(dalException.getMessage());
         }
     }
 
@@ -190,12 +146,12 @@ public class StudentMainCTLL {
             this.currentCase = casesAssignedList.getSelectionModel().getSelectedItem();
             try {
                 this.currentPatient = model.getPatientOf(currentGroup, currentCase);
-            } catch (DalException dalException) {
-                softAlert.displayAlert(dalException.getMessage());
+            } catch (DALException dalException) {
+                SoftAlert.displayAlert(dalException.getMessage());
             }
-            fieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,
-                    genderComboBox,weightField,heightField,cprField,phoneNumberField,medicalHistoryTextArea);
-            fieldsManager.displayCaseInfo(caseTab, currentCase, caseCategoryComboBox,caseSubcategoryComboBox,caseNameField,descriptionOfConditionText);
+            FieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,
+                    genderComboBox,medicalHistoryTextArea);
+            FieldsManager.displayCaseInfo(caseTab, currentCase,caseNameField,descriptionOfConditionText);
         }
     }
 
@@ -205,23 +161,23 @@ public class StudentMainCTLL {
             this.currentCase = casesGradedList.getSelectionModel().getSelectedItem();
             try {
                 this.currentPatient = model.getPatientOf(currentGroup, currentCase);
-            } catch (DalException dalException) {
-                softAlert.displayAlert(dalException.getMessage());
+            } catch (DALException dalException) {
+                SoftAlert.displayAlert(dalException.getMessage());
             }
-            fieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,
-                    genderComboBox,weightField,heightField,cprField,phoneNumberField,medicalHistoryTextArea);
-            fieldsManager.displayCaseInfo(caseTab, currentCase, caseCategoryComboBox,caseSubcategoryComboBox,caseNameField,descriptionOfConditionText);
+            FieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,
+                    genderComboBox,medicalHistoryTextArea);
+            FieldsManager.displayCaseInfo(caseTab, currentCase,caseNameField,descriptionOfConditionText);
         }
     }
 
     @FXML
     private void newObservation(ActionEvent event) {
-        fieldsManager.handleObservationStudentView(newObservationTextArea,model,currentPatient,medicalHistoryTextArea);
+        FieldsManager.handleObservationStudentView(newObservationTextArea,model,currentPatient,medicalHistoryTextArea);
     }
 
     @FXML
     void saveChangesOnCase(ActionEvent event) {
-        if (fieldsManager.caseFieldsAreFilled(caseNameField,descriptionOfConditionText)) {
+        if (FieldsManager.caseFieldsAreFilled(caseNameField,descriptionOfConditionText)) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to update this case?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
@@ -229,14 +185,12 @@ public class StudentMainCTLL {
                 try {
                     currentCase.setName(caseNameField.getText());
                     currentCase.setConditionDescription(descriptionOfConditionText.getText());
-                    currentCase.setCategory(caseCategoryComboBox.getValue());
-                    currentCase.setSubCategory(caseSubcategoryComboBox.getValue());
                     model.updateCase(currentCase);
                     model.updateCaseInTable(currentCase);
                     refreshCasesAssignedList();
-                } catch (DalException dalException) {
+                } catch (DALException dalException) {
                     dalException.printStackTrace();
-                    softAlert.displayAlert(dalException.getMessage());
+                    SoftAlert.displayAlert(dalException.getMessage());
                 }
             }
         }
@@ -260,17 +214,16 @@ public class StudentMainCTLL {
 
     @FXML
     void updatePatient(ActionEvent event) {
-        if (fieldsManager.patientFieldsAreFilled(nameField,familyNameField,dateOfBirthPicker,genderComboBox,weightField,heightField,cprField,phoneNumberField)) {
+        if (FieldsManager.patientFieldsAreFilled(nameField,familyNameField,dateOfBirthPicker,genderComboBox)) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to update this patient?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
                 try {
-                    fieldsManager.updateVariablesOfPatient(currentPatient, nameField,familyNameField,dateOfBirthPicker,genderComboBox,
-                            weightField,heightField,cprField,phoneNumberField);
+                    FieldsManager.updateVariablesOfPatient(currentPatient, nameField,familyNameField,dateOfBirthPicker,genderComboBox);
                     model.updatePatient(currentPatient);
-                } catch (DalException dalException) {
-                    softAlert.displayAlert(dalException.getMessage());
+                } catch (DALException dalException) {
+                    SoftAlert.displayAlert(dalException.getMessage());
                 }
             }
         }
@@ -283,8 +236,8 @@ public class StudentMainCTLL {
     public void getLogedGroup() {
         try {
             this.currentGroup = model.getGroupOf(currentStudent);
-        } catch (DalException dalException) {
-            softAlert.displayAlert(dalException.getMessage());
+        } catch (DALException dalException) {
+            SoftAlert.displayAlert(dalException.getMessage());
         }
     }
 
@@ -315,7 +268,7 @@ public class StudentMainCTLL {
         stage.showAndWait();
     }
 
-    private void closeWindows() {
+    private void closeWindows() { //TODO TO be implemented
         for (Stage listOfStage : listOfStages) {
             listOfStage.close();
         }

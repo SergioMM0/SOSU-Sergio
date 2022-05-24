@@ -8,17 +8,14 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Properties;
 
-public class DataAccess {
+public class ConnectionProvider {
 
      private final SQLServerDataSource dataSource;
 
-     public DataAccess()  {
-
+     public ConnectionProvider()  {
           dataSource = new SQLServerDataSource();
           try (InputStream input = new FileInputStream("data/database.properties")) {
-
                Properties prop = new Properties();
-
                // load a properties file
                prop.load(input);
                dataSource.setServerName(prop.getProperty("servername"));

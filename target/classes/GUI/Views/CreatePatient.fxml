@@ -20,10 +20,6 @@
       <Label layoutX="45.0" layoutY="85.0" text="Family name" />
       <TextField fx:id="familyNameField" layoutX="160.0" layoutY="80.0" prefHeight="0.0" prefWidth="280.0" />
       <ComboBox fx:id="genderComboBox" layoutX="160.0" layoutY="150.0" prefHeight="0.0" prefWidth="280.0" />
-      <TextField fx:id="weightField" layoutX="160.0" layoutY="185.0" prefHeight="0.0" prefWidth="280.0" />
-      <TextField fx:id="heightField" layoutX="160.0" layoutY="220.0" prefHeight="0.0" prefWidth="280.0" />
-      <TextField fx:id="phoneNumberField" layoutX="160.0" layoutY="290.0" prefHeight="0.0" prefWidth="280.0" />
-      <TextField fx:id="cprField" layoutX="160.0" layoutY="255.0" prefHeight="0.0" prefWidth="280.0" />
       <Label layoutX="45.0" layoutY="330.0" text="Observations" />
       <TextField fx:id="observationsField" layoutX="160.0" layoutY="325.0" prefHeight="115.0" prefWidth="280.0" />
       <Button fx:id="createButton" layoutX="340.0" layoutY="460.0" mnemonicParsing="false" onAction="#createPatient" prefHeight="25.0" prefWidth="100.0" text="Create" />

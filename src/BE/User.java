@@ -5,9 +5,9 @@ public class User {
     private int schoolID;
     private String name;
     private String email;
-    private String userType;
+    private int userType;
 
-    public User(int id,int schoolID, String name, String email, String userType) {
+    public User(int id,int schoolID, String name, String email, int userType) {
         this.id = id;
         this.schoolID = schoolID;
         this.name = name;
@@ -15,7 +15,7 @@ public class User {
         this.userType = userType;
     }
 
-    public User(int schoolID, String name, String email, String userType) {
+    public User(int schoolID, String name, String email, int userType) {
         this.schoolID = schoolID;
         this.name = name;
         this.email = email;
@@ -38,11 +38,11 @@ public class User {
         this.schoolID = schoolID;
     }
 
-    public String getUserType() {
+    public int getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(int userType) {
         this.userType = userType;
     }
 

@@ -6,7 +6,7 @@ import BE.Patient;
 import BE.User;
 import BLL.BLLFacade;
 import BLL.BLLManager;
-import DAL.util.DalException;
+import DAL.Exceptions.DALException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -22,36 +22,26 @@ public class StudentMOD {
         casesGraded = FXCollections.observableArrayList();
     }
 
-    //TODO DELETE THE FOLLOWING WHEN IMPLEMENTED TO READ FROM FILE
-
-    public ObservableList<String> getGenders() {
-        ObservableList<String> genders = FXCollections.observableArrayList();
-        genders.add("Male");
-        genders.add("Female");
-        genders.add("Lockheed Martin F-16 Fighting Falcon lol");
-        return genders;
-    }
-
-    public Group getGroupOf(User user) throws DalException{
+    public Group getGroupOf(User user) throws DALException {
         return bllFacade.getGroupOf(user);
     }
 
 
-    public ObservableList<Case> getCasesAssignedTo(Group logedGroup) throws DalException {
+    public ObservableList<Case> getCasesAssignedTo(Group logedGroup) throws DALException {
         casesAssigned.addAll(bllFacade.getCasesAssignedTo(logedGroup));
         return casesAssigned;
     }
 
-    public ObservableList<Case> getCasesGradedOf(Group logedGroup) throws DalException {
+    public ObservableList<Case> getCasesGradedOf(Group logedGroup) throws DALException {
         casesGraded.addAll(bllFacade.getCasesGradedOf(logedGroup));
         return casesGraded;
     }
 
-    public Patient getPatientOf(Group currentGroup, Case currentCase) throws DalException {
+    public Patient getPatientOf(Group currentGroup, Case currentCase) throws DALException {
         return bllFacade.getPatientOfCase(currentCase, currentGroup);
     }
 
-    public void addObservationToPatient(String observation, Patient currentPatient) throws DalException{
+    public void addObservationToPatient(String observation, Patient currentPatient) throws DALException {
         bllFacade.addObservationToPatient(observation, currentPatient);
     }
 
@@ -64,7 +54,7 @@ public class StudentMOD {
         return casesAssigned;
     }
 
-    public void updateCase(Case currentCase) throws DalException{
+    public void updateCase(Case currentCase) throws DALException {
         bllFacade.updateCase(currentCase);
     }
 
@@ -73,13 +63,11 @@ public class StudentMOD {
             if (c.getName().equals(currentCase.getName())) {
                 c.setName(currentCase.getName());
                 c.setConditionDescription(currentCase.getConditionDescription());
-                c.setCategory(currentCase.getCategory());
-                c.setSubCategory(currentCase.getSubCategory());
             }
         }
     }
 
-    public void updatePatient(Patient currentPatient) throws DalException{
+    public void updatePatient(Patient currentPatient) throws DALException {
         bllFacade.updatePatient(currentPatient);
     }
 }
