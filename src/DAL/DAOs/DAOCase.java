@@ -76,7 +76,7 @@ public class DAOCase {
     public void assignCaseToGroup(Patient patient, Case assignedCase, Group group) throws DALException {
         try(Connection con = connectionProvider.getConnection()) {
 
-            String sql = "INSERT INTO [Cases] ([Description],[Name],[schoolid],[isCopy]) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO [Cases] ([Description],[Name],[schoolid],[isCopy]) VALUES (?,?,?,?)";
             String sql2 = "SELECT [ID] FROM [Cases] WHERE [Name] = ? AND [isCopy] = ?";
             String sql3 = "INSERT INTO [Patient] (FirstName, LastName, DateofBirth, Gender, Schoolid, IsCopy) VALUES (?,?,?,?,?,?)";
             String sql4 = "SELECT [ID] FROM [Patient] WHERE [FirstName] = ? AND [isCopy] = ?";

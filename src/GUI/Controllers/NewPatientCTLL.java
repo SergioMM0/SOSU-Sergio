@@ -67,9 +67,8 @@ public class NewPatientCTLL implements Initializable {
         if(fieldsAreFiled()){
             ArrayList<String> observations = new ArrayList<>();
             try{
-                observations.add(observationsField.getText());
+                observations.add(LocalDate.now() + ": " + observationsField.getText());
                 Patient patient = new Patient(
-                        0,
                         nameField.getText(),
                         familyNameField.getText(),
                         dateOfBirthPicker.getValue(),

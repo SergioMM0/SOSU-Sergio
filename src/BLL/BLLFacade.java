@@ -81,6 +81,7 @@ public interface BLLFacade {
     List<User> getAllUSERS(int schoolId , String utype) throws DALException;
 
     List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DALException;
+
     Patient getPatientOfCase(Case selectedCase, Group group) throws DALException;
 
     void unassignCase(Case selectedItem) throws DALException;

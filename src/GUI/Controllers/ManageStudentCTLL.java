@@ -61,6 +61,7 @@ public class ManageStudentCTLL {
                     teacherMainCTLL.updateStudentInTable(student);
                     closeWindow();
                 }catch (DALException dalException){
+                    dalException.printStackTrace();
                     SoftAlert.displayAlert(dalException.getMessage());
                 }
             }

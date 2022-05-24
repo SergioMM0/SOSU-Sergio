@@ -518,6 +518,7 @@ public class TeacherMainCTLL {
             }
             model.removeObservableGroup(groupsTable.getSelectionModel().getSelectedItem());
             refreshGroupList();
+            participantsTable.getItems().clear();
         }
     }
 
@@ -674,6 +675,7 @@ public class TeacherMainCTLL {
                         currentCase.setName(caseNameField.getText());
                         currentCase.setConditionDescription(descriptionOfConditionText.getText());
                         model.updateCase(currentCase);
+                        FieldsManager.displayCaseInfo(caseTab,currentCase,caseNameField,descriptionOfConditionText);
                     } catch (DALException dalException) {
                         dalException.printStackTrace();
                         SoftAlert.displayAlert(dalException.getMessage());
@@ -686,6 +688,7 @@ public class TeacherMainCTLL {
                         model.updateCase(currentCase);
                         model.updateCaseInTable(currentCase);
                         refreshCasesList();
+                        FieldsManager.displayCaseInfo(caseTab,currentCase,caseNameField,descriptionOfConditionText);
                     } catch (DALException dalException) {
                         dalException.printStackTrace();
                         SoftAlert.displayAlert(dalException.getMessage());

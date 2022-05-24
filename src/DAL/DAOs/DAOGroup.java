@@ -30,11 +30,10 @@ public class DAOGroup {
 
             ResultSet rs = statement.getResultSet();
             while(rs.next()){
-                listOfGroups.add(new Group(
-                        rs.getInt("ID"),
-                        rs.getString("Name"),
-                        rs.getInt("Schoolid")
-                ));
+                int id = rs.getInt("ID");
+                String name = rs.getString("Name");
+                Group group = new Group(id , name , getUsersInGroup(id) , schoolID);
+                listOfGroups.add(group);
             }
             return listOfGroups;
         } catch (SQLException sqlException) {
@@ -101,12 +100,10 @@ public class DAOGroup {
         ArrayList<User> listOfUsersInGroup = new ArrayList<>();
         try(Connection con = connectionProvider.getConnection()) {
 
-            String sql = "SELECT a.[ID] , a.[Username] , a.[Email] , d.[Usertype] , a.[Schoolid] FROM [Users] as a" +
-                    " INNER JOIN [UsersInGroup] as b"+
-                    " ON a.[ID] = b.[StudentID] " +
-                    " INNER JOIN [Usertype] as d" +
-                    " ON a.[Usertype] = d.[Identifier]" +
-                    " WHERE b.[GroupID] = ?";
+            String sql = "SELECT a.[ID] , a.[Username] , a.[Email] , a.[Usertype] , a.[Schoolid] FROM [Users] as a " +
+                    "INNER JOIN [UsersInGroup] as b "+
+                    "ON a.[ID] = b.[StudentID] " +
+                    "WHERE b.[Groupid] = ?";
 
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1, id);
@@ -114,11 +111,11 @@ public class DAOGroup {
             ResultSet rs = prs.getResultSet();
             while(rs.next()){
                 listOfUsersInGroup.add(new User(
-                        rs.getInt("userid"),
-                        rs.getInt("schoolid"),
-                        rs.getString("username"),
-                        rs.getString("email"),
-                        rs.getInt("usertype")
+                        rs.getInt("ID"),
+                        rs.getInt("Schoolid"),
+                        rs.getString("Username"),
+                        rs.getString("Email"),
+                        rs.getInt("Usertype")
                         ));
             }
             return listOfUsersInGroup;

@@ -84,6 +84,7 @@ public interface DALFacade {
     StudentQuestionnaire getQuestionnaireOf(Group group) throws DALException;
 
     List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DALException;
+
     Patient getPatientOfCase(Case selectedCase, Group group) throws DALException;
 
     void unassignCase(Case selectedItem) throws DALException;

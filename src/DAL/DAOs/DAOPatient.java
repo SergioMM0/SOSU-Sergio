@@ -14,13 +14,11 @@ import java.util.List;
 public class DAOPatient {
 
     private final ConnectionProvider dataAccess;
-    //private CopyChecker copyChecker;
     private final int isTrue = 1;
     private final int isFalse = 0;
 
     public DAOPatient() {
         dataAccess = new ConnectionProvider();
-        //copyChecker = CopyChecker.getInstance();
     }
 
     public List<Patient> getAllPatients(int schoolid) throws DALException {
@@ -60,7 +58,7 @@ public class DAOPatient {
             String sql = "INSERT INTO [Patient] ([FirstName], [LastName], [DateofBirth], [Gender], [Schoolid], [isCopy]) " +
                     "VALUES (?,?,?,?,?,?)";
 
-            String sql2 = "SELECT [ID] FROM Patient WHERE [FirstName] = ? AND [LastName] = ? AND [DateOfBirth] = ? AND [Gender] = ? AND [schoolid] = ?";
+            String sql2 = "SELECT [ID] FROM [Patient] WHERE [FirstName] = ? AND [LastName] = ? AND [DateOfBirth] = ? AND [Gender] = ? AND [schoolid] = ?";
 
             PreparedStatement prs = con.prepareStatement(sql);
             PreparedStatement prs2 = con.prepareStatement(sql2);
@@ -73,8 +71,6 @@ public class DAOPatient {
             prs.setInt(6, patient.getIsCopyDB());
             prs.executeUpdate();
 
-            addObservation(patient.getObservationsList().get(0),patient);
-
             prs2.setString(1 , patient.getFirst_name());
             prs2.setString(2 , patient.getLast_name());
             prs2.setDate(3, Date.valueOf(patient.getDateOfBirth()));
@@ -86,6 +82,8 @@ public class DAOPatient {
             while(rs.next()){
                 patient.setId(rs.getInt("ID"));
             }
+
+            addObservation(patient.getObservationsList().get(0),patient);
             return patient;
         } catch (SQLException sqlException) {
             throw new DALException("Not able to create the patient" , sqlException);
@@ -161,18 +159,17 @@ public class DAOPatient {
             st.execute();
             ResultSet rs = st.getResultSet();
             while(rs.next()){
-                int id = rs.getInt("id");
+                int id = rs.getInt("ID");
                 return new Patient(id,
-                        rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        convertToLocalDateViaSqlDate(rs.getDate("dateofBirth")),
-                        rs.getString("gender"),
+                        rs.getString("FirstName"),
+                        rs.getString("LastName"),
+                        convertToLocalDateViaSqlDate(rs.getDate("DateOfBirth")),
+                        rs.getString("Gender"),
                         getObservationsOf(id),
-                        rs.getInt("schoolid"),
+                        rs.getInt("Schoolid"),
                         CopyChecker.checkIfCopy(rs.getInt("isCopy"))
                         );
             }
-
         }catch (SQLException sqlException){
             throw new DALException("Not able to get the patient for the case", sqlException);
         }

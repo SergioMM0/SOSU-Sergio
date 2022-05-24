@@ -52,11 +52,11 @@ public class DAOUser {
             ResultSet rs = statement.getResultSet();
             while (rs.next()) {
                 allStudents.add(new User(
-                        rs.getInt("userid"),
-                        rs.getInt("schoolId"),
+                        rs.getInt("ID"),
+                        rs.getInt("Schoolid"),
                         rs.getString("username"),
                         rs.getString("email"),
-                        rs.getInt("usertype")
+                        rs.getInt("Usertype")
                 ));
             }
         } catch (SQLException sqlException) {
@@ -92,13 +92,13 @@ public class DAOUser {
 
     public void updateStudent(User student) throws DALException {
         try (Connection con = dataAccess.getConnection()) {
-            String sql = "UPDATE [Users] SET [Username] = ?  , [Email] = ? WHERE [ID] = ? ";
+            String sql = "UPDATE [Users] SET [Username] = ?, [Password] = ?, [Email] = ? WHERE [ID] = ? ";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1, student.getName());
-            prs.setString(2, student.getEmail());
-            prs.setInt(3, student.getId());
-            prs.executeUpdate();
-
+            prs.setString(2, student.getName());
+            prs.setString(3, student.getEmail());
+            prs.setInt(4, student.getId());
+            prs.execute();
         } catch (SQLException sqlException) {
             throw new DALException("Not able to update the student", sqlException);
         }
