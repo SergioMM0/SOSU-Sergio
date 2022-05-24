@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class ManageGroupCTLL {
@@ -39,9 +41,10 @@ public class ManageGroupCTLL {
         if(operationType == 1){
             if(fieldsAreFilled()){
                 try{
+                    List<User> empty = new ArrayList<>();
                     Group group = new Group(
                             nameField.getText(),
-                            null,
+                            empty,
                             logedUser.getSchoolID()
                     );
                     teacherMainCTLL.addGroupToList(model.createNewGroup(group));

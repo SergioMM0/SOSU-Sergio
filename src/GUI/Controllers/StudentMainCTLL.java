@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentMainCTLL {
 
@@ -120,12 +121,24 @@ public class StudentMainCTLL {
         setUpTabs();
         populateCasesAssigned();
         populateCasesGraded();
-        casesAssignedList.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Case>() {
-            @Override
-            public void onChanged(Change<? extends Case> c) {
-                    evaluateCaseButton.setDisable(casesAssignedList.getSelectionModel().getSelectedItem()==null);
-            }
-        });
+        displayLabels();
+    }
+
+    private void displayLabels() {
+        groupLBL.setText(currentGroup.getName());
+        setUpStudentsLBL(currentGroup);
+    }
+
+    private void setUpStudentsLBL(Group group) {
+        StringBuilder sb = new StringBuilder();
+        List<User> participants = group.getMembers();
+        for (int i = 0; i < participants.size(); i++) {
+            if (i == participants.size() - 1) {
+                sb.append(participants.get(i).getName());
+            } else sb.append(participants.get(i).getName()).append(", ");
+
+        }
+        studentLBL.setText(sb.toString());
     }
 
     private void setUpTabs() {

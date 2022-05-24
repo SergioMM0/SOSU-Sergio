@@ -165,6 +165,9 @@ public class DAOGroup {
             while(rs.next()){
                 group = new Group(rs.getInt("id"), rs.getString("name"), rs.getInt("Schoolid"));
             }
+            if (group != null) {
+                group.setMembers(getUsersInGroup(group.getId()));
+            }
         }catch (SQLException sqlException){
             throw new DalException("Not able to get the group of the student", sqlException);
         }

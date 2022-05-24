@@ -345,8 +345,10 @@ public class TeacherMainCTLL {
     private void groupIsSelected(MouseEvent event) {
         if(groupsTable.getSelectionModel().getSelectedItem() != null){
             this.currentGroup = groupsTable.getSelectionModel().getSelectedItem();
-            populateParticipantsTable(groupsTable.getSelectionModel().getSelectedItem());
-            populateGroupsTab(groupsTable.getSelectionModel().getSelectedItem());
+            if(currentGroup.getMembers() != null){
+                populateParticipantsTable(groupsTable.getSelectionModel().getSelectedItem());
+                populateGroupsTab(groupsTable.getSelectionModel().getSelectedItem());
+            }
         }
     }
 
@@ -609,6 +611,7 @@ public class TeacherMainCTLL {
         try {
             model.deleteStudent(student);
         } catch (DalException dalException) {
+            dalException.printStackTrace();
             softAlert.displayAlert(dalException.getMessage());
         }
         model.deleteObservableStudent(student);
