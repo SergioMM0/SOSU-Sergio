@@ -121,26 +121,6 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public List<School> getAllSchools() throws DALException {
-        return dalFacade.getAllSchhol();
-    }
-
-    @Override
-    public void createSchool(School school) throws DALException {
-        dalFacade.createSchool(school);
-    }
-
-    @Override
-    public void updateSchool(School school) throws DALException {
-        dalFacade.updateSchool(school);
-    }
-
-    @Override
-    public void deleteSchool(School school) throws DALException {
-        dalFacade.deleteSchool(school);
-    }
-
-    @Override
     public void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DALException {
         String groupDistinctiveCase = selectedCase.getName() + " - " + group.getName();
         selectedCase.setName(groupDistinctiveCase);
@@ -156,38 +136,10 @@ public class BLLManager implements BLLFacade {
         return dalFacade.getCasesAssignedTo(group);
     }
 
-    @Override
-    public List<User> getALLUsers(int schoolid, String utype) throws DALException {
-        List<User> sortedusers = dalFacade.getAllUSERS(schoolid , utype);
-      sortedusers.sort((o1, o2) -> o2.getName().compareTo(o1.getName()));
-
-     return sortedusers ;
-
-    }
-
-    public ObservableList<User> searchUser(ObservableList<User> users, String text) {
-        return users.filtered((t) -> t.getName().toLowerCase().startsWith(text.toLowerCase()) ||  t.getEmail().toLowerCase().startsWith(text.toLowerCase()));
-
-    }
-
 
     @Override
     public Group getGroupOf(User student) throws DALException {
         return dalFacade.getGroupOf(student);
-    }
-
-    @Override
-    public StudentQuestionnaire getQuestionnaireOf(Group group) throws DALException {
-        return dalFacade.getQuestionnaireOf(group);
-    }
-
-    public List<User> searchForUser(String query) throws DALException {
-        return dalFacade.searchForUser(query);
-    }
-
-    @Override
-    public List<User> getAllUSERS(int schoolId , String utype) throws DALException {
-        return dalFacade.getAllUSERS(schoolId , utype);
     }
 
     @Override

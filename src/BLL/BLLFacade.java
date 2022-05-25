@@ -57,28 +57,11 @@ public interface BLLFacade {
 
     void deletePatient(Patient selectedPatient) throws DALException;
 
-    List<School> getAllSchools() throws DALException;
-
-    void createSchool(School school) throws DALException;
-
-    void updateSchool(School school) throws DALException;
-
-    void deleteSchool(School school) throws DALException;
-
     void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DALException;
 
     List<Case> getCasesAssignedTo(Group group) throws DALException;
 
-    List<User> getALLUsers(int schoolid, String utype) throws DALException;
-
     Group getGroupOf(User student) throws DALException;
-
-    StudentQuestionnaire getQuestionnaireOf(Group group) throws DALException;
-
-
-    List<User> searchForUser(String query) throws DALException;
-
-    List<User> getAllUSERS(int schoolId , String utype) throws DALException;
 
     List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DALException;
 

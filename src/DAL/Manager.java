@@ -73,11 +73,6 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public List<User> searchForUser(String query) throws DALException {
-        return daoUser.searchForUser(query);
-    }
-
-    @Override
     public List<Patient> getAllPatients(int schoolid) throws DALException {
         return daoPatient.getAllPatients(schoolid);
     }
@@ -95,26 +90,6 @@ public class Manager implements DALFacade {
     @Override
     public void deletePatient(Patient patient) throws DALException {
         daoPatient.deletePatient(patient);
-    }
-
-    @Override
-    public List<School> getAllSchhol() throws DALException {
-        return daoSchool.getAllSchhol();
-    }
-
-    @Override
-    public void createSchool(School school) throws DALException {
-        daoSchool.createSchool(school);
-    }
-
-    @Override
-    public void updateSchool(School school) throws DALException {
-        daoSchool.updateSchool(school);
-    }
-
-    @Override
-    public void deleteSchool(School school) throws DALException {
-        daoSchool.deleteSchool(school);
     }
 
     @Override
@@ -138,18 +113,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public List<User> getUsersInGroup(int id) throws DALException {
-        return daoGroup.getUsersInGroup(id);
-    }
-
-    @Override
     public void addUsertoGroup(Group group, User user) throws DALException {
         daoGroup.addUsertoGroup(group, user);
-    }
-
-    @Override
-    public void removeUserFromGroup(User user) throws DALException {
-        daoGroup.removeUserFromGroup(user);
     }
 
     @Override
@@ -204,24 +169,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public List<User> getAllUSERS(int schoolId ,String utype) throws DALException {
-        return daoUser.getAllUSERS(schoolId , utype);
-    }
-
-    @Override
-    public List<User> getALLUsers(int schoolid, String utype) throws DALException {
-        return null;
-    }
-
-
-    @Override
     public Group getGroupOf(User student) throws DALException {
         return daoGroup.getGroupOf(student);
-    }
-
-    @Override
-    public StudentQuestionnaire getQuestionnaireOf(Group group) throws DALException {
-        return daoStudentQuestion.getQuestionnaireOf(group);
     }
 
     @Override

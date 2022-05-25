@@ -9,9 +9,9 @@ public interface DALFacade {
 
     List<Case> getAllCases(int schoolid) throws DALException;
 
-    Case createCase(Case c)throws DALException;
+    Case createCase(Case c) throws DALException;
 
-    void updateCase(Case c)throws DALException;
+    void updateCase(Case c) throws DALException;
 
     void deleteCase(Case c) throws DALException;
 
@@ -19,45 +19,31 @@ public interface DALFacade {
 
     List<User> getAllStudents(int schoolid) throws DALException;
 
-    void updateStudent(User user) throws DALException;  //
+    void updateStudent(User user) throws DALException;
 
     void deleteStudent(User user) throws DALException;
 
-    User addNewStudent(User user ) throws DALException; //
-
-    List<User> searchForUser (String query) throws DALException;
+    User addNewStudent(User user) throws DALException;
 
     List<Patient> getAllPatients(int schoolid) throws DALException;
 
-    Patient createPatient(Patient patient ) throws DALException;
-    //
+    Patient createPatient(Patient patient) throws DALException;
+
     void updatePatient(Patient patient) throws DALException;
-        //
-    void deletePatient(Patient patient)throws DALException;
 
-    List<School> getAllSchhol() throws DALException;
+    void deletePatient(Patient patient) throws DALException;
 
-    void createSchool(School school)throws DALException;
-        //
-    void updateSchool(School school)throws DALException;
-        //
-    void deleteSchool(School school)throws DALException;
+    List<Group> getAllGroups(int schoolID) throws DALException;
 
-    List<Group> getAllGroups(int schoolID)throws DALException;
+    Group createGroup(Group group) throws DALException;
 
-    Group createGroup(Group group)throws DALException;
-        //
-    void updateGroup(Group group)throws DALException;
-        //
-    void deleteGroup(Group group)throws DALException;
+    void updateGroup(Group group) throws DALException;
 
-    List<User> getUsersInGroup(int id)throws DALException;
+    void deleteGroup(Group group) throws DALException;
 
-    void addUsertoGroup(Group group , User user)throws DALException;
+    void addUsertoGroup(Group group, User user) throws DALException;
 
-    void removeUserFromGroup(User user)throws DALException;
-
-    void assignCaseToGroup(Patient p , Case c , Group g) throws DALException;
+    void assignCaseToGroup(Patient p, Case c, Group g) throws DALException;
 
 
     void addStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DALException;
@@ -70,18 +56,11 @@ public interface DALFacade {
 
     StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DALException;
 
-     void removeParticipant(User user , Group group)throws DALException;
+    void removeParticipant(User user, Group group) throws DALException;
 
-     List<Case> getCasesAssignedTo(Group group)throws DALException;
-
-
-    List<User> getAllUSERS(int schoolId  ,String utype) throws DALException;
-
-     List<User> getALLUsers(int schoolid , String utype) throws DALException;
+    List<Case> getCasesAssignedTo(Group group) throws DALException;
 
     Group getGroupOf(User student) throws DALException;
-
-    StudentQuestionnaire getQuestionnaireOf(Group group) throws DALException;
 
     List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DALException;
 
