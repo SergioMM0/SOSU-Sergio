@@ -4,7 +4,7 @@ import BE.Case;
 import BE.Group;
 import BE.Patient;
 import DAL.DataAccess.ConnectionProvider;
-import DAL.Exceptions.CopyChecker;
+import DAL.Util.CopyChecker;
 import DAL.Exceptions.DALException;
 import java.sql.*;
 import java.util.ArrayList;
