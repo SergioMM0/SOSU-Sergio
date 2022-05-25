@@ -1,19 +1,30 @@
 package GUI.Alerts;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 
 public class ConfirmationAlert {
 
-    private static final String confirmationTitle = "Please confirm";
+    private static ConfirmationAlert instance;
+    private ButtonType answer;
 
-    public ConfirmationAlert(String message){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(confirmationTitle);
-        alert.setHeaderText(message);
-        ButtonType okButton = new ButtonType("Confirm");
-        ButtonType cancelButton = new ButtonType("Cancel");
-        alert.getButtonTypes().setAll(okButton,cancelButton);
+    private ConfirmationAlert(){}
+
+    public static ConfirmationAlert getInstance(){
+        if(instance == null){
+            instance = new ConfirmationAlert();
+        }return instance;
+    }
+
+    public void displayConfirmationAlert(String message){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                message, ButtonType.YES, ButtonType.CANCEL);
         alert.showAndWait();
+        answer = alert.getResult();
+    }
+
+    public ButtonType getAnswer(){
+        return this.answer;
     }
 }

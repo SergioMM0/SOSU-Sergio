@@ -13,6 +13,4 @@ public class SoftAlert {
         alert.getButtonTypes().setAll(okButton);
         alert.showAndWait();
     }
-
-
 }
