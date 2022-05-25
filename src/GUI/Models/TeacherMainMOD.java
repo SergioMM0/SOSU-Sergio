@@ -110,7 +110,7 @@ public class TeacherMainMOD {
     }
 
     public void deleteStudent(User student) throws DALException {
-        bllFacade.deleteStudent(student);
+        bllFacade.deleteUser(student);
     }
 
     public void deleteObservableStudent(User student) {

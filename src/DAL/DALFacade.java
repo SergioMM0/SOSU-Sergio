@@ -21,9 +21,9 @@ public interface DALFacade {
 
     void updateStudent(User user) throws DALException;
 
-    void deleteStudent(User user) throws DALException;
+    void deleteUser(User user) throws DALException;
 
-    User addNewStudent(User user) throws DALException;
+    User addNewUser(User user) throws DALException;
 
     List<Patient> getAllPatients(int schoolid) throws DALException;
 
@@ -45,24 +45,11 @@ public interface DALFacade {
 
     void assignCaseToGroup(Patient p, Case c, Group g) throws DALException;
 
-
-    void addStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DALException;
-
-    StudentQuestion getFirstStudentQuestion() throws DALException;
-
-    StudentQuestion getNextStudentQuestion(int id) throws DALException;
-
-    StudentQuestion getPreviousQuestion(int currentQuestionId) throws DALException;
-
-    StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DALException;
-
     void removeParticipant(User user, Group group) throws DALException;
 
     List<Case> getCasesAssignedTo(Group group) throws DALException;
 
     Group getGroupOf(User student) throws DALException;
-
-    List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DALException;
 
     Patient getPatientOfCase(Case selectedCase, Group group) throws DALException;
 
@@ -76,13 +63,9 @@ public interface DALFacade {
 
     void addObservationToPatient(String text, Patient currentPatient) throws DALException;
 
-    StudentQuestionnaire getQuestionnaire(int questionnaireId) throws DALException;
-
-    int getSickPatientId(Patient currentPatient, Case currentCase, Group currentGroup) throws DALException;
-
-    void updateQuestionnaire(StudentQuestionnaire questionnaire) throws DALException;
-
-    int getQuestionnaireOf(int caseId, int groupId) throws DALException;
-
     List<School> getAllSchools() throws DALException;
+
+    School addSchool(School currentSchool) throws DALException;
+
+    void deleteSchool(School currentSchool) throws DALException;
 }

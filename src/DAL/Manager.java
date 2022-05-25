@@ -3,10 +3,7 @@ package DAL;
 import BE.*;
 import DAL.DAOs.*;
 import DAL.Exceptions.DALException;
-
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 public class Manager implements DALFacade {
 
@@ -15,7 +12,6 @@ public class Manager implements DALFacade {
     private final DAOPatient daoPatient;
     private final DAOSchool daoSchool;
     private final DAOGroup daoGroup;
-    private final DAOStudentQuestion daoStudentQuestion;
 
     public Manager() {
         daoCase = new DAOCase();
@@ -23,7 +19,6 @@ public class Manager implements DALFacade {
         daoPatient = new DAOPatient();
         daoSchool = new DAOSchool();
         daoGroup = new DAOGroup();
-        daoStudentQuestion = new DAOStudentQuestion();
     }
 
 
@@ -63,13 +58,13 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void deleteStudent(User student) throws DALException {
-        daoUser.deleteStudent(student);
+    public void deleteUser(User user) throws DALException {
+        daoUser.deleteUser(user);
     }
 
     @Override
-    public User addNewStudent(User student) throws DALException {
-        return daoUser.addStudent(student);
+    public User addNewUser(User student) throws DALException {
+        return daoUser.addUser(student);
     }
 
     @Override
@@ -123,42 +118,6 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void addStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DALException {
-        daoStudentQuestion.addStudentQuestionAnswer(answer);
-    }
-
-    @Override
-    public StudentQuestion getFirstStudentQuestion() throws DALException {
-        var questionaireId=daoStudentQuestion.addQuestionaire();
-        StudentQuestion question = daoStudentQuestion.getAllQuestions().get(0);
-        question.setQuestionaireId(questionaireId);
-        return question;
-    }
-
-    @Override
-    public StudentQuestion getNextStudentQuestion(int id) throws DALException {
-        List<StudentQuestion> questions = daoStudentQuestion.getAllQuestions();
-        Optional<StudentQuestion> nextQuestion =
-                questions.stream().filter(question -> question.getId() > id).min(Comparator.comparingInt(StudentQuestion::getId));
-        if (nextQuestion.isPresent()) return nextQuestion.get();
-        return null;
-    }
-
-    @Override
-    public StudentQuestion getPreviousQuestion(int currentQuestionId) throws DALException {
-        List<StudentQuestion> questions = daoStudentQuestion.getAllQuestions();
-        Optional<StudentQuestion> previousQuestion =
-                questions.stream().filter(question -> question.getId() < currentQuestionId).max(Comparator.comparingInt(StudentQuestion::getId));
-        if (previousQuestion.isPresent()) return previousQuestion.get();
-        return null;
-    }
-
-    @Override
-    public StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DALException {
-        return daoStudentQuestion.getQuestionaireAnswer(questionId,questionaireId);
-    }
-
-    @Override
     public void removeParticipant(User user, Group group) throws DALException {
         daoGroup.removeParticipant(user , group);
     }
@@ -171,11 +130,6 @@ public class Manager implements DALFacade {
     @Override
     public Group getGroupOf(User student) throws DALException {
         return daoGroup.getGroupOf(student);
-    }
-
-    @Override
-    public List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DALException {
-        return daoStudentQuestion.getQuestionnaireQuestions(questionnaireId);
     }
 
     public Patient getPatientOfCase(Case selectedCase, Group group) throws DALException {
@@ -208,29 +162,17 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public StudentQuestionnaire getQuestionnaire(int questionnaireId) throws DALException {
-        return  daoStudentQuestion.getQuestionnaire(questionnaireId);
-    }
-
-    @Override
-    public int getSickPatientId(Patient currentPatient, Case currentCase, Group currentGroup) throws DALException {
-        return daoStudentQuestion.getSickPatientId(currentPatient,currentCase,currentGroup);
-    }
-
-    @Override
-    public void updateQuestionnaire(StudentQuestionnaire questionnaire) throws DALException {
-        daoStudentQuestion.updateQuestionnaireSickPatient(questionnaire);
-    }
-
-    @Override
-    public int getQuestionnaireOf(int caseId, int groupId) throws DALException {
-       return daoStudentQuestion.getQuestionnaireOf(caseId,groupId);
-    }
-
-    @Override
     public List<School> getAllSchools() throws DALException {
         return daoSchool.getAllSchools();
     }
 
+    @Override
+    public School addSchool(School currentSchool) throws DALException {
+        return daoSchool.addSchool(currentSchool);
+    }
 
+    @Override
+    public void deleteSchool(School currentSchool) throws DALException {
+        daoSchool.deleteSchool(currentSchool);
+    }
 }

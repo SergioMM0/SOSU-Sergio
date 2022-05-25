@@ -14,23 +14,17 @@ public interface BLLFacade {
 
     Patient createPatient(Patient patient) throws DALException;
 
-    void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DALException;
-
-    StudentQuestion getFirstQuestion() throws DALException;
-
-    StudentQuestion getNextQuestion(StudentQuestion question) throws DALException, BLLException;
-
     List<Group> getAllGroups(int schoolID) throws DALException;
 
     List<Case> getAllCases(int schoolID) throws DALException;
 
     List<Patient> getAllPatients(int schoolID) throws DALException;
 
-    User addNewStudent(User student) throws DALException;
+    User addNewUser(User user) throws DALException;
 
     void updateStudent(User student) throws DALException;
 
-    void deleteStudent(User student) throws DALException;
+    void deleteUser(User user) throws DALException;
 
     List<User> getAllStudent(int schoolID) throws DALException;
 
@@ -39,11 +33,6 @@ public interface BLLFacade {
     Group createNewGroup(Group group) throws DALException;
 
     void updateGroup(Group selectedGroup) throws DALException;
-
-
-    StudentQuestion getPreviousQuestion(int currentQuestionId) throws BLLException, DALException;
-
-    StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DALException;
 
     void addStudentToGroup(Group group, User student) throws DALException;
 
@@ -63,8 +52,6 @@ public interface BLLFacade {
 
     Group getGroupOf(User student) throws DALException;
 
-    List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DALException;
-
     Patient getPatientOfCase(Case selectedCase, Group group) throws DALException;
 
     void unassignCase(Case selectedItem) throws DALException;
@@ -77,11 +64,11 @@ public interface BLLFacade {
 
     void addObservationToPatient(String text, Patient patient) throws DALException;
 
-    void UpdateQuestionnaire(int questionnaireId, Case currentCase, Patient currentPatient, Group currentGroup) throws DALException;
-
-    int getQuestionnaireOf(int caseId, int groupId) throws DALException;
-
     List<School> getAllSchools() throws DALException,BLLException;
+
+    School addSchool(School currentSchool) throws DALException;
+
+    void deleteSchool(School currentSchool) throws DALException;
 }
 
 

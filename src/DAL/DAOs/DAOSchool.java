@@ -36,4 +36,36 @@ public class DAOSchool {
         return allSchools;
     }
 
+    public School addSchool(School currentSchool) throws DALException{
+        try(Connection connection = connectionProvider.getConnection()){
+            String sql = "INSERT INTO [School] (Name) VALUES ?";
+            String sql2 = "SELECT * FROM [School] WHERE [Name] = ?";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+            PreparedStatement st2 = connection.prepareStatement(sql2);
+            st.setString(1,currentSchool.getName());
+            st.execute();
+
+            st2.setString(1,currentSchool.getName());
+            st2.execute();
+            ResultSet rs = st2.getResultSet();
+            while(rs.next()){
+                currentSchool.setId(rs.getInt("ID"));
+            }
+        }catch (SQLException sqlException){
+            throw new DALException("Not able to create the school", sqlException);
+        }
+        return currentSchool;
+    }
+
+    public void deleteSchool(School currentSchool) throws DALException {
+        try(Connection connection = connectionProvider.getConnection()){
+            String sql = "DELETE FROM [School] WHERE [ID] = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, currentSchool.getId());
+            st.execute();
+        }catch (SQLException sqlException){
+            throw new DALException("Not able to delete the school", sqlException);
+        }
+    }
 }

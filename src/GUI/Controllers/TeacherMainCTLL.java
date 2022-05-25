@@ -790,16 +790,6 @@ public class TeacherMainCTLL {
             loader.<AssignCaseCTLL>getController().setController(this);
             loader.<AssignCaseCTLL>getController().initializeView();
         }
-        if (resource.equals("GUI/Views/StudentQuestion.fxml")) {
-            StudentQuestionCTL controller = loader.<StudentQuestionCTL>getController();
-            Case selectedCase = casesAssignedList.getSelectionModel().getSelectedItem();  //find selected case from case list
-            controller.setCase(selectedCase);
-            controller.setGroup(groupsTable.getSelectionModel().getSelectedItem());     //find selected group
-            controller.disableQuestionTab();            //student question tab will be disabled
-            controller.setModelQuestionnaireId();       //set questionnaire Id in application according to selected case and group
-            controller.fillOverviewList();      //laod data from database and fill it in overview list
-            controller.openOverViewTab();
-        }
         root.getStylesheets().add(css);
         Stage stage = new Stage();
         stage.setTitle(title);

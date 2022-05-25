@@ -5,7 +5,6 @@ import BLL.Exceptions.BLLException;
 import DAL.DALFacade;
 import DAL.Manager;
 import DAL.Exceptions.DALException;
-import javafx.collections.ObservableList;
 
 import java.security.InvalidParameterException;
 import java.util.List;
@@ -53,8 +52,8 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public User addNewStudent(User student) throws DALException {
-        return dalFacade.addNewStudent(student);
+    public User addNewUser(User user) throws DALException {
+        return dalFacade.addNewUser(user);
     }
 
     @Override
@@ -63,8 +62,8 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public void deleteStudent(User student) throws DALException {
-        dalFacade.deleteStudent(student);
+    public void deleteUser(User user) throws DALException {
+        dalFacade.deleteUser(user);
     }
 
     @Override
@@ -143,9 +142,6 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DALException {
-        return dalFacade.getQuestionnaireQuestions(questionnaireId);
-    }
     public Patient getPatientOfCase(Case selectedCase, Group group) throws DALException {
         return dalFacade.getPatientOfCase(selectedCase, group);
     }
@@ -176,20 +172,6 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public void UpdateQuestionnaire(int questionnaireId, Case currentCase, Patient currentPatient, Group currentGroup) throws DALException {
-        StudentQuestionnaire questionnaire=dalFacade.getQuestionnaire(questionnaireId);
-        int sickPatientId = dalFacade.getSickPatientId(currentPatient, currentCase, currentGroup);
-        if(sickPatientId<0)return;
-        questionnaire.setSickPatientId(sickPatientId);
-        dalFacade.updateQuestionnaire(questionnaire);
-    }
-
-    @Override
-    public int getQuestionnaireOf(int caseId, int groupId) throws DALException {
-        return dalFacade.getQuestionnaireOf(caseId,groupId);
-    }
-
-    @Override
     public List<School> getAllSchools() throws DALException, BLLException {
         try{
             return dalFacade.getAllSchools();
@@ -199,33 +181,12 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DALException {
-        dalFacade.addStudentQuestionAnswer(answer);
+    public School addSchool(School currentSchool) throws DALException {
+        return dalFacade.addSchool(currentSchool);
     }
 
     @Override
-    public StudentQuestion getFirstQuestion() throws DALException {
-        return dalFacade.getFirstStudentQuestion();
+    public void deleteSchool(School currentSchool) throws DALException {
+        dalFacade.deleteSchool(currentSchool);
     }
-
-    @Override
-    public StudentQuestion getNextQuestion(StudentQuestion question) throws DALException, BLLException {
-        StudentQuestion s = dalFacade.getNextStudentQuestion(question.getId());
-
-        return s;
-    }
-
-    @Override
-    public StudentQuestion getPreviousQuestion(int currentQuestionId) throws BLLException, DALException {
-        StudentQuestion s = dalFacade.getPreviousQuestion(currentQuestionId);
-
-        return s;
-    }
-
-    @Override
-    public StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DALException {
-        return dalFacade.getQuestionaireAnswer(questionId, questionaireId);
-    }
-
-
 }

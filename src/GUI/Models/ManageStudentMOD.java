@@ -14,7 +14,7 @@ public class ManageStudentMOD {
     }
 
     public User addNewStudent(User user) throws DALException {
-        return bllFacade.addNewStudent(user);
+        return bllFacade.addNewUser(user);
     }
 
     public void updateStudent(User student) throws DALException {
