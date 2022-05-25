@@ -6,6 +6,8 @@ import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.AdminMOD;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,6 +72,7 @@ public class AdminCTLL {
         initializeTables();
         populateSchools();
         setUPContextMenus();
+        //initializeStudentsFilter();
     }
 
     private void initializeTables() {
@@ -88,6 +91,29 @@ public class AdminCTLL {
             exception.printStackTrace();
             SoftAlert.displayAlert(exception.getMessage());
         }
+    }
+
+    public void initializeStudentsFilter(){
+        FilteredList<User> filteredStudents = new FilteredList<>(model.getObservableStudents(), b -> true);
+        FilteredList<User> filteredTeachers = new FilteredList<>(model.getObservableTeachers(), b -> true);
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredStudents.setPredicate(user ->{
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if(user.getName().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }
+                else return user.getName().toLowerCase().contains(lowerCaseFilter);
+            });
+        });
+        SortedList<User> sortedStudents = new SortedList<>(filteredStudents);
+        sortedStudents.comparatorProperty().bind(studentTableView.comparatorProperty());
+        SortedList<User> sortedTeachers = new SortedList<>(filteredTeachers);
+        sortedStudents.comparatorProperty().bind(studentTableView.comparatorProperty());
+        studentTableView.setItems(sortedStudents);
+        teacherTableView.setItems(sortedTeachers);
     }
 
     private void setUPContextMenus() {
@@ -123,30 +149,22 @@ public class AdminCTLL {
 
         updateSchool.setOnAction(t -> {
             menu1.hide();
-            try{
-
-            }catch (DALException dalException){
-                SoftAlert.displayAlert(dalException.getMessage());
-            }
-            refreshSchoolTable();
+            openView("GUI/Views/ManageSchool.fxml","Add new school", 400,220,2);
         });
 
         updateTeacher.setOnAction(t -> {
             menu2.hide();
-            try{
+            if(currentSchool != null){
+                openView("GUI/Views/ManageUser.fxml","Add new teacher", 400,220,4);
+            }else SoftAlert.displayAlert("Please select a School");
 
-            }catch (DALException dalException){
-                SoftAlert.displayAlert(dalException.getMessage());
-            }
         });
 
         updateStudent.setOnAction(t -> {
             menu3.hide();
-            try{
-
-            }catch (DALException dalException){
-                SoftAlert.displayAlert(dalException.getMessage());
-            }
+            if(currentSchool != null){
+                openView("GUI/Views/ManageUser.fxml","Add new student", 400,220,2);
+            }else SoftAlert.displayAlert("Please select a School");
         });
     }
 
@@ -154,6 +172,14 @@ public class AdminCTLL {
     void schoolIsSelected(MouseEvent event) {
         if(schoolTableView.getSelectionModel().getSelectedItem() != null){
             this.currentSchool = schoolTableView.getSelectionModel().getSelectedItem();
+            try{
+                model.getAllUsers(currentSchool);
+                    refreshTeachersTable();
+                    refreshStudentsTable();
+
+            }catch (DALException dalException){
+                SoftAlert.displayAlert(dalException.getMessage());
+            }
         }
     }
 
@@ -173,32 +199,21 @@ public class AdminCTLL {
 
     @FXML
     void addSchool(ActionEvent event) {
-        try{
-            model.addObservableSchool(model.addSchool(currentSchool));
-            refreshSchoolTable();
-        }catch (DALException dalException){
-            SoftAlert.displayAlert(dalException.getMessage());
-        }
+        openView("GUI/Views/ManageSchool.fxml","Add new school", 400,220,1);
     }
 
     @FXML
     void addStudent(ActionEvent event) {
-        try {
-            model.addObservableStudent(model.addStudent(currentStudent));
-            refreshStudentsTable();
-        } catch (DALException dalException) {
-            SoftAlert.displayAlert(dalException.getMessage());
-        }
+        if(currentSchool!=null){
+            openView("GUI/Views/ManageUser.fxml","Add new student", 400,220,1);
+        }else SoftAlert.displayAlert("Please select a school");
     }
 
     @FXML
     void addTeacher(ActionEvent event) {
-        try{
-            model.addObservableTeacher(model.addTeacher(currentTeacher));
-            refreshTeachersTable();
-        }catch (DALException dalException){
-            SoftAlert.displayAlert(dalException.getMessage());
-        }
+        if(currentSchool!=null){
+            openView("GUI/Views/ManageUser.fxml","Add new teacher", 400,220,3);
+        }else SoftAlert.displayAlert("PLease select a school");
     }
 
     @FXML
@@ -215,7 +230,7 @@ public class AdminCTLL {
     @FXML
     void deleteStudent(ActionEvent event) {
         try{
-            model.removeStudent(currentStudent);
+            model.removeUser(currentStudent);
             model.removeObservableStudent(currentStudent);
             refreshStudentsTable();
         }catch (DALException dalException){
@@ -226,7 +241,7 @@ public class AdminCTLL {
     @FXML
     void deleteTeacher(ActionEvent event) {
         try{
-            model.removeTeacher(currentTeacher);
+            model.removeUser(currentTeacher);
             model.removeObservableTeacher(currentTeacher);
             refreshTeachersTable();
         }catch (DALException dalException){
@@ -234,22 +249,38 @@ public class AdminCTLL {
         }
     }
 
-    private void refreshSchoolTable() {
+    protected void refreshSchoolTable() {
         schoolTableView.getItems().clear();
         schoolTableView.getItems().addAll(model.getObservableSchools());
     }
 
-    private void refreshStudentsTable() {
+    protected void refreshStudentsTable() {
         studentTableView.getItems().clear();
         studentTableView.getItems().addAll(model.getObservableStudents());
     }
 
-    private void refreshTeachersTable(){
+    protected void refreshTeachersTable(){
         teacherTableView.getItems().clear();
         teacherTableView.getItems().addAll(model.getObservableTeachers());
     }
 
-    private void openView(String resource, String title, int width, int height, boolean resizable, int operationType) {
+    public void addStudentToTable(User addUser) {
+        model.addObservableStudent(addUser);
+    }
+
+    public void updateStudentInTable(User student) {
+        model.updateObservableStudent(student);
+    }
+
+    public void addTeacherToTable(User addUser) {
+        model.addObservableTeacher(addUser);
+    }
+
+    public void updateTeacherInTable(User teacher) {
+        model.updateObservableTeacher(teacher);
+    }
+
+    private void openView(String resource, String title, int width, int height,int operationType) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource(resource));
         Parent root = null;
@@ -259,22 +290,50 @@ public class AdminCTLL {
             e.printStackTrace();
         }
         assert root != null;
-        if (resource.equals("GUI/Views/CreatePatient.fxml")) {
-            loader.<NewPatientCTLL>getController().setUser(logedUser);
-            loader.<NewPatientCTLL>getController().setController(this);
-        }
         root.getStylesheets().add("GUI/Views/CSS/GeneralCSS.css");
+        if (resource.equals("GUI/Views/ManageUser.fxml") && operationType == 1) {
+            loader.<ManageUserCTLL>getController().setSchoolId(currentSchool.getId());
+            loader.<ManageUserCTLL>getController().setMainController(this);
+            loader.<ManageUserCTLL>getController().setOperationType(operationType);
+        }
+        if (resource.equals("GUI/Views/ManageUser.fxml") && operationType == 2) {
+            loader.<ManageUserCTLL>getController().setStudent(currentStudent);
+            loader.<ManageUserCTLL>getController().setMainController(this);
+            loader.<ManageUserCTLL>getController().setOperationType(operationType);
+            loader.<ManageUserCTLL>getController().populateStudentFields();
+        }
+        if (resource.equals("GUI/Views/ManageUser.fxml") && operationType == 3) {
+            loader.<ManageUserCTLL>getController().setSchoolId(currentSchool.getId());
+            loader.<ManageUserCTLL>getController().setMainController(this);
+            loader.<ManageUserCTLL>getController().setOperationType(operationType);
+        }
+        if (resource.equals("GUI/Views/ManageUser.fxml") && operationType == 4) {
+            loader.<ManageUserCTLL>getController().setTeacher(currentTeacher);
+            loader.<ManageUserCTLL>getController().setMainController(this);
+            loader.<ManageUserCTLL>getController().setOperationType(operationType);
+            loader.<ManageUserCTLL>getController().populateTeacherFields();
+        }
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setScene(new Scene(root, width, height));
         listOfStages.add(stage);
-        stage.setResizable(resizable);
+        stage.setResizable(false);
         stage.showAndWait();
     }
 
     @FXML
     void logOut(ActionEvent event) {
         closeWindows();
+        Parent root1;
+        Stage stage = (Stage) schoolTableView.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/Login.fxml"));
+            root1 = (Parent) fxmlLoader.load();
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void closeWindows() {
@@ -282,9 +341,6 @@ public class AdminCTLL {
             listOfStage.close();
         }
         listOfStages.clear();
-    }
-
-    public void setUser(User logedUser) {
-        this.currentUser = logedUser;
+        model.clearLists();
     }
 }

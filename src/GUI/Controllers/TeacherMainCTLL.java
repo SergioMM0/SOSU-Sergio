@@ -763,12 +763,12 @@ public class TeacherMainCTLL {
         }
         if (resource.equals("GUI/Views/ManageStudent.fxml") && operationType == 1) {
             loader.<ManageStudentCTLL>getController().setUser(logedUser);
-            loader.<ManageStudentCTLL>getController().setController(this);
+            loader.<ManageStudentCTLL>getController().setMainController(this);
             loader.<ManageStudentCTLL>getController().setOperationType(operationType);
         }
         if (resource.equals("GUI/Views/ManageStudent.fxml") && operationType == 2) {
             loader.<ManageStudentCTLL>getController().setUser(logedUser);
-            loader.<ManageStudentCTLL>getController().setController(this);
+            loader.<ManageStudentCTLL>getController().setMainController(this);
             loader.<ManageStudentCTLL>getController().setOperationType(operationType);
             loader.<ManageStudentCTLL>getController().setStudent(studentsTable.getSelectionModel().getSelectedItem());
             loader.<ManageStudentCTLL>getController().populateStudentFields();

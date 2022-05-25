@@ -18,6 +18,6 @@ public class ManageStudentMOD {
     }
 
     public void updateStudent(User student) throws DALException {
-        bllFacade.updateStudent(student);
+        bllFacade.updateUser(student);
     }
 }

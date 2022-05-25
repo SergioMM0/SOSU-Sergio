@@ -19,7 +19,7 @@ public interface DALFacade {
 
     List<User> getAllStudents(int schoolid) throws DALException;
 
-    void updateStudent(User user) throws DALException;
+    void updateUser(User user) throws DALException;
 
     void deleteUser(User user) throws DALException;
 
@@ -68,4 +68,6 @@ public interface DALFacade {
     School addSchool(School currentSchool) throws DALException;
 
     void deleteSchool(School currentSchool) throws DALException;
+
+    List<User> getAllUsers(School currentSchool) throws DALException;
 }

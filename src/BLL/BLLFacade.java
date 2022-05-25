@@ -22,7 +22,7 @@ public interface BLLFacade {
 
     User addNewUser(User user) throws DALException;
 
-    void updateStudent(User student) throws DALException;
+    void updateUser(User student) throws DALException;
 
     void deleteUser(User user) throws DALException;
 
@@ -69,6 +69,8 @@ public interface BLLFacade {
     School addSchool(School currentSchool) throws DALException;
 
     void deleteSchool(School currentSchool) throws DALException;
+
+    List<User> getAllUsers(School currentSchool) throws DALException;
 }
 
 

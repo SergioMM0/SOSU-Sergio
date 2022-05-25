@@ -1,9 +1,10 @@
 package DAL.DAOs;
 
-import BE.Group;
+import BE.School;
 import BE.User;
 import DAL.DataAccess.ConnectionProvider;
 import DAL.Exceptions.DALException;
+import GUI.Util.StaticData;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,16 +12,15 @@ import java.util.List;
 
 public class DAOUser {
 
-    private final ConnectionProvider dataAccess;
-    private final int studentIdentifier = 3;
+    private final ConnectionProvider connectionProvider;
 
     public DAOUser() {
-        dataAccess = new ConnectionProvider();
+        connectionProvider = new ConnectionProvider();
     }
 
 
     public User checkCredentials(String useremail, String password) throws DALException {
-        try (Connection con = dataAccess.getConnection()) {
+        try (Connection con = connectionProvider.getConnection()) {
             String sql = " SELECT * FROM [Users] WHERE [Email] = ? AND [Password] = ?";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1, useremail);
@@ -43,11 +43,11 @@ public class DAOUser {
 
     public List<User> getAllStudents(int schoolId) throws DALException {
         ArrayList<User> allStudents = new ArrayList<>();
-        try (Connection con = dataAccess.getConnection()) {
+        try (Connection con = connectionProvider.getConnection()) {
             String sql = "SELECT * FROM [Users] WHERE [Schoolid] = ? And [Usertype] = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, schoolId);
-            statement.setInt(2, studentIdentifier);
+            statement.setInt(2, StaticData.getStudentType());
             statement.execute();
             ResultSet rs = statement.getResultSet();
             while (rs.next()) {
@@ -65,8 +65,8 @@ public class DAOUser {
         return allStudents;
     }
 
-    public void updateStudent(User student) throws DALException {
-        try (Connection con = dataAccess.getConnection()) {
+    public void updateUser(User student) throws DALException {
+        try (Connection con = connectionProvider.getConnection()) {
             String sql = "UPDATE [Users] SET [Username] = ?, [Password] = ?, [Email] = ? WHERE [ID] = ? ";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1, student.getName());
@@ -80,7 +80,7 @@ public class DAOUser {
     }
 
     public void deleteUser(User user) throws DALException {
-        try (Connection con = dataAccess.getConnection()) {
+        try (Connection con = connectionProvider.getConnection()) {
             String sql = "DELETE FROM [Users] WHERE [ID] = ?";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1, user.getId());
@@ -91,7 +91,7 @@ public class DAOUser {
     }
 
     public User addUser(User user) throws DALException {
-        try (Connection con = dataAccess.getConnection()) {
+        try (Connection con = connectionProvider.getConnection()) {
             String sql = "INSERT INTO [Users]([Username] , [Password], [Email] , [Usertype] , [Schoolid])" +
                     "VALUES  (?,?,?,?,?)";
             String sql2 = "SELECT [ID] FROM [Users] WHERE [Username] = ? AND [Password] = ? AND [Email] = ? AND [Usertype] = ? AND [schoolid] = ?";
@@ -118,6 +118,29 @@ public class DAOUser {
         } catch (SQLException sqlException) {
             throw new DALException("Not able to add the user", sqlException);
         }
+    }
+
+    public List<User> getAllUsers(School currentSchool) throws DALException{
+        List<User> allUsers = new ArrayList<>();
+        try(Connection connection = connectionProvider.getConnection()){
+            String sql = "SELECT * FROM [Users] WHERE [Schoolid] = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1,currentSchool.getId());
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            while(rs.next()){
+                allUsers.add(new User (
+                        rs.getInt("ID"),
+                        rs.getInt("Schoolid"),
+                        rs.getString("Username"),
+                        rs.getString("Email"),
+                        rs.getInt("Usertype")
+                ));
+            }
+        }catch (SQLException sqlException){
+            throw new DALException("Not able to retrieve all the users", sqlException);
+        }
+        return allUsers;
     }
 }
 

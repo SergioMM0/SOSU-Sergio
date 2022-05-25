@@ -53,8 +53,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void updateStudent(User student) throws DALException {
-        daoUser.updateStudent(student);
+    public void updateUser(User student) throws DALException {
+        daoUser.updateUser(student);
     }
 
     @Override
@@ -174,5 +174,10 @@ public class Manager implements DALFacade {
     @Override
     public void deleteSchool(School currentSchool) throws DALException {
         daoSchool.deleteSchool(currentSchool);
+    }
+
+    @Override
+    public List<User> getAllUsers(School currentSchool) throws DALException {
+        return daoUser.getAllUsers(currentSchool);
     }
 }

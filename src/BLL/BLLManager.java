@@ -57,8 +57,8 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public void updateStudent(User student) throws DALException {
-        dalFacade.updateStudent(student);
+    public void updateUser(User student) throws DALException {
+        dalFacade.updateUser(student);
     }
 
     @Override
@@ -188,5 +188,10 @@ public class BLLManager implements BLLFacade {
     @Override
     public void deleteSchool(School currentSchool) throws DALException {
         dalFacade.deleteSchool(currentSchool);
+    }
+
+    @Override
+    public List<User> getAllUsers(School currentSchool) throws DALException {
+        return dalFacade.getAllUsers(currentSchool);
     }
 }

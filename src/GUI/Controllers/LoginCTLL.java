@@ -94,7 +94,6 @@ public class LoginCTLL implements Initializable {
                 loader.<TeacherMainCTLL>getController().initializeView();
             }
             case 1 -> {
-                loader.<AdminCTLL>getController().setUser(logedUser);
                 loader.<AdminCTLL>getController().initializeView();
             }
         }

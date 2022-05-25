@@ -4,6 +4,7 @@ import BE.User;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.ManageStudentMOD;
+import GUI.Util.StaticData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -43,7 +44,7 @@ public class ManageStudentCTLL {
                             logedUser.getSchoolID(),
                             nameField.getText(),
                             emailField.getText(),
-                            3
+                            StaticData.getStudentType()
                     );
                     teacherMainCTLL.addStudentToTable(model.addNewStudent(user));
                     closeWindow();
@@ -99,7 +100,7 @@ public class ManageStudentCTLL {
         this.operationType = operationType;
     }
 
-    public void setController(TeacherMainCTLL teacherMainCTLL) {
+    public void setMainController(TeacherMainCTLL teacherMainCTLL) {
         this.teacherMainCTLL = teacherMainCTLL;
     }
 
