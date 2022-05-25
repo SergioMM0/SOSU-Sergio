@@ -76,9 +76,6 @@ public class StudentMainCTLL {
     @FXML
     private Label studentLBL;
 
-    @FXML
-    private Button evaluateCaseButton;
-
     private User currentStudent;
     private Group currentGroup;
     private Patient currentPatient;
@@ -266,6 +263,21 @@ public class StudentMainCTLL {
         stage.setScene(new Scene(root, width, height));
         stage.setResizable(resizable);
         stage.showAndWait();
+    }
+
+    @FXML
+    void logOut(ActionEvent event) {
+        closeWindows();
+        Parent root1;
+        Stage stage = (Stage) casesAssignedList.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/Login.fxml"));
+            root1 = (Parent) fxmlLoader.load();
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void closeWindows() { //TODO TO be implemented
