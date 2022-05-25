@@ -2,6 +2,7 @@ package GUI.Controllers;
 
 import BE.School;
 import BE.User;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.AdminMOD;
@@ -73,8 +74,9 @@ public class AdminCTLL {
     private void populateSchools(){
         try{
             schoolTableView.getItems().addAll(model.getAllSchools());
-        }catch(DALException dalException){
-            SoftAlert.displayAlert(dalException.getMessage());
+        }catch(DALException | BLLException exception){
+            exception.printStackTrace();
+            SoftAlert.displayAlert(exception.getMessage());
         }
     }
 

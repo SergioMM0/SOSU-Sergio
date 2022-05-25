@@ -190,8 +190,12 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public List<School> getAllSchools() throws DALException {
-        return dalFacade.getAllSchools();
+    public List<School> getAllSchools() throws DALException, BLLException {
+        try{
+            return dalFacade.getAllSchools();
+        }catch(NullPointerException nullPointerException){
+            throw new BLLException("Not able to get the schools", nullPointerException);
+        }
     }
 
     @Override

@@ -22,6 +22,7 @@ public class DAOSchool {
         try(Connection connection = connectionProvider.getConnection()){
             String sql = "SELECT * FROM [School]";
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.execute();
             ResultSet rs = statement.getResultSet();
             while(rs.next()){
                 allSchools.add(new School(

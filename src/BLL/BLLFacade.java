@@ -81,7 +81,7 @@ public interface BLLFacade {
 
     int getQuestionnaireOf(int caseId, int groupId) throws DALException;
 
-    List<School> getAllSchools() throws DALException;
+    List<School> getAllSchools() throws DALException,BLLException;
 }
 
 
