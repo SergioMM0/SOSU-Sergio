@@ -42,7 +42,6 @@ public class LoginCTLL implements Initializable {
     private Label passwordLBL;
 
     private User logedUser;
-    private final String generalCSS = "GUI/Views/CSS/GeneralCSS.css";
     private LoginMOD loginMOD;
 
     @Override
@@ -57,13 +56,13 @@ public class LoginCTLL implements Initializable {
                 logedUser = loginMOD.checkCredentials(emailField.getText(),passwordField.getText());
                 switch (logedUser.getUserType()) {
                     case 3:
-                        openView("GUI/Views/StudentMain.fxml", generalCSS, "FS3 for Students", 880, 660, false, logedUser);
+                        openView("GUI/Views/StudentMain.fxml", "FS3 for Students", 880, logedUser);
                         break;
                     case 2:
-                        openView("GUI/Views/TeacherMain.fxml", generalCSS, "Simulation platform FS3", 880, 660, false, logedUser);
+                        openView("GUI/Views/TeacherMain.fxml", "FS3 for Students", 880, logedUser);
                         break;
                     case 1:
-                        openView("GUI/Views/TeacherMain.fxml", generalCSS,"Admin view", 880,660,false, logedUser);
+                        openView("GUI/Views/Admin.fxml","Admin FS3", 1000, logedUser);
                 }
             }catch (DALException | BLLException exception){
                 SoftAlert.displayAlert(exception.getMessage());
@@ -76,7 +75,7 @@ public class LoginCTLL implements Initializable {
         st.close();
     }
 
-    private void openView(String resource, String css, String title, int width, int height, boolean resizable, User logedUser){
+    private void openView(String resource, String title, int width, User logedUser){
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(resource));
         Parent root = null;
         try{root = loader.load();}
@@ -84,7 +83,7 @@ public class LoginCTLL implements Initializable {
             e.printStackTrace();
         }
         assert root != null;
-        root.getStylesheets().add(css);
+        root.getStylesheets().add("GUI/Views/CSS/GeneralCSS.css");
         switch (logedUser.getUserType()) {
             case 3 -> {
                 loader.<StudentMainCTLL>getController().setUser(logedUser);
@@ -94,12 +93,15 @@ public class LoginCTLL implements Initializable {
                 loader.<TeacherMainCTLL>getController().setUser(logedUser);
                 loader.<TeacherMainCTLL>getController().initializeView();
             }
-            case 1 -> loader.<AdminCTLL>getController().setUser(logedUser);
+            case 1 -> {
+                loader.<AdminCTLL>getController().setUser(logedUser);
+                loader.<AdminCTLL>getController().initializeView();
+            }
         }
         Stage stage = new Stage();
         stage.setTitle(title);
-        stage.setScene(new Scene(root,width,height));
-        stage.setResizable(resizable);
+        stage.setScene(new Scene(root,width,660));
+        stage.setResizable(false);
         stage.show();
         closeWindow();
     }

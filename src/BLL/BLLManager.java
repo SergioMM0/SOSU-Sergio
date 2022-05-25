@@ -190,6 +190,11 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
+    public List<School> getAllSchools() throws DALException {
+        return dalFacade.getAllSchools();
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DALException {
         dalFacade.addStudentQuestionAnswer(answer);
     }

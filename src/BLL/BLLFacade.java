@@ -80,6 +80,8 @@ public interface BLLFacade {
     void UpdateQuestionnaire(int questionnaireId, Case currentCase, Patient currentPatient, Group currentGroup) throws DALException;
 
     int getQuestionnaireOf(int caseId, int groupId) throws DALException;
+
+    List<School> getAllSchools() throws DALException;
 }
 
 

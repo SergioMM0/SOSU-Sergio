@@ -83,4 +83,6 @@ public interface DALFacade {
     void updateQuestionnaire(StudentQuestionnaire questionnaire) throws DALException;
 
     int getQuestionnaireOf(int caseId, int groupId) throws DALException;
+
+    List<School> getAllSchools() throws DALException;
 }

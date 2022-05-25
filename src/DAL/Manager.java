@@ -227,4 +227,10 @@ public class Manager implements DALFacade {
        return daoStudentQuestion.getQuestionnaireOf(caseId,groupId);
     }
 
+    @Override
+    public List<School> getAllSchools() throws DALException {
+        return daoSchool.getAllSchools();
+    }
+
+
 }
