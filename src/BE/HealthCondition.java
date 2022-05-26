@@ -3,47 +3,27 @@ package BE;
 public class HealthCondition {
 
     private int id;
-    private int categoryID;
-    private int subcategoryID;
-    private int status;
-    private int expectedScore;
+    private int relevancy;
     private String assessment;
     private String goal;
+    private int expectations;
     private String professionalNote;
     private int isEditing;
 
-    public HealthCondition(int categoryID, int subcategoryID, int status, int expectedScore,
-                           String assessment, String goal, String professionalNote) {
-        this.categoryID = categoryID;
-        this.subcategoryID = subcategoryID;
-        this.status = status;
-        this.expectedScore = expectedScore;
+    public HealthCondition(int relevancy, String assessment, String goal, int expectations, String professionalNote) {
+        this.relevancy = relevancy;
         this.assessment = assessment;
         this.goal = goal;
+        this.expectations = expectations;
         this.professionalNote = professionalNote;
     }
 
-    public HealthCondition(int categoryID, int subcategoryID, int status, int expectedScore,
-                           String assessment, String goal, String professionalNote, int isEditing) {
-        this.categoryID = categoryID;
-        this.subcategoryID = subcategoryID;
-        this.status = status;
-        this.expectedScore = expectedScore;
-        this.assessment = assessment;
-        this.goal = goal;
-        this.professionalNote = professionalNote;
-        this.isEditing = isEditing;
-    }
-
-    public HealthCondition(int id, int categoryID, int subcategoryID, int status, int expectedScore,
-                           String assessment, String goal, String professionalNote, int isEditing) {
+    public HealthCondition(int id, int relevancy, String assessment, String goal, int expectations, String professionalNote, int isEditing) {
         this.id = id;
-        this.categoryID = categoryID;
-        this.subcategoryID = subcategoryID;
-        this.status = status;
-        this.expectedScore = expectedScore;
+        this.relevancy = relevancy;
         this.assessment = assessment;
         this.goal = goal;
+        this.expectations = expectations;
         this.professionalNote = professionalNote;
         this.isEditing = isEditing;
     }
@@ -56,36 +36,12 @@ public class HealthCondition {
         this.id = id;
     }
 
-    public int getCategoryID() {
-        return categoryID;
+    public int getRelevancy() {
+        return relevancy;
     }
 
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
-    }
-
-    public int getSubcategoryID() {
-        return subcategoryID;
-    }
-
-    public void setSubcategoryID(int subcategoryID) {
-        this.subcategoryID = subcategoryID;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getExpectedScore() {
-        return expectedScore;
-    }
-
-    public void setExpectedScore(int expectedScore) {
-        this.expectedScore = expectedScore;
+    public void setRelevancy(int relevancy) {
+        this.relevancy = relevancy;
     }
 
     public String getAssessment() {
@@ -102,6 +58,14 @@ public class HealthCondition {
 
     public void setGoal(String goal) {
         this.goal = goal;
+    }
+
+    public int getExpectations() {
+        return expectations;
+    }
+
+    public void setExpectations(int expectations) {
+        this.expectations = expectations;
     }
 
     public String getProfessionalNote() {

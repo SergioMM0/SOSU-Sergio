@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.EvaluateCaseCTLL">
+  <tabs>
+      <Tab fx:id="caseTab" text="Case info">
+         <content>
+            <AnchorPane prefHeight="470.0" prefWidth="860.0">
+               <children>
+                  <Label layoutX="180.0" layoutY="39.0" text="Case name:" />
+                  <Label layoutX="40.0" layoutY="80.0" prefHeight="18.0" prefWidth="170.0" text="Description of the case:" />
+                  <Button layoutX="689.0" layoutY="540.0" mnemonicParsing="false" onAction="#saveChangesOnCase" prefHeight="40.0" prefWidth="130.0" text="Save changes" />
+                  <TextField fx:id="caseNameField" layoutX="280.0" layoutY="35.0" prefHeight="26.0" prefWidth="320.0" />
+                  <TextArea fx:id="descriptionOfConditionText" layoutX="40.0" layoutY="120.0" prefHeight="400.0" prefWidth="780.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="patientOverviewTab" text="Patient overview">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="40.0" layoutY="40.0" text="Name" />
+                  <Label layoutX="40.0" layoutY="120.0" text="Date of Birth" />
+                  <Label layoutX="40.0" layoutY="160.0" text="Gender" />
+                  <Label layoutX="40.0" layoutY="80.0" text="Family name" />
+                  <Line endX="-100.0" endY="465.0" layoutX="245.0" layoutY="110.0" startX="-100.0" startY="-85.0" />
+                  <Line endX="-100.0" endY="465.0" layoutX="565.0" layoutY="110.0" startX="-100.0" startY="-85.0" />
+                  <Button layoutX="230.0" layoutY="536.0" mnemonicParsing="false" onAction="#newObservation" prefHeight="35.0" prefWidth="150.0" text="New observation" />
+                  <Label fx:id="medicalHistoryLBL" layoutX="635.0" layoutY="30.0" text="Medical history" />
+                  <TextArea fx:id="medicalHistoryTextArea" layoutX="485.0" layoutY="67.0" prefHeight="505.0" prefWidth="365.0" />
+                  <Button layoutX="230.0" layoutY="210.0" mnemonicParsing="false" onAction="#updatePatient" prefHeight="35.0" prefWidth="150.0" text="Update patient" />
+                  <TextField fx:id="nameField" layoutX="165.0" layoutY="35.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextField fx:id="familyNameField" layoutX="165.0" layoutY="75.0" prefHeight="25.0" prefWidth="280.0" />
+                  <ComboBox fx:id="genderComboBox" layoutX="165.0" layoutY="155.0" prefHeight="25.0" prefWidth="280.0" />
+                  <DatePicker fx:id="dateOfBirthPicker" layoutX="165.0" layoutY="115.0" prefHeight="25.0" prefWidth="280.0" />
+                  <TextArea fx:id="newObservationTextArea" layoutX="165.0" layoutY="430.0" prefHeight="95.0" prefWidth="280.0" />
+                  <Label layoutX="40.0" layoutY="465.0" text="New observation:" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+    <Tab text="Funktionsevnetilstande">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="categoryFATableView" layoutX="40.0" layoutY="40.0" onMouseClicked="#categoryFAIsSelected" prefHeight="500.0" prefWidth="300.0">
+                    <columns>
+                      <TableColumn fx:id="categoryNameFA" prefWidth="299.20001220703125" text="Categories" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="subcategoryFATableView" layoutX="380.0" layoutY="40.0" onMouseClicked="#subcategoryFAIsSelected" prefHeight="500.0" prefWidth="300.0">
+                     <columns>
+                        <TableColumn fx:id="subCategoryNameFA" prefWidth="299.20001220703125" text="Subcategories" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="705.0" layoutY="240.0" mnemonicParsing="false" onAction="#assessFA" prefHeight="100.0" prefWidth="150.0" text="Assess" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Helbredstilstande">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="categoryHCTableView" layoutX="40.0" layoutY="40.0" onMouseClicked="#categoryHCIsSelected" prefHeight="500.0" prefWidth="300.0">
+                     <columns>
+                        <TableColumn fx:id="categoryNameHC" prefWidth="299.20001220703125" text="Categories" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="subcategoryHCTableView" layoutX="380.0" layoutY="40.0" onMouseClicked="#subcategoryHCIsSelected" prefHeight="500.0" prefWidth="300.0">
+                     <columns>
+                        <TableColumn fx:id="subCategoryNameHC" prefWidth="299.20001220703125" text="Subcategories" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="705.0" layoutY="240.0" mnemonicParsing="false" onAction="#assessHC" prefHeight="100.0" prefWidth="150.0" text="Assess" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
