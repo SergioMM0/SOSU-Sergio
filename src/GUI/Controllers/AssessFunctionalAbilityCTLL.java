@@ -12,9 +12,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,6 +117,8 @@ public class AssessFunctionalAbilityCTLL {
     private List<ImageView> indicatorsExpected;
     private int currentLevel = 6;
     private int expectedLevel = 6;
+    private final File file = new File("/res/green.png");
+    private final Image green = new Image(file.toURI().toString());
 
     public AssessFunctionalAbilityCTLL() {
         model = new AssessFunctionalAbilityMOD();
@@ -251,7 +255,6 @@ public class AssessFunctionalAbilityCTLL {
         indicatorsExpected.add(selectionIndicator10);
         indicatorsExpected.add(selectionIndicator11);
         indicatorsExpected.add(selectionIndicator12);
-
         if (currentSubcategory.isAssessed()) {
             FieldsManager.setUpSelectionIndicatorsAssessed(indicatorsCurrent, indicatorsExpected, currentFunctionalAbility);
         } else {

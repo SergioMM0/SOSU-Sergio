@@ -190,7 +190,7 @@ public class FieldsManager {
 
     public static void changeIndicatorCurrent(List<ImageView> indicatorsCurrent, int currentLevel){
         for(ImageView indicator : indicatorsCurrent){
-            if(currentLevel == indicatorsCurrent.indexOf(indicator)){
+            if(currentLevel == indicatorsCurrent.indexOf(indicator)+1){
                 indicator.setVisible(true);
             }else indicator.setVisible(false);
         }
