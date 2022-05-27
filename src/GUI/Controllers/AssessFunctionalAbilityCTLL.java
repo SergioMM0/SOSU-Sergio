@@ -123,7 +123,7 @@ public class AssessFunctionalAbilityCTLL {
     }
 
     public void initializeView() {
-        setUpComboBoxes();
+        setUpFields();
         setUpSelectionIndicator();
     }
 
@@ -213,6 +213,7 @@ public class AssessFunctionalAbilityCTLL {
                     FieldsManager.updateVariablesOfFunctionalAbility(currentFunctionalAbility,currentLevel, expectedLevel,
                             relevancyComboBox,performanceComboBox,meaningComboBox,goalTextArea,observationsTextArea);
                     model.updateFunctionalAbility(currentFunctionalAbility,currentPatient,currentSubcategory);
+                    closeWindow();
                 } catch (DALException dalException) {
                     SoftAlert.displayAlert(dalException.getMessage());
                 }
@@ -221,6 +222,7 @@ public class AssessFunctionalAbilityCTLL {
                     FieldsManager.updateVariablesOfFunctionalAbility(currentFunctionalAbility,currentLevel, expectedLevel,
                             relevancyComboBox,performanceComboBox,meaningComboBox,goalTextArea,observationsTextArea);
                     model.addFunctionalAbility(currentFunctionalAbility,currentPatient,currentSubcategory);
+                    closeWindow();
                 } catch (DALException dalException) {
                     SoftAlert.displayAlert(dalException.getMessage());
                 }
@@ -228,10 +230,12 @@ public class AssessFunctionalAbilityCTLL {
         }
     }
 
-    public void setUpComboBoxes() {
+    public void setUpFields() {
         if (currentSubcategory.isAssessed()) {
-            FieldsManager.fillFunctionalAbilityAssessed(relevancyComboBox, performanceComboBox, meaningComboBox, currentFunctionalAbility);
-        } else FieldsManager.fillFunctionalAbilityNotAssessed(relevancyComboBox, performanceComboBox, meaningComboBox);
+            FieldsManager.fillFunctionalAbilityAssessed(relevancyComboBox, performanceComboBox,
+                    meaningComboBox, currentFunctionalAbility,goalTextArea,observationsTextArea);
+        } else FieldsManager.fillFunctionalAbilityNotAssessed(relevancyComboBox, performanceComboBox,
+                meaningComboBox);
     }
 
     public void setUpSelectionIndicator() {

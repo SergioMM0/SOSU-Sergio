@@ -23,52 +23,64 @@
 
 #dependenceButton1{
     -fx-background-image: url("/res/one.png");
+    -fx-background-color: white;
 }
 
 #dependenceButton2{
     -fx-background-image: url("/res/two.png");
+    -fx-background-color: white;
 }
 
 #dependenceButton3{
     -fx-background-image: url("/res/three.png");
+    -fx-background-color: white;
 }
 
 #dependenceButton4{
     -fx-background-image: url("/res/four.png");
+    -fx-background-color: white;
 }
 
 #dependenceButton5{
     -fx-background-image: url("/res/five.png");
+    -fx-background-color: white;
 }
 
 #dependenceButton6{
     -fx-background-image: url("/res/one.png");
+    -fx-background-color: white;
 }
 
 
 
 #expectedButton1{
     -fx-background-image: url("/res/one.png");
+    -fx-background-color: white;
 }
 
 #expectedButton2{
     -fx-background-image: url("/res/two.png");
+    -fx-background-color: white;
 }
 
 #expectedButton3{
     -fx-background-image: url("/res/three.png");
+    -fx-background-color: white;
 }
 
 #expectedButton4{
     -fx-background-image: url("/res/four.png");
+    -fx-background-color: white;
 }
 
 #expectedButton5{
     -fx-background-image: url("/res/five.png");
+    -fx-background-color: white;
 }
 
 #expectedButton6{
     -fx-background-image: url("/res/one.png");
+    -fx-background-color: white;
 }
 
 

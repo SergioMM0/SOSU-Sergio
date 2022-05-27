@@ -131,7 +131,8 @@ public class FieldsManager {
     }
 
     public static void fillFunctionalAbilityAssessed(ComboBox<String> relevancyComboBox, ComboBox<String> performanceComboBox,
-                                                     ComboBox<String> meaningComboBox, FunctionalAbility currentFunctionalAbility) {
+                                                     ComboBox<String> meaningComboBox, FunctionalAbility currentFunctionalAbility,
+                                                     TextArea goalTextArea, TextArea observationsArea) {
         relevancyComboBox.getItems().clear(); //just in case
         relevancyComboBox.getItems().addAll(StaticData.getRelevancyObservableList());
         relevancyComboBox.getSelectionModel().select(
@@ -147,9 +148,12 @@ public class FieldsManager {
         meaningComboBox.getSelectionModel().select(
                 meaningComboBox.getItems().indexOf(StaticData.getMeaning(currentFunctionalAbility.getMeaning())));
 
+        goalTextArea.setText(currentFunctionalAbility.getCitizenGoal());
+        observationsArea.setText(currentFunctionalAbility.getProfessionalNote());
     }
 
-    public static void fillFunctionalAbilityNotAssessed(ComboBox<String> relevancyComboBox, ComboBox<String> performanceComboBox, ComboBox<String> meaningComboBox) {
+    public static void fillFunctionalAbilityNotAssessed(ComboBox<String> relevancyComboBox, ComboBox<String> performanceComboBox,
+                                                        ComboBox<String> meaningComboBox) {
         relevancyComboBox.getItems().clear();
         relevancyComboBox.getItems().addAll(StaticData.getRelevancyObservableList());
 
@@ -164,39 +168,39 @@ public class FieldsManager {
     public static void setUpSelectionIndicatorsAssessed(List<ImageView> indicatorsCurrent, List<ImageView> indicatorsExpected, FunctionalAbility currentFunctionalAbility) {
         for(ImageView indicator : indicatorsCurrent){
             if(currentFunctionalAbility.getCurrentLevel() == indicatorsCurrent.indexOf(indicator)+1){
-                indicator.setDisable(false);
-            }else indicator.setDisable(true);
+                indicator.setVisible(true);
+            }else indicator.setVisible(false);
         }
 
         for(ImageView indicator : indicatorsExpected){
             if(currentFunctionalAbility.getExpectedLevel() == indicatorsExpected.indexOf(indicator)+1){
-                indicator.setDisable(false);
-            }else indicator.setDisable(true);
+                indicator.setVisible(true);
+            }else indicator.setVisible(false);
         }
     }
 
     public static void setUpSelectionIndicatorsNotAssessed(List<ImageView> indicatorsCurrent, List<ImageView> indicatorsExpected) {
         for(ImageView indicator : indicatorsCurrent){
-            indicator.setDisable(true);
+            indicator.setVisible(false);
         }
         for(ImageView indicator : indicatorsExpected){
-            indicator.setDisable(true);
+            indicator.setVisible(false);
         }
     }
 
     public static void changeIndicatorCurrent(List<ImageView> indicatorsCurrent, int currentLevel){
         for(ImageView indicator : indicatorsCurrent){
             if(currentLevel == indicatorsCurrent.indexOf(indicator)){
-                indicator.setDisable(true);
-            }else indicator.setDisable(false);
+                indicator.setVisible(true);
+            }else indicator.setVisible(false);
         }
     }
 
     public static void changeIndicatorExpected(List<ImageView> indicatorsExpected, int expectedLevel){
         for(ImageView indicator : indicatorsExpected){
             if(expectedLevel == indicatorsExpected.indexOf(indicator)+1){
-                indicator.setDisable(true);
-            }else indicator.setDisable(false);
+                indicator.setVisible(true);
+            }else indicator.setVisible(false);
         }
     }
 
