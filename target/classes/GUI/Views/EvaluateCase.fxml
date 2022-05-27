@@ -63,7 +63,8 @@
                   </TableView>
                   <TableView fx:id="subcategoryFATableView" layoutX="380.0" layoutY="40.0" onMouseClicked="#subcategoryFAIsSelected" prefHeight="500.0" prefWidth="300.0">
                      <columns>
-                        <TableColumn fx:id="subCategoryNameFA" prefWidth="299.20001220703125" text="Subcategories" />
+                        <TableColumn fx:id="subCategoryNameFA" prefWidth="230.0" text="Subcategories" />
+                        <TableColumn fx:id="assessedColFA" prefWidth="68.79998779296875" text="Assessed" />
                      </columns>
                   </TableView>
                   <Button layoutX="705.0" layoutY="240.0" mnemonicParsing="false" onAction="#assessFA" prefHeight="100.0" prefWidth="150.0" text="Assess" />
@@ -81,7 +82,8 @@
                   </TableView>
                   <TableView fx:id="subcategoryHCTableView" layoutX="380.0" layoutY="40.0" onMouseClicked="#subcategoryHCIsSelected" prefHeight="500.0" prefWidth="300.0">
                      <columns>
-                        <TableColumn fx:id="subCategoryNameHC" prefWidth="299.20001220703125" text="Subcategories" />
+                        <TableColumn fx:id="subCategoryNameHC" prefWidth="230.0" text="Subcategories" />
+                        <TableColumn fx:id="assessedCOLHC" prefWidth="68.79998779296875" text="Assessed" />
                      </columns>
                   </TableView>
                   <Button layoutX="705.0" layoutY="240.0" mnemonicParsing="false" onAction="#assessHC" prefHeight="100.0" prefWidth="150.0" text="Assess" />

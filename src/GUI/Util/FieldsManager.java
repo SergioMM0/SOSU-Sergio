@@ -4,6 +4,7 @@ import BE.Case;
 import BE.Patient;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
+import GUI.Models.EvaluateCaseMOD;
 import GUI.Models.StudentMOD;
 import GUI.Models.TeacherMainMOD;
 import javafx.scene.control.*;
@@ -53,6 +54,20 @@ public class FieldsManager {
     }
 
     public static void handleObservationStudentView(TextArea newObservation, StudentMOD model, Patient patient, TextArea medicalHistory) {
+        if (!newObservation.getText().isEmpty()) {
+            String observation = LocalDate.now() + ": " + newObservation.getText();
+            try {
+                model.addObservationToPatient(observation, patient);
+            } catch (DALException dalException) {
+                SoftAlert.displayAlert(dalException.getMessage());
+            }
+            patient.addObservation(observation);
+            medicalHistory.setText(handleObservationsOfPatient(patient));
+            newObservation.clear();
+        }
+    }
+
+    public static void handleObservationEvaluatingCase(TextArea newObservation, EvaluateCaseMOD model, Patient patient, TextArea medicalHistory) {
         if (!newObservation.getText().isEmpty()) {
             String observation = LocalDate.now() + ": " + newObservation.getText();
             try {

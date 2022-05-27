@@ -24,6 +24,14 @@ public class StaticData {
         return 2;
     }
 
+    public static boolean subcategoryAssessed(){
+        return true;
+    }
+
+    public static boolean subcategoryNotAssessed(){
+        return false;
+    }
+
     public static ObservableList<String> getRelevancyObservableList(int relevancyInt){
         ObservableList<String> relevancies = FXCollections.observableArrayList();
         relevancies.add("Irrelevant");

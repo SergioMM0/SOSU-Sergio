@@ -72,4 +72,10 @@ public interface DALFacade {
     List<User> getAllUsers(School currentSchool) throws DALException;
 
     List<Category> getAllCategoriesHC() throws DALException;
+
+    List<Category> getAllCategoriesFA() throws DALException;
+
+    List<Subcategory> getSubcategoriesFA(Category currentCategory,Patient currentPatient) throws DALException;
+
+    List<Subcategory> getSubcategoriesHC(Category currentCategory,Patient currentPatient) throws DALException;
 }

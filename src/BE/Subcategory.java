@@ -3,16 +3,16 @@ package BE;
 public class Subcategory {
 
     private int id;
-    private int name;
+    private String name;
     private boolean assessed;
 
-    public Subcategory(int id, int name, boolean assessed) {
+    public Subcategory(int id, String name, boolean assessed) {
         this.id = id;
         this.name = name;
         this.assessed = assessed;
     }
 
-    public Subcategory(int id, int name) {
+    public Subcategory(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -25,11 +25,11 @@ public class Subcategory {
         this.id = id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 

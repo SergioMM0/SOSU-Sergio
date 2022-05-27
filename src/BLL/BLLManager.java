@@ -3,7 +3,7 @@ package BLL;
 import BE.*;
 import BLL.Exceptions.BLLException;
 import DAL.DALFacade;
-import DAL.Manager;
+import DAL.DALManager;
 import DAL.Exceptions.DALException;
 
 import java.security.InvalidParameterException;
@@ -14,7 +14,7 @@ public class BLLManager implements BLLFacade {
     private DALFacade dalFacade;
 
     public BLLManager() {
-        dalFacade = new Manager();
+        dalFacade = new DALManager();
     }
 
     @Override
@@ -198,5 +198,20 @@ public class BLLManager implements BLLFacade {
     @Override
     public List<Category> getAllCategoriesHC() throws DALException {
         return dalFacade.getAllCategoriesHC();
+    }
+
+    @Override
+    public List<Category> getAllCategoriesFA() throws DALException {
+        return dalFacade.getAllCategoriesFA();
+    }
+
+    @Override
+    public List<Subcategory> getSubcategoriesFA(Category currentCategory,Patient currentPatient) throws DALException {
+        return dalFacade.getSubcategoriesFA(currentCategory,currentPatient);
+    }
+
+    @Override
+    public List<Subcategory> getSubcategoriesHC(Category currentCategory,Patient currentPatient) throws DALException {
+        return dalFacade.getSubcategoriesHC(currentCategory,currentPatient);
     }
 }

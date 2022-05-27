@@ -5,6 +5,7 @@ import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.EvaluateCaseMOD;
 import GUI.Util.FieldsManager;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -74,6 +76,12 @@ public class EvaluateCaseCTLL {
     private TableColumn<Subcategory, String> subCategoryNameHC;
 
     @FXML
+    private TableColumn<Subcategory, String> assessedCOLHC;
+
+    @FXML
+    private TableColumn<Subcategory, String> assessedColFA;
+
+    @FXML
     private TableView<Subcategory> subcategoryFATableView;
 
     @FXML
@@ -93,6 +101,7 @@ public class EvaluateCaseCTLL {
     public void initializeView() {
         FieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,genderComboBox,medicalHistoryTextArea);
         FieldsManager.displayCaseInfo(caseTab,currentCase,caseNameField,descriptionOfConditionText);
+        initializeTables();
         populateCategoriesFA();
         populateCategoriesHC();
     }
@@ -101,6 +110,7 @@ public class EvaluateCaseCTLL {
     void categoryFAIsSelected(MouseEvent event) {
         if(categoryFATableView.getSelectionModel().getSelectedItem() != null){
             this.currentCategory = categoryFATableView.getSelectionModel().getSelectedItem();
+            populateSubcategoriesFA();
         }
     }
 
@@ -108,9 +118,9 @@ public class EvaluateCaseCTLL {
     void categoryHCIsSelected(MouseEvent event) {
         if(categoryHCTableView.getSelectionModel().getSelectedItem() != null){
             this.currentCategory = categoryHCTableView.getSelectionModel().getSelectedItem();
+            populateSubcategoriesHC();
         }
     }
-
 
     @FXML
     void subcategoryFAIsSelected(MouseEvent event) {
@@ -128,27 +138,102 @@ public class EvaluateCaseCTLL {
 
     @FXML
     void assessFA(ActionEvent event) {
-
+        openView("GUI/Views/AssessFunctionalAbility.fxml","Functional Ability", 710,700);
     }
 
     @FXML
     void assessHC(ActionEvent event) {
-
+        openView("GUI/Views/AssesHealthCondition.fxml","Health Condition", 680,450);
     }
 
     @FXML
     void newObservation(ActionEvent event) {
-
+        FieldsManager.handleObservationEvaluatingCase(newObservationTextArea,model,currentPatient,medicalHistoryTextArea);
     }
 
     @FXML
     void saveChangesOnCase(ActionEvent event) {
-
+        if (FieldsManager.caseFieldsAreFilled(caseNameField,descriptionOfConditionText)) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Are you sure you want to update this case?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                try {
+                    currentCase.setName(caseNameField.getText());
+                    currentCase.setConditionDescription(descriptionOfConditionText.getText());
+                    model.updateCase(currentCase);
+                } catch (DALException dalException) {
+                    dalException.printStackTrace();
+                    SoftAlert.displayAlert(dalException.getMessage());
+                }
+            }
+        }
     }
 
     @FXML
     void updatePatient(ActionEvent event) {
+        if (FieldsManager.patientFieldsAreFilled(nameField,familyNameField,dateOfBirthPicker,genderComboBox)) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Are you sure you want to update this patient?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                try {
+                    model.updatePatient(currentPatient);
+                } catch (DALException dalException) {
+                    SoftAlert.displayAlert(dalException.getMessage());
+                }
+            }
+        }
+    }
 
+    private void initializeTables() {
+        categoryNameHC.setCellValueFactory(new PropertyValueFactory<>("name"));
+        categoryNameFA.setCellValueFactory(new PropertyValueFactory<>("name"));
+        subCategoryNameFA.setCellValueFactory(new PropertyValueFactory<>("name"));
+        subCategoryNameHC.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        assessedColFA.setCellValueFactory(subcategory -> {
+                    boolean assessed = subcategory.getValue().isAssessed();
+                    String isAssessed;
+                    if (assessed) {
+                        isAssessed = "Yes";
+                    } else {
+                        isAssessed = "No";
+                    }
+                    return new ReadOnlyStringWrapper(isAssessed);
+                });
+        assessedCOLHC.setCellValueFactory(subcategory -> {
+            boolean assessed = subcategory.getValue().isAssessed();
+            String isAssessed;
+            if (assessed) {
+                isAssessed = "Yes";
+            } else {
+                isAssessed = "No";
+            }
+            return new ReadOnlyStringWrapper(isAssessed);
+        });
+
+
+    }
+
+    private void populateSubcategoriesFA() {
+        try{
+            subcategoryFATableView.getItems().clear();
+            subcategoryFATableView.getItems().addAll(model.getSubcategoriesFA(currentCategory,currentPatient));
+        }catch (DALException dalException){
+            dalException.printStackTrace();
+            SoftAlert.displayAlert(dalException.getMessage());
+        }
+    }
+
+    private void populateSubcategoriesHC() {
+        try{
+            subcategoryHCTableView.getItems().clear();
+            subcategoryHCTableView.getItems().addAll(model.getSubcategoriesHC(currentCategory,currentPatient));
+        }catch (DALException dalException){
+            dalException.printStackTrace();
+            SoftAlert.displayAlert(dalException.getMessage());
+        }
     }
 
     private void populateCategoriesHC() {
@@ -160,7 +245,11 @@ public class EvaluateCaseCTLL {
     }
 
     private void populateCategoriesFA() {
-
+        try{
+            categoryFATableView.getItems().addAll(model.getAllCategoriesFA());
+        }catch (DALException dalException){
+            SoftAlert.displayAlert(dalException.getMessage());
+        }
     }
 
     public void setGroup(Group group){
@@ -175,7 +264,7 @@ public class EvaluateCaseCTLL {
         this.currentPatient = patient;
     }
 
-    private void openView(String resource, String css, String title, int width, int height) {
+    private void openView(String resource, String title, int width, int height) {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(resource));
         Parent root = null;
         try {
@@ -184,10 +273,18 @@ public class EvaluateCaseCTLL {
             e.printStackTrace();
         }
         assert root != null;
-        if (resource.equals("GUI/Views/EvaluateCase.fxml")) {
+        if (resource.equals("GUI/Views/AssessFunctionalAbility.fxml")) {
+            /*
+            loader.<>getController().setCase();
+            loader.<>getController().setController(this);
+            loader.<>getController().initializeView();
+
+             */
+        }
+        if (resource.equals("GUI/Views/AssesHealthCondition.fxml")) {
 
         }
-        root.getStylesheets().add(css);
+        root.getStylesheets().add("GUI/Views/CSS/GeneralCSS.css");
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setScene(new Scene(root, width, height));

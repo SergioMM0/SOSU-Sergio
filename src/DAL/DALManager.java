@@ -5,22 +5,28 @@ import DAL.DAOs.*;
 import DAL.Exceptions.DALException;
 import java.util.List;
 
-public class Manager implements DALFacade {
+public class DALManager implements DALFacade {
 
     private final DAOCase daoCase;
     private final DAOUser daoUser;
     private final DAOPatient daoPatient;
     private final DAOSchool daoSchool;
     private final DAOGroup daoGroup;
-    private final DAOCategories daoCategories;
+    private final DAOCategory daoCategories;
+    private final DAOSubcategory daoSubcategory;
+    private final DAOFunctionalAbility daoFunctionalAbility;
+    private final DAOHealthCondition daoHealthCondition;
 
-    public Manager() {
+    public DALManager() {
         daoCase = new DAOCase();
         daoUser = new DAOUser();
         daoPatient = new DAOPatient();
         daoSchool = new DAOSchool();
         daoGroup = new DAOGroup();
-        daoCategories = new DAOCategories();
+        daoCategories = new DAOCategory();
+        daoSubcategory = new DAOSubcategory();
+        daoFunctionalAbility = new DAOFunctionalAbility();
+        daoHealthCondition = new DAOHealthCondition();
     }
 
 
@@ -186,5 +192,20 @@ public class Manager implements DALFacade {
     @Override
     public List<Category> getAllCategoriesHC() throws DALException {
         return daoCategories.getAllCategoriesHC();
+    }
+
+    @Override
+    public List<Category> getAllCategoriesFA() throws DALException {
+        return daoCategories.getAllCategoriesFA();
+    }
+
+    @Override
+    public List<Subcategory> getSubcategoriesFA(Category currentCategory,Patient currentPatient) throws DALException {
+        return daoSubcategory.getSubcategoriesFA(currentCategory,currentPatient);
+    }
+
+    @Override
+    public List<Subcategory> getSubcategoriesHC(Category currentCategory,Patient currentPatient) throws DALException {
+        return daoSubcategory.getSubcategoriesHC(currentCategory,currentPatient);
     }
 }
