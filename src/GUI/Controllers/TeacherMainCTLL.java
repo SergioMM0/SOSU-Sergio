@@ -116,7 +116,6 @@ public class TeacherMainCTLL {
     private Tab studentsGroupsTab;
 
     private User logedUser;
-    private final String generalCSS = "GUI/Views/CSS/GeneralCSS.css";
     private TeacherMainMOD model;
     private boolean patientFromGV;
     private boolean caseFromGV;
@@ -187,12 +186,12 @@ public class TeacherMainCTLL {
 
     @FXML
     private void addNewCase(ActionEvent event) {
-        openView("GUI/Views/CreateCase.fxml", generalCSS, "Create new case", 860, 700, false, 0);
+        openView("GUI/Views/CreateCase.fxml", "Create new case", 860, 700, 0);
     }
 
     @FXML
     private void addNewPatient(ActionEvent event) {
-        openView("GUI/Views/CreatePatient.fxml", generalCSS, "Create new patient", 485, 400, false, 0);
+        openView("GUI/Views/CreatePatient.fxml","Create new patient", 485, 400, 0);
     }
 
     @FXML
@@ -203,14 +202,6 @@ public class TeacherMainCTLL {
                                     // tables it should refresh
             FieldsManager.displayCaseInfo(caseTab, currentCase,caseNameField,descriptionOfConditionText);
         }
-        /*
-        this.currentCase = casesListGV.getSelectionModel().getSelectedItem();
-        this.caseFromGV = true;
-        if (currentCase != null) {
-            FieldsManager.displayCaseInfo(caseTab, currentCase,caseNameField,descriptionOfConditionText);
-        }
-        old architecture
-         */
     }
 
     @FXML
@@ -222,15 +213,6 @@ public class TeacherMainCTLL {
             FieldsManager.displayPatientInfo(patientOverviewTab, currentPatient, nameField,familyNameField,dateOfBirthPicker,
                     genderComboBox,medicalHistoryTextArea);
         }
-        /*
-        this.currentPatient = patientsListGV.getSelectionModel().getSelectedItem();
-        if(currentPatient != null){
-            this.patientFromGV = true;
-            FieldsManager.displayPatientInfo(patientOverviewTab, currentPatient, nameField,familyNameField,dateOfBirthPicker,
-                    genderComboBox,medicalHistoryTextArea);
-        }
-        old architecture
-         */
     }
 
     @FXML
@@ -325,13 +307,13 @@ public class TeacherMainCTLL {
 
     @FXML
     private void addNewStudent(ActionEvent event) {
-        openView("GUI/Views/ManageStudent.fxml", generalCSS, "Add new Student", 400, 220, false, 1);
+        openView("GUI/Views/ManageStudent.fxml", "Add new Student", 400, 220, 1);
     }
 
     @FXML
     private void editStudent(ActionEvent event) {
         if (studentsTable.getSelectionModel().getSelectedItem() != null) {
-            openView("GUI/Views/ManageStudent.fxml", generalCSS, "Edit student", 400, 220, false, 2);
+            openView("GUI/Views/ManageStudent.fxml", "Edit student", 400, 220, 2);
         } else SoftAlert.displayAlert("Please select a student");
     }
 
@@ -344,13 +326,13 @@ public class TeacherMainCTLL {
 
     @FXML
     private void createGroup(ActionEvent event) {
-        openView("GUI/Views/ManageGroup.fxml", generalCSS, "Add new group", 400, 180, false, 1);
+        openView("GUI/Views/ManageGroup.fxml", "Add new group", 400, 180, 1);
     }
 
     @FXML
     private void editGroup(ActionEvent event) {
         if (groupsTable.getSelectionModel().getSelectedItem() != null) {
-            openView("GUI/Views/ManageGroup.fxml", generalCSS, "Edit group", 400, 180, false, 2);
+            openView("GUI/Views/ManageGroup.fxml", "Edit group", 400, 180, 2);
         } else SoftAlert.displayAlert("Please select a group");
     }
 
@@ -449,7 +431,7 @@ public class TeacherMainCTLL {
 
     @FXML
     private void openGradeCase(ActionEvent event) {
-        openView("GUI/Views/StudentQuestion.fxml", "", "Question Overview", 880, 660, false, 0);
+        openView("GUI/Views/StudentQuestion.fxml", "Question Overview", 880, 660, 0);
     }
 
     @FXML
@@ -659,7 +641,7 @@ public class TeacherMainCTLL {
     }
 
     private void handleAssignCaseToGroup() {
-        openView("GUI/Views/AssignNewCaseToGroup.fxml",generalCSS,"Assign case to group",530,400,false,0);
+        openView("GUI/Views/AssignNewCaseToGroup.fxml","Assign case to group",530,400,0);
     }
 
     private void handleDeleteCase() {
@@ -743,7 +725,7 @@ public class TeacherMainCTLL {
         logedUser = user;
     }
 
-    private void openView(String resource, String css, String title, int width, int height, boolean resizable, int operationType) {
+    private void openView(String resource, String title, int width, int height, int operationType) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource(resource));
         Parent root = null;
@@ -790,12 +772,12 @@ public class TeacherMainCTLL {
             loader.<AssignCaseCTLL>getController().setController(this);
             loader.<AssignCaseCTLL>getController().initializeView();
         }
-        root.getStylesheets().add(css);
+        root.getStylesheets().add("GUI/Views/CSS/GeneralCSS.css");
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setScene(new Scene(root, width, height));
         listOfStages.add(stage);
-        stage.setResizable(resizable);
+        stage.setResizable(false);
         stage.showAndWait();
     }
 

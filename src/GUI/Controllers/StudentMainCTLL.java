@@ -26,52 +26,19 @@ import java.util.List;
 public class StudentMainCTLL {
 
     @FXML
-    private TextField caseNameField;
-
-    @FXML
-    private Tab caseTab;
-
-    @FXML
     private TableView<Case> casesAssignedList;
 
     @FXML
     private TableView<Case> casesGradedList;
 
     @FXML
-    private DatePicker dateOfBirthPicker;
-
-    @FXML
-    private TextArea descriptionOfConditionText;
-
-    @FXML
-    private TextField familyNameField;
-
-    @FXML
-    private ComboBox<String> genderComboBox;
-
-    @FXML
     private Label groupLBL;
-
-    @FXML
-    private Label medicalHistoryLBL;
-
-    @FXML
-    private TextArea medicalHistoryTextArea;
 
     @FXML
     private TableColumn<Case, String> nameCOLCasesAssigned;
 
     @FXML
     private TableColumn<Case, String> nameCOLCasesGraded;
-
-    @FXML
-    private TextField nameField;
-
-    @FXML
-    private TextArea newObservationTextArea;
-
-    @FXML
-    private Tab patientOverviewTab;
 
     @FXML
     private Label studentLBL;
@@ -90,7 +57,6 @@ public class StudentMainCTLL {
 
     protected void initializeView() {
         getLogedGroup();
-        setUpTabs();
         populateCasesAssigned();
         populateCasesGraded();
         displayLabels();
@@ -111,11 +77,6 @@ public class StudentMainCTLL {
 
         }
         studentLBL.setText(sb.toString());
-    }
-
-    private void setUpTabs() {
-        patientOverviewTab.setDisable(true);
-        caseTab.setDisable(true);
     }
 
     private void populateCasesAssigned() {
@@ -146,9 +107,6 @@ public class StudentMainCTLL {
             } catch (DALException dalException) {
                 SoftAlert.displayAlert(dalException.getMessage());
             }
-            FieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,
-                    genderComboBox,medicalHistoryTextArea);
-            FieldsManager.displayCaseInfo(caseTab, currentCase,caseNameField,descriptionOfConditionText);
         }
     }
 
@@ -161,41 +119,7 @@ public class StudentMainCTLL {
             } catch (DALException dalException) {
                 SoftAlert.displayAlert(dalException.getMessage());
             }
-            FieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,
-                    genderComboBox,medicalHistoryTextArea);
-            FieldsManager.displayCaseInfo(caseTab, currentCase,caseNameField,descriptionOfConditionText);
         }
-    }
-
-    @FXML
-    private void newObservation(ActionEvent event) {
-        FieldsManager.handleObservationStudentView(newObservationTextArea,model,currentPatient,medicalHistoryTextArea);
-    }
-
-    @FXML
-    void saveChangesOnCase(ActionEvent event) {
-        if (FieldsManager.caseFieldsAreFilled(caseNameField,descriptionOfConditionText)) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                    "Are you sure you want to update this case?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.YES) {
-                try {
-                    currentCase.setName(caseNameField.getText());
-                    currentCase.setConditionDescription(descriptionOfConditionText.getText());
-                    model.updateCase(currentCase);
-                    model.updateCaseInTable(currentCase);
-                    refreshCasesAssignedList();
-                } catch (DALException dalException) {
-                    dalException.printStackTrace();
-                    SoftAlert.displayAlert(dalException.getMessage());
-                }
-            }
-        }
-    }
-
-    protected void refreshCasesAssignedList() {
-        casesAssignedList.getItems().clear();
-        casesAssignedList.getItems().addAll(model.getObservableCasesAssigned());
     }
 
     @FXML
@@ -206,28 +130,6 @@ public class StudentMainCTLL {
     @FXML
     private void seeGradedCase(ActionEvent event) {
         openView("GUI/Views/EvaluateCase.fxml", generalCSS, "Evaluate case", 880, 660, false);
-        //TODO Lock all the elements in questionnaire view to prevent modifications(as it is already graded)
-    }
-
-    @FXML
-    void updatePatient(ActionEvent event) {
-        if (FieldsManager.patientFieldsAreFilled(nameField,familyNameField,dateOfBirthPicker,genderComboBox)) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                    "Are you sure you want to update this patient?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.YES) {
-                try {
-                    FieldsManager.updateVariablesOfPatient(currentPatient, nameField,familyNameField,dateOfBirthPicker,genderComboBox);
-                    model.updatePatient(currentPatient);
-                } catch (DALException dalException) {
-                    SoftAlert.displayAlert(dalException.getMessage());
-                }
-            }
-        }
-    }
-
-    public void setUser(User user) {
-        this.currentStudent = user;
     }
 
     public void getLogedGroup() {
@@ -236,6 +138,10 @@ public class StudentMainCTLL {
         } catch (DALException dalException) {
             SoftAlert.displayAlert(dalException.getMessage());
         }
+    }
+
+    public void setUser(User user) {
+        this.currentStudent = user;
     }
 
     private void openView(String resource, String css, String title, int width, int height, boolean resizable) {

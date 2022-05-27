@@ -21,7 +21,6 @@
                <children>
                   <Label layoutX="180.0" layoutY="39.0" text="Case name:" />
                   <Label layoutX="40.0" layoutY="80.0" prefHeight="18.0" prefWidth="170.0" text="Description of the case:" />
-                  <Button layoutX="689.0" layoutY="540.0" mnemonicParsing="false" onAction="#saveChangesOnCase" prefHeight="40.0" prefWidth="130.0" text="Save changes" />
                   <TextField fx:id="caseNameField" layoutX="280.0" layoutY="35.0" prefHeight="26.0" prefWidth="320.0" />
                   <TextArea fx:id="descriptionOfConditionText" layoutX="40.0" layoutY="120.0" prefHeight="400.0" prefWidth="780.0" />
                </children>
@@ -75,12 +74,12 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="categoryHCTableView" layoutX="40.0" layoutY="40.0" onMouseClicked="#categoryHCIsSelected" prefHeight="500.0" prefWidth="300.0">
+                  <TableView fx:id="categoryHCTableView" layoutX="40.0" layoutY="40.0" onMouseClicked="#categoryHCIsSelected" prefHeight="530.0" prefWidth="300.0">
                      <columns>
                         <TableColumn fx:id="categoryNameHC" prefWidth="299.20001220703125" text="Categories" />
                      </columns>
                   </TableView>
-                  <TableView fx:id="subcategoryHCTableView" layoutX="380.0" layoutY="40.0" onMouseClicked="#subcategoryHCIsSelected" prefHeight="500.0" prefWidth="300.0">
+                  <TableView fx:id="subcategoryHCTableView" layoutX="380.0" layoutY="40.0" onMouseClicked="#subcategoryHCIsSelected" prefHeight="530.0" prefWidth="300.0">
                      <columns>
                         <TableColumn fx:id="subCategoryNameHC" prefWidth="230.0" text="Subcategories" />
                         <TableColumn fx:id="assessedCOLHC" prefWidth="68.79998779296875" text="Assessed" />

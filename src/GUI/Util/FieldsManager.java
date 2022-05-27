@@ -13,6 +13,17 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class FieldsManager {
+    /*
+        private FieldsManager instance;
+
+    private FieldsManager(){}
+
+    private FieldsManager getInstance(){
+        if(instance == null){
+            instance = new FieldsManager();
+        }return instance;
+    }
+     */
 
     public static boolean patientFieldsAreFilled(TextField name, TextField familyName, DatePicker dateOfBirth, ComboBox<String> gender) {
         if (name.getText().isEmpty()) {
