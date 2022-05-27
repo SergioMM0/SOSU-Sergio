@@ -71,6 +71,8 @@ public interface BLLFacade {
     void deleteSchool(School currentSchool) throws DALException;
 
     List<User> getAllUsers(School currentSchool) throws DALException;
+
+    List<Category> getAllCategoriesHC() throws DALException;
 }
 
 

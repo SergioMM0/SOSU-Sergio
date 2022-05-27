@@ -1,0 +1,12 @@
+INSERT INTO CategoryHC ([Name]) VALUES ('Funktionsniveau');
+INSERT INTO CategoryHC ([Name]) VALUES ('Bevægeapparat');
+INSERT INTO CategoryHC ([Name]) VALUES ('Ernæring');
+INSERT INTO CategoryHC ([Name]) VALUES ('Hud og slimhinder');
+INSERT INTO CategoryHC ([Name]) VALUES ('Kommunikation');
+INSERT INTO CategoryHC ([Name]) VALUES ('Psykosociale forhold');
+INSERT INTO CategoryHC ([Name]) VALUES ('Respiration og cirkulation');
+INSERT INTO CategoryHC ([Name]) VALUES ('Seksualitet');
+INSERT INTO CategoryHC ([Name]) VALUES ('Smerter og sanseindtryk');
+INSERT INTO CategoryHC ([Name]) VALUES ('Søvn og hvile');
+INSERT INTO CategoryHC ([Name]) VALUES ('Viden og udvikling');
+INSERT INTO CategoryHC ([Name]) VALUES ('Udskillelse af affaldsstoffer');

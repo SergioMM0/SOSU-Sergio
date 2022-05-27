@@ -6,8 +6,8 @@ public class FunctionalAbility {
     private int relevancy;
     private int currentLevel;
     private int expectedLevel;
-    private int Performance;
-    private int Meaning;
+    private int performance;
+    private int meaning;
     private String citizenGoal;
     private String professionalNote;
     private int isEditing;
@@ -16,8 +16,8 @@ public class FunctionalAbility {
         this.relevancy = relevancy;
         this.currentLevel = currentLevel;
         this.expectedLevel = expectedLevel;
-        Performance = performance;
-        Meaning = meaning;
+        this.performance = performance;
+        this.meaning = meaning;
         this.citizenGoal = citizenGoal;
         this.professionalNote = professionalNote;
     }
@@ -27,8 +27,8 @@ public class FunctionalAbility {
         this.relevancy = relevancy;
         this.currentLevel = currentLevel;
         this.expectedLevel = expectedLevel;
-        Performance = performance;
-        Meaning = meaning;
+        this.performance = performance;
+        this.meaning = meaning;
         this.citizenGoal = citizenGoal;
         this.professionalNote = professionalNote;
         this.isEditing = isEditing;
@@ -67,19 +67,19 @@ public class FunctionalAbility {
     }
 
     public int getPerformance() {
-        return Performance;
+        return performance;
     }
 
     public void setPerformance(int performance) {
-        Performance = performance;
+        this.performance = performance;
     }
 
     public int getMeaning() {
-        return Meaning;
+        return meaning;
     }
 
     public void setMeaning(int meaning) {
-        Meaning = meaning;
+        this.meaning = meaning;
     }
 
     public String getCitizenGoal() {

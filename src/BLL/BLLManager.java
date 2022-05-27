@@ -194,4 +194,9 @@ public class BLLManager implements BLLFacade {
     public List<User> getAllUsers(School currentSchool) throws DALException {
         return dalFacade.getAllUsers(currentSchool);
     }
+
+    @Override
+    public List<Category> getAllCategoriesHC() throws DALException {
+        return dalFacade.getAllCategoriesHC();
+    }
 }

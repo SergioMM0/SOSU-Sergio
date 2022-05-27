@@ -1,6 +1,8 @@
 package GUI.Controllers;
 
 import BE.*;
+import DAL.Exceptions.DALException;
+import GUI.Alerts.SoftAlert;
 import GUI.Models.EvaluateCaseMOD;
 import GUI.Util.FieldsManager;
 import javafx.event.ActionEvent;
@@ -86,12 +88,13 @@ public class EvaluateCaseCTLL {
 
     public EvaluateCaseCTLL(){
         model = new EvaluateCaseMOD();
-        initializeView();
     }
 
     public void initializeView() {
         FieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,genderComboBox,medicalHistoryTextArea);
-        FieldsManager.displayCaseInfo(caseTab,currentCase,nameField,descriptionOfConditionText);
+        FieldsManager.displayCaseInfo(caseTab,currentCase,caseNameField,descriptionOfConditionText);
+        populateCategoriesFA();
+        populateCategoriesHC();
     }
 
     @FXML
@@ -146,6 +149,30 @@ public class EvaluateCaseCTLL {
     @FXML
     void updatePatient(ActionEvent event) {
 
+    }
+
+    private void populateCategoriesHC() {
+        try{
+            categoryHCTableView.getItems().addAll(model.getAllCategoriesHC());
+        }catch (DALException dalException){
+            SoftAlert.displayAlert(dalException.getMessage());
+        }
+    }
+
+    private void populateCategoriesFA() {
+
+    }
+
+    public void setGroup(Group group){
+        this.currentGroup = group;
+    }
+
+    public void setCase(Case currentCase){
+        this.currentCase = currentCase;
+    }
+
+    public void setPatient(Patient patient){
+        this.currentPatient = patient;
     }
 
     private void openView(String resource, String css, String title, int width, int height) {

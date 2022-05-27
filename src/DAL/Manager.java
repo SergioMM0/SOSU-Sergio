@@ -12,6 +12,7 @@ public class Manager implements DALFacade {
     private final DAOPatient daoPatient;
     private final DAOSchool daoSchool;
     private final DAOGroup daoGroup;
+    private final DAOCategories daoCategories;
 
     public Manager() {
         daoCase = new DAOCase();
@@ -19,6 +20,7 @@ public class Manager implements DALFacade {
         daoPatient = new DAOPatient();
         daoSchool = new DAOSchool();
         daoGroup = new DAOGroup();
+        daoCategories = new DAOCategories();
     }
 
 
@@ -179,5 +181,10 @@ public class Manager implements DALFacade {
     @Override
     public List<User> getAllUsers(School currentSchool) throws DALException {
         return daoUser.getAllUsers(currentSchool);
+    }
+
+    @Override
+    public List<Category> getAllCategoriesHC() throws DALException {
+        return daoCategories.getAllCategoriesHC();
     }
 }
