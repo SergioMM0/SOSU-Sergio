@@ -60,4 +60,8 @@ public class EvaluateCaseMOD {
     public FunctionalAbility getCurrentFunctionalAbility(Subcategory currentSubcategory, Patient patient) throws DALException {
         return bllFacade.getFunctionalAbility(currentSubcategory, patient);
     }
+
+    public HealthCondition getCurrentHealthCondition(Subcategory currentSubcategory, Patient currentPatient) throws DALException{
+        return bllFacade.getHealthCondition(currentSubcategory,currentPatient);
+    }
 }

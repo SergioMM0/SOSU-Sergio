@@ -243,4 +243,14 @@ public class BLLManager implements BLLFacade {
     public void addFunctionalAbility(FunctionalAbility currentFunctionalAbility, Patient currentPatient, Subcategory currentSubcategory) throws DALException {
         dalFacade.addFunctionalAbility(currentFunctionalAbility,currentPatient,currentSubcategory);
     }
+
+    @Override
+    public void addHealthCondition(HealthCondition currentHealthCondition, Subcategory subcategory, Patient patient) throws DALException {
+        dalFacade.addHealthCondition(currentHealthCondition,subcategory,patient);
+    }
+
+    @Override
+    public void updateHealthCondition(HealthCondition healthCondition, Subcategory subcategory, Patient patient) throws DALException {
+        dalFacade.updateHealthCondition(healthCondition,subcategory,patient);
+    }
 }

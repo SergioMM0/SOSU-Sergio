@@ -21,7 +21,6 @@
                <children>
                   <Label layoutX="180.0" layoutY="39.0" text="Case name:" />
                   <Label layoutX="40.0" layoutY="80.0" prefHeight="18.0" prefWidth="170.0" text="Description of the case:" />
-                  <Button layoutX="689.0" layoutY="540.0" mnemonicParsing="false" onAction="#saveChangesOnCase" prefHeight="40.0" prefWidth="130.0" text="Save changes" />
                   <TextField fx:id="caseNameField" layoutX="280.0" layoutY="35.0" prefHeight="26.0" prefWidth="320.0" />
                   <TextArea fx:id="descriptionOfConditionText" layoutX="40.0" layoutY="120.0" prefHeight="400.0" prefWidth="780.0" />
                </children>

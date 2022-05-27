@@ -87,6 +87,10 @@ public interface BLLFacade {
     void updateFunctionalAbility(FunctionalAbility currentFunctionalAbility, Patient currentPatient, Subcategory currentSubcategory) throws DALException;
 
     void addFunctionalAbility(FunctionalAbility currentFunctionalAbility, Patient currentPatient, Subcategory currentSubcategory) throws DALException;
+
+    void addHealthCondition(HealthCondition currentHealthCondition, Subcategory subcategory, Patient patient) throws DALException;
+
+    void updateHealthCondition(HealthCondition healthCondition, Subcategory subcategory, Patient patient) throws DALException;
 }
 
 

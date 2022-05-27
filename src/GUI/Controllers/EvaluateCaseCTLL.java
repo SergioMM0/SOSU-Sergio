@@ -135,7 +135,7 @@ public class EvaluateCaseCTLL {
     @FXML
     void subcategoryHCIsSelected(MouseEvent event) {
         if(subcategoryHCTableView.getSelectionModel().getSelectedItem() != null){
-            this.currentSubcategory = subcategoryFATableView.getSelectionModel().getSelectedItem();
+            this.currentSubcategory = subcategoryHCTableView.getSelectionModel().getSelectedItem();
         }
     }
 
@@ -143,7 +143,7 @@ public class EvaluateCaseCTLL {
     void assessFA(ActionEvent event) {
         try{
             this.currentFunctionalAbility = model.getCurrentFunctionalAbility(currentSubcategory, currentPatient);
-            openView("GUI/Views/AssessFunctionalAbility.fxml","Functional Ability", 710,700);
+            openView("GUI/Views/AssessFunctionalAbility.fxml","Functional Ability", 710,680);
         }catch(DALException dalException){
             SoftAlert.displayAlert(dalException.getMessage());
         }
@@ -151,31 +151,17 @@ public class EvaluateCaseCTLL {
 
     @FXML
     void assessHC(ActionEvent event) {
-        openView("GUI/Views/AssesHealthCondition.fxml","Health Condition", 680,450);
+        try{
+            this.currentHealthCondition = model.getCurrentHealthCondition(currentSubcategory, currentPatient);
+            openView("GUI/Views/AssesHealthCondition.fxml","Health Condition", 680,450);
+        }catch (DALException dalException){
+            SoftAlert.displayAlert(dalException.getMessage());
+        }
     }
 
     @FXML
     void newObservation(ActionEvent event) {
         FieldsManager.handleObservationEvaluatingCase(newObservationTextArea,model,currentPatient,medicalHistoryTextArea);
-    }
-
-    @FXML
-    void saveChangesOnCase(ActionEvent event) {
-        if (FieldsManager.caseFieldsAreFilled(caseNameField,descriptionOfConditionText)) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                    "Are you sure you want to update this case?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.YES) {
-                try {
-                    currentCase.setName(caseNameField.getText());
-                    currentCase.setConditionDescription(descriptionOfConditionText.getText());
-                    model.updateCase(currentCase);
-                } catch (DALException dalException) {
-                    dalException.printStackTrace();
-                    SoftAlert.displayAlert(dalException.getMessage());
-                }
-            }
-        }
     }
 
     @FXML
@@ -186,6 +172,7 @@ public class EvaluateCaseCTLL {
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
                 try {
+                    FieldsManager.updateVariablesOfPatient(currentPatient, nameField,familyNameField,dateOfBirthPicker,genderComboBox);
                     model.updatePatient(currentPatient);
                 } catch (DALException dalException) {
                     SoftAlert.displayAlert(dalException.getMessage());
@@ -221,7 +208,7 @@ public class EvaluateCaseCTLL {
         });
     }
 
-    private void populateSubcategoriesFA() {
+    protected void populateSubcategoriesFA() {
         try{
             subcategoryFATableView.getItems().clear();
             subcategoryFATableView.getItems().addAll(model.getSubcategoriesFA(currentCategory,currentPatient));
@@ -231,7 +218,7 @@ public class EvaluateCaseCTLL {
         }
     }
 
-    private void populateSubcategoriesHC() {
+    protected void populateSubcategoriesHC() {
         try{
             subcategoryHCTableView.getItems().clear();
             subcategoryHCTableView.getItems().addAll(model.getSubcategoriesHC(currentCategory,currentPatient));
@@ -283,9 +270,14 @@ public class EvaluateCaseCTLL {
             loader.<AssessFunctionalAbilityCTLL>getController().setSubcategory(currentSubcategory);
             loader.<AssessFunctionalAbilityCTLL>getController().setFunctionalAbility(currentFunctionalAbility);
             loader.<AssessFunctionalAbilityCTLL>getController().initializeView();
+            loader.<AssessFunctionalAbilityCTLL>getController().setEvaluateCaseCTLL(this);
         }
         if (resource.equals("GUI/Views/AssesHealthCondition.fxml")) {
-            //loader.<AssessHealthCondition>getController().setPatient(currentPatient);
+            loader.<AssessHealthConditionCTLL>getController().setPatient(currentPatient);
+            loader.<AssessHealthConditionCTLL>getController().setSubCategory(currentSubcategory);
+            loader.<AssessHealthConditionCTLL>getController().setHealthCondition(currentHealthCondition);
+            loader.<AssessHealthConditionCTLL>getController().initializeView();
+            loader.<AssessHealthConditionCTLL>getController().setEvaluateCaseCTLL(this);
         }
         root.getStylesheets().add("GUI/Views/CSS/GeneralCSS.css");
         Stage stage = new Stage();

@@ -7,36 +7,36 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="700.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.AssessFunctionalAbilityCTLL">
+<AnchorPane prefHeight="680.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.AssessFunctionalAbilityCTLL">
    <children>
       <Label layoutX="40.0" layoutY="40.0" text="Relevancy" />
       <ComboBox fx:id="relevancyComboBox" layoutX="130.0" layoutY="35.0" prefHeight="26.0" prefWidth="540.0" />
       <Label layoutX="40.0" layoutY="80.0" text="Dependance Level" />
-      <Button fx:id="dependenceButton1" layoutX="40.0" layoutY="110.0" mnemonicParsing="false" onAction="#dependenceButton1" prefHeight="80.0" prefWidth="80.0" />
-      <ImageView fx:id="selectionIndicator1" fitHeight="10.0" fitWidth="80.0" layoutX="40.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="dependenceButton2" layoutX="150.0" layoutY="110.0" mnemonicParsing="false" onAction="#dependenceButton2" prefHeight="80.0" prefWidth="80.0" />
-      <ImageView fx:id="selectionIndicator2" fitHeight="10.0" fitWidth="80.0" layoutX="150.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="dependenceButton3" layoutX="260.0" layoutY="110.0" mnemonicParsing="false" onAction="#dependenceButton3" prefHeight="80.0" prefWidth="80.0" />
-      <ImageView fx:id="selectionIndicator3" fitHeight="10.0" fitWidth="80.0" layoutX="260.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="dependenceButton4" layoutX="370.0" layoutY="110.0" mnemonicParsing="false" onAction="#dependenceButton4" prefHeight="80.0" prefWidth="80.0" />
-      <ImageView fx:id="selectionIndicator4" fitHeight="10.0" fitWidth="80.0" layoutX="370.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="dependenceButton5" layoutX="480.0" layoutY="110.0" mnemonicParsing="false" onAction="#dependenceButton5" prefHeight="80.0" prefWidth="80.0" />
-      <ImageView fx:id="selectionIndicator5" fitHeight="10.0" fitWidth="80.0" layoutX="480.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="dependenceButton6" layoutX="590.0" layoutY="110.0" mnemonicParsing="false" onAction="#dependenceButton6" prefHeight="80.0" prefWidth="80.0" />
-      <ImageView fx:id="selectionIndicator6" fitHeight="10.0" fitWidth="80.0" layoutX="590.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="dependenceButton1" contentDisplay="CENTER" layoutX="41.0" layoutY="111.0" mnemonicParsing="false" onAction="#dependenceButton1" prefHeight="80.0" prefWidth="80.0" />
+      <ImageView fx:id="selectionIndicator1" fitHeight="10.0" fitWidth="80.0" layoutX="41.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="dependenceButton2" contentDisplay="CENTER" layoutX="151.0" layoutY="111.0" mnemonicParsing="false" onAction="#dependenceButton2" prefHeight="80.0" prefWidth="80.0" />
+      <ImageView fx:id="selectionIndicator2" fitHeight="10.0" fitWidth="80.0" layoutX="151.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="dependenceButton3" contentDisplay="CENTER" layoutX="261.0" layoutY="111.0" mnemonicParsing="false" onAction="#dependenceButton3" prefHeight="80.0" prefWidth="80.0" />
+      <ImageView fx:id="selectionIndicator3" fitHeight="10.0" fitWidth="80.0" layoutX="261.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="dependenceButton4" contentDisplay="CENTER" layoutX="371.0" layoutY="111.0" mnemonicParsing="false" onAction="#dependenceButton4" prefHeight="80.0" prefWidth="80.0" />
+      <ImageView fx:id="selectionIndicator4" fitHeight="10.0" fitWidth="80.0" layoutX="371.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="dependenceButton5" contentDisplay="CENTER" layoutX="481.0" layoutY="111.0" mnemonicParsing="false" onAction="#dependenceButton5" prefHeight="80.0" prefWidth="80.0" />
+      <ImageView fx:id="selectionIndicator5" fitHeight="10.0" fitWidth="80.0" layoutX="481.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="dependenceButton6" contentDisplay="CENTER" layoutX="591.0" layoutY="111.0" mnemonicParsing="false" onAction="#dependenceButton6" prefHeight="80.0" prefWidth="80.0" />
+      <ImageView fx:id="selectionIndicator6" fitHeight="10.0" fitWidth="80.0" layoutX="591.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="40.0" layoutY="220.0" text="Expected Level" />
-      <Button fx:id="expectedButton1" layoutX="40.0" layoutY="255.0" mnemonicParsing="false" onAction="#expectedButton1" prefHeight="80.0" prefWidth="80.0" />
-      <ImageView fx:id="selectionIndicator7" fitHeight="10.0" fitWidth="80.0" layoutX="40.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="expectedButton2" layoutX="150.0" layoutY="255.0" mnemonicParsing="false" onAction="#expectedButton2" prefHeight="80.0" prefWidth="80.0" />
-      <ImageView fx:id="selectionIndicator8" fitHeight="10.0" fitWidth="80.0" layoutX="150.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="expectedButton3" layoutX="260.0" layoutY="255.0" mnemonicParsing="false" onAction="#expectedButton3" prefHeight="80.0" prefWidth="80.0" />
-      <ImageView fx:id="selectionIndicator9" fitHeight="10.0" fitWidth="80.0" layoutX="260.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="expectedButton4" layoutX="370.0" layoutY="255.0" mnemonicParsing="false" onAction="#expectedButton4" prefHeight="80.0" prefWidth="80.0" />
-      <ImageView fx:id="selectionIndicator10" fitHeight="10.0" fitWidth="80.0" layoutX="370.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="expectedButton5" layoutX="480.0" layoutY="255.0" mnemonicParsing="false" onAction="#expectedButton5" prefHeight="80.0" prefWidth="80.0" />
-      <ImageView fx:id="selectionIndicator11" fitHeight="10.0" fitWidth="80.0" layoutX="480.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="expectedButton6" layoutX="590.0" layoutY="255.0" mnemonicParsing="false" onAction="#expectedButton6" prefHeight="80.0" prefWidth="80.0" />
-      <ImageView fx:id="selectionIndicator12" fitHeight="10.0" fitWidth="80.0" layoutX="590.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="expectedButton1" contentDisplay="CENTER" layoutX="41.0" layoutY="256.0" mnemonicParsing="false" onAction="#expectedButton1" prefHeight="80.0" prefWidth="80.0" />
+      <ImageView fx:id="selectionIndicator7" fitHeight="10.0" fitWidth="80.0" layoutX="40.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="expectedButton2" contentDisplay="CENTER" layoutX="151.0" layoutY="256.0" mnemonicParsing="false" onAction="#expectedButton2" prefHeight="80.0" prefWidth="80.0" />
+      <ImageView fx:id="selectionIndicator8" fitHeight="10.0" fitWidth="80.0" layoutX="151.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="expectedButton3" contentDisplay="CENTER" layoutX="261.0" layoutY="256.0" mnemonicParsing="false" onAction="#expectedButton3" prefHeight="80.0" prefWidth="80.0" />
+      <ImageView fx:id="selectionIndicator9" fitHeight="10.0" fitWidth="80.0" layoutX="261.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="expectedButton4" contentDisplay="CENTER" layoutX="371.0" layoutY="256.0" mnemonicParsing="false" onAction="#expectedButton4" prefHeight="80.0" prefWidth="80.0" />
+      <ImageView fx:id="selectionIndicator10" fitHeight="10.0" fitWidth="80.0" layoutX="371.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="expectedButton5" contentDisplay="CENTER" layoutX="481.0" layoutY="256.0" mnemonicParsing="false" onAction="#expectedButton5" prefHeight="80.0" prefWidth="80.0" />
+      <ImageView fx:id="selectionIndicator11" fitHeight="10.0" fitWidth="80.0" layoutX="481.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="expectedButton6" contentDisplay="CENTER" layoutX="591.0" layoutY="256.0" mnemonicParsing="false" onAction="#expectedButton6" prefHeight="80.0" prefWidth="80.0" />
+      <ImageView fx:id="selectionIndicator12" fitHeight="10.0" fitWidth="80.0" layoutX="591.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="40.0" layoutY="365.0" text="Performance" />
       <ComboBox fx:id="performanceComboBox" layoutX="130.0" layoutY="360.0" prefHeight="26.0" prefWidth="540.0" />
       <Label layoutX="40.0" layoutY="410.0" text="Meaning" />

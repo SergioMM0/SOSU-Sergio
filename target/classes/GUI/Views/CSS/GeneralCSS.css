@@ -132,7 +132,3 @@
 #selectionIndicator12{
     -fx-image: url("/res/green.png");
 }
-
-#selectionIndicator13{
-    set: url("/res/green.png");
-}

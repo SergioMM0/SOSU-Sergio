@@ -123,4 +123,32 @@ public class StaticData {
             default -> integer;
         };
     }
+
+    public static ObservableList<String> getExpectationsObservableList(){
+        ObservableList<String> expectations = FXCollections.observableArrayList();
+        expectations.add("Mindskes");
+        expectations.add("Forvliber Uaendret");
+        expectations.add("Forsvinder");
+        return expectations;
+    }
+
+    public static String getExpectation(int expect){
+        String string = null;
+        return switch (expect){
+            case 1 -> "Mindskes";
+            case 2 -> "Forvliber Uaendret";
+            case 3 -> "Forsvinder";
+            default -> string;
+        };
+    }
+
+    public static int parseExpectationToInt(String expectation){
+        int integer = 0;
+        return switch (expectation) {
+            case "Mindskes" -> 1;
+            case "Forvliber Uaendret" -> 2;
+            case "Forsvinder" -> 3;
+            default -> integer;
+        };
+    }
 }

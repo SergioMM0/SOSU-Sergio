@@ -115,6 +115,7 @@ public class AssessFunctionalAbilityCTLL {
     private FunctionalAbility currentFunctionalAbility;
     private List<ImageView> indicatorsCurrent;
     private List<ImageView> indicatorsExpected;
+    private EvaluateCaseCTLL evaluateCaseCTLL;
     private int currentLevel = 6;
     private int expectedLevel = 6;
     private final File file = new File("/res/green.png");
@@ -217,6 +218,7 @@ public class AssessFunctionalAbilityCTLL {
                     FieldsManager.updateVariablesOfFunctionalAbility(currentFunctionalAbility,currentLevel, expectedLevel,
                             relevancyComboBox,performanceComboBox,meaningComboBox,goalTextArea,observationsTextArea);
                     model.updateFunctionalAbility(currentFunctionalAbility,currentPatient,currentSubcategory);
+                    evaluateCaseCTLL.populateSubcategoriesFA();
                     closeWindow();
                 } catch (DALException dalException) {
                     SoftAlert.displayAlert(dalException.getMessage());
@@ -226,6 +228,7 @@ public class AssessFunctionalAbilityCTLL {
                     FieldsManager.updateVariablesOfFunctionalAbility(currentFunctionalAbility,currentLevel, expectedLevel,
                             relevancyComboBox,performanceComboBox,meaningComboBox,goalTextArea,observationsTextArea);
                     model.addFunctionalAbility(currentFunctionalAbility,currentPatient,currentSubcategory);
+                    evaluateCaseCTLL.populateSubcategoriesFA();
                     closeWindow();
                 } catch (DALException dalException) {
                     SoftAlert.displayAlert(dalException.getMessage());
@@ -272,6 +275,10 @@ public class AssessFunctionalAbilityCTLL {
 
     public void setFunctionalAbility(FunctionalAbility functionalAbility) {
         this.currentFunctionalAbility = functionalAbility;
+    }
+
+    public void setEvaluateCaseCTLL(EvaluateCaseCTLL evaluateCaseCTLL){
+        this.evaluateCaseCTLL = evaluateCaseCTLL;
     }
 
     private void closeWindow() {

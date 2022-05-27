@@ -1,9 +1,6 @@
 package GUI.Util;
 
-import BE.Case;
-import BE.FunctionalAbility;
-import BE.Patient;
-import BE.Subcategory;
+import BE.*;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.EvaluateCaseMOD;
@@ -240,5 +237,73 @@ public class FieldsManager {
         currentFunctionalAbility.setRelevancy(StaticData.parseRelevancyToInt(relevancyComboBox.getValue()));
         currentFunctionalAbility.setCitizenGoal(goalTextArea.getText());
         currentFunctionalAbility.setProfessionalNote(observationsTextArea.getText());
+    }
+
+
+    public static void fillHealthConditionNotAssessed(ComboBox<String> relevancyComboBox,
+                                                      ComboBox<String> expectationsComboBox) {
+        relevancyComboBox.getItems().clear();
+        relevancyComboBox.getItems().addAll(StaticData.getRelevancyObservableList());
+
+        expectationsComboBox.getItems().clear();
+        expectationsComboBox.getItems().addAll(StaticData.getExpectationsObservableList());
+    }
+
+    public static void fillHealthConditionAssessed(HealthCondition currentHealthCondition,
+                                                   ComboBox<String> relevancyComboBox, ComboBox<String> expectationsComboBox,
+                                                   TextArea assessmentText, TextArea goalText, TextArea observationsText) {
+
+        relevancyComboBox.getItems().clear(); //just in case
+        relevancyComboBox.getItems().addAll(StaticData.getRelevancyObservableList());
+        relevancyComboBox.getSelectionModel().select(
+                relevancyComboBox.getItems().indexOf(StaticData.getRelevancy(currentHealthCondition.getRelevancy())));
+
+        expectationsComboBox.getItems().clear();
+        expectationsComboBox.getItems().addAll(StaticData.getExpectationsObservableList());
+        expectationsComboBox.getSelectionModel().select(
+                expectationsComboBox.getItems().indexOf(StaticData.getExpectation(currentHealthCondition.getExpectations()))
+        );
+
+        assessmentText.setText(currentHealthCondition.getAssessment());
+        goalText.setText(currentHealthCondition.getGoal());
+        observationsText.setText(currentHealthCondition.getProfessionalNote());
+    }
+
+
+    public static boolean healthConditionFieldsArefilled(ComboBox<String> relevancyComboBox,
+                                                         ComboBox<String> expectationsComboBox,
+                                                         TextArea assessmentText, TextArea goalText,
+                                                         TextArea observationsText) {
+
+        if (relevancyComboBox.getSelectionModel().isEmpty() || relevancyComboBox.hasProperties()) {
+            SoftAlert.displayAlert("Please introduce a level of relevancy for the Health condition disorder");
+            return false;
+        }
+        else if (expectationsComboBox.getSelectionModel().isEmpty() || expectationsComboBox.hasProperties()) {
+            SoftAlert.displayAlert("Please introduce an expectation for the Health condition disorder");
+            return false;
+        }else if (assessmentText.getText().isEmpty()) {
+            SoftAlert.displayAlert("Please introduce a valid assessment");
+            return false;
+        }else if (goalText.getText().isEmpty()) {
+            SoftAlert.displayAlert("Please introduce a valid patient goal");
+            return false;
+        }else if (observationsText.getText().isEmpty()) {
+            SoftAlert.displayAlert("Please introduce a valid observation");
+            return false;
+        }else return true;
+    }
+
+    public static void updateVariablesOfHealthCondition(HealthCondition currentHealthCondition,
+                                                        ComboBox<String> relevancyComboBox,
+                                                        ComboBox<String> expectationsComboBox,
+                                                        TextArea assessmentText, TextArea goalText,
+                                                        TextArea observationsText) {
+
+        currentHealthCondition.setRelevancy(StaticData.parseRelevancyToInt(relevancyComboBox.getValue()));
+        currentHealthCondition.setExpectations(StaticData.parseExpectationToInt(expectationsComboBox.getValue()));
+        currentHealthCondition.setAssessment(assessmentText.getText());
+        currentHealthCondition.setGoal(goalText.getText());
+        currentHealthCondition.setProfessionalNote(observationsText.getText());
     }
 }

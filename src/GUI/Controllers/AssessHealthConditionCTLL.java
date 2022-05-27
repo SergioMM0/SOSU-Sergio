@@ -1,9 +1,17 @@
 package GUI.Controllers;
 
+import BE.HealthCondition;
+import BE.Patient;
+import BE.Subcategory;
+import DAL.Exceptions.DALException;
+import GUI.Alerts.SoftAlert;
+import GUI.Models.AssessHealthConditionMOD;
+import GUI.Util.FieldsManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
 public class AssessHealthConditionCTLL {
 
@@ -11,7 +19,7 @@ public class AssessHealthConditionCTLL {
     private TextArea assessmentText;
 
     @FXML
-    private ComboBox<?> expectationsComboBox;
+    private ComboBox<String> expectationsComboBox;
 
     @FXML
     private TextArea goalText;
@@ -20,15 +28,84 @@ public class AssessHealthConditionCTLL {
     private TextArea observationsText;
 
     @FXML
-    private ComboBox<?> relevancyComboBox;
+    private ComboBox<String> relevancyComboBox;
 
-    @FXML
-    void cancel(ActionEvent event) {
+    private AssessHealthConditionMOD model;
+    private Patient currentPatient;
+    private Subcategory currentSubcategory;
+    private HealthCondition currentHealthCondition;
+    private EvaluateCaseCTLL evaluateCaseCTLL;
 
+    public AssessHealthConditionCTLL(){
+        model = new AssessHealthConditionMOD();
+    }
+
+    public void initializeView() {
+        setUpFields();
     }
 
     @FXML
     void save(ActionEvent event) {
+        if(FieldsManager.healthConditionFieldsArefilled(relevancyComboBox,expectationsComboBox,
+                assessmentText,goalText,observationsText)){
+            if(currentSubcategory.isAssessed()){
+                try{
+                    FieldsManager.updateVariablesOfHealthCondition(currentHealthCondition,relevancyComboBox, expectationsComboBox,
+                            assessmentText,goalText,observationsText);
+                    model.updateHealthCondition(currentHealthCondition,currentSubcategory,currentPatient);
+                    evaluateCaseCTLL.populateSubcategoriesHC();
+                    closeWindow();
+                }catch (DALException dalException){
+                    SoftAlert.displayAlert(dalException.getMessage());
+                }
+            }
+            else{
+                try{
+                    FieldsManager.updateVariablesOfHealthCondition(currentHealthCondition,relevancyComboBox, expectationsComboBox,
+                            assessmentText,goalText,observationsText);
+                    model.addHealthCondition(currentHealthCondition,currentSubcategory,currentPatient);
+                    evaluateCaseCTLL.populateSubcategoriesHC();
+                    closeWindow();
+                }catch (DALException dalException){
+                    SoftAlert.displayAlert(dalException.getMessage());
+                }
+            }
+        }
+    }
 
+    @FXML
+    void cancel(ActionEvent event) {
+        closeWindow();
+    }
+
+
+    private void setUpFields() {
+        if(currentSubcategory.isAssessed()){
+            FieldsManager.fillHealthConditionAssessed(currentHealthCondition,relevancyComboBox,
+                    expectationsComboBox,assessmentText,goalText,observationsText);
+        }else FieldsManager.fillHealthConditionNotAssessed(relevancyComboBox,expectationsComboBox);
+    }
+
+    private void closeWindow() {
+        Stage st = (Stage) goalText.getScene().getWindow();
+        st.close();
+    }
+
+    public void setPatient(Patient patient) {
+        this.currentPatient = patient;
+    }
+
+
+    public void setSubCategory(Subcategory subcategory) {
+        this.currentSubcategory = subcategory;
+    }
+
+
+    public void setHealthCondition(HealthCondition healthCondition) {
+        this.currentHealthCondition = healthCondition;
+    }
+
+    public void setEvaluateCaseCTLL(EvaluateCaseCTLL evaluateCaseCTLL){
+        this.evaluateCaseCTLL = evaluateCaseCTLL;
     }
 }
