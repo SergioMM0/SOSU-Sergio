@@ -7,7 +7,6 @@ import GUI.Models.EvaluateCaseMOD;
 import GUI.Util.FieldsManager;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -93,6 +92,8 @@ public class EvaluateCaseCTLL {
     private Case currentCase;
     private Patient currentPatient;
     private Group currentGroup;
+    private FunctionalAbility currentFunctionalAbility;
+    private HealthCondition currentHealthCondition;
 
     public EvaluateCaseCTLL(){
         model = new EvaluateCaseMOD();
@@ -138,7 +139,12 @@ public class EvaluateCaseCTLL {
 
     @FXML
     void assessFA(ActionEvent event) {
-        openView("GUI/Views/AssessFunctionalAbility.fxml","Functional Ability", 710,700);
+        try{
+            this.currentFunctionalAbility = model.getCurrentFunctionalAbility(currentSubcategory, currentPatient);
+            openView("GUI/Views/AssessFunctionalAbility.fxml","Functional Ability", 710,700);
+        }catch(DALException dalException){
+            SoftAlert.displayAlert(dalException.getMessage());
+        }
     }
 
     @FXML
@@ -271,15 +277,13 @@ public class EvaluateCaseCTLL {
         }
         assert root != null;
         if (resource.equals("GUI/Views/AssessFunctionalAbility.fxml")) {
-            /*
-            loader.<>getController().setCase();
-            loader.<>getController().setController(this);
-            loader.<>getController().initializeView();
-
-             */
+            loader.<AssessFunctionalAbilityCTLL>getController().setPatient(currentPatient);
+            loader.<AssessFunctionalAbilityCTLL>getController().setSubcategory(currentSubcategory);
+            loader.<AssessFunctionalAbilityCTLL>getController().setFunctionalAbility(currentFunctionalAbility);
+            loader.<AssessFunctionalAbilityCTLL>getController().initializeView();
         }
         if (resource.equals("GUI/Views/AssesHealthCondition.fxml")) {
-
+            //loader.<AssessHealthCondition>getController().setPatient(currentPatient);
         }
         root.getStylesheets().add("GUI/Views/CSS/GeneralCSS.css");
         Stage stage = new Stage();

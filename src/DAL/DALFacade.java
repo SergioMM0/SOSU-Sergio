@@ -82,4 +82,8 @@ public interface DALFacade {
     FunctionalAbility getFunctionalAbility(Subcategory subcategory, Patient patient) throws DALException;
 
     HealthCondition getHealthCondition(Subcategory subcategory, Patient patient) throws DALException;
+
+    void updateFunctionalAbility(FunctionalAbility currentFunctionalAbility, Patient currentPatient, Subcategory currentSubcategory) throws DALException;
+
+    void addFunctionalAbility(FunctionalAbility currentFunctionalAbility, Patient currentPatient, Subcategory currentSubcategory) throws DALException;
 }

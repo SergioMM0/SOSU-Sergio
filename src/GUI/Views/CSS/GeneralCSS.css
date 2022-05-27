@@ -18,3 +18,105 @@
 .table-row-cell:selected:hover{
     -fx-background-color: #484848;
 }
+
+
+
+#dependenceButton1{
+    -fx-background-image: url("/res/one.png");
+}
+
+#dependenceButton2{
+    -fx-background-image: url("/res/two.png");
+}
+
+#dependenceButton3{
+    -fx-background-image: url("/res/three.png");
+}
+
+#dependenceButton4{
+    -fx-background-image: url("/res/four.png");
+}
+
+#dependenceButton5{
+    -fx-background-image: url("/res/five.png");
+}
+
+#dependenceButton6{
+    -fx-background-image: url("/res/one.png");
+}
+
+
+
+#expectedButton1{
+    -fx-background-image: url("/res/one.png");
+}
+
+#expectedButton2{
+    -fx-background-image: url("/res/two.png");
+}
+
+#expectedButton3{
+    -fx-background-image: url("/res/three.png");
+}
+
+#expectedButton4{
+    -fx-background-image: url("/res/four.png");
+}
+
+#expectedButton5{
+    -fx-background-image: url("/res/five.png");
+}
+
+#expectedButton6{
+    -fx-background-image: url("/res/one.png");
+}
+
+
+
+#selectionIndicator1{
+    -fx-background-image: url("/res/green.png");
+}
+
+#selectionIndicator2{
+    -fx-background-image: url("/res/green.png");
+}
+
+#selectionIndicator3{
+    -fx-background-image: url("/res/green.png");
+}
+
+#selectionIndicator4{
+    -fx-background-image: url("/res/green.png");
+}
+
+#selectionIndicator5{
+    -fx-background-image: url("/res/green.png");
+}
+
+#selectionIndicator6{
+    -fx-background-image: url("/res/green.png");
+}
+
+#selectionIndicator7{
+    -fx-background-image: url("/res/green.png");
+}
+
+#selectionIndicator8{
+    -fx-background-image: url("/res/green.png");
+}
+
+#selectionIndicator9{
+    -fx-background-image: url("/res/green.png");
+}
+
+#selectionIndicator10{
+    -fx-background-image: url("/res/green.png");
+}
+
+#selectionIndicator11{
+    -fx-background-image: url("/res/green.png");
+}
+
+#selectionIndicator12{
+    -fx-background-image: url("/res/green.png");
+}

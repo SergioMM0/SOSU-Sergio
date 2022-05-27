@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 
-public class AssessHealthCondition {
+public class AssessHealthConditionCTLL {
 
     @FXML
     private TextArea assessmentText;

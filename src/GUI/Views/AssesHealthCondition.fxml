@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="450.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.AssessHealthCondition">
+<AnchorPane prefHeight="450.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.AssessHealthConditionCTLL">
    <children>
       <Label layoutX="40.0" layoutY="40.0" text="Relevancy" />
       <ComboBox fx:id="relevancyComboBox" layoutX="130.0" layoutY="35.0" prefHeight="26.0" prefWidth="500.0" />

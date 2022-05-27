@@ -220,7 +220,7 @@ public class BLLManager implements BLLFacade {
     public FunctionalAbility getFunctionalAbility(Subcategory subcategory, Patient patient) throws DALException {
         FunctionalAbility functionalAbility = dalFacade.getFunctionalAbility(subcategory,patient);
         if( functionalAbility == null){
-            return new FunctionalAbility(StaticData.isNotEditing());
+            return new FunctionalAbility(StaticData.isEditing());
         }
         else return functionalAbility;
     }
@@ -229,8 +229,18 @@ public class BLLManager implements BLLFacade {
     public HealthCondition getHealthCondition(Subcategory subcategory, Patient patient) throws DALException {
         HealthCondition healthCondition = dalFacade.getHealthCondition(subcategory,patient);
         if(healthCondition == null){
-            return new HealthCondition(StaticData.isNotEditing());
+            return new HealthCondition(StaticData.isEditing());
         }
         else return healthCondition;
+    }
+
+    @Override
+    public void updateFunctionalAbility(FunctionalAbility currentFunctionalAbility, Patient currentPatient, Subcategory currentSubcategory) throws DALException{
+        dalFacade.updateFunctionalAbility(currentFunctionalAbility,currentPatient, currentSubcategory);
+    }
+
+    @Override
+    public void addFunctionalAbility(FunctionalAbility currentFunctionalAbility, Patient currentPatient, Subcategory currentSubcategory) throws DALException {
+        dalFacade.addFunctionalAbility(currentFunctionalAbility,currentPatient,currentSubcategory);
     }
 }

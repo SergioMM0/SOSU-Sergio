@@ -56,20 +56,4 @@ public class DAOCategory {
         }
         return allCategories;
     }
-
-    /*
-         try(Connection connection = connectionProvider.getConnection()){
-            String sql = "";
-            PreparedStatement st = connection.prepareStatement(sql);
-
-            st.execute();
-            ResultSet rs = st.getResultSet();
-            while(rs.next()){
-
-            }
-        }catch (SQLException sqlException){
-            throw new DALException("Not able to get all the categories", sqlException);
-        }
-     */
-
 }

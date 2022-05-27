@@ -1,15 +1,19 @@
 package GUI.Util;
 
 import BE.Case;
+import BE.FunctionalAbility;
 import BE.Patient;
+import BE.Subcategory;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.EvaluateCaseMOD;
 import GUI.Models.StudentMOD;
 import GUI.Models.TeacherMainMOD;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class FieldsManager {
 
@@ -124,5 +128,113 @@ public class FieldsManager {
         currentPatient.setLast_name(familyNameField.getText());
         currentPatient.setDateOfBirth(dateOfBirthPicker.getValue());
         currentPatient.setGender(genderComboBox.getValue());
+    }
+
+    public static void fillFunctionalAbilityAssessed(ComboBox<String> relevancyComboBox, ComboBox<String> performanceComboBox,
+                                                     ComboBox<String> meaningComboBox, FunctionalAbility currentFunctionalAbility) {
+        relevancyComboBox.getItems().clear(); //just in case
+        relevancyComboBox.getItems().addAll(StaticData.getRelevancyObservableList());
+        relevancyComboBox.getSelectionModel().select(
+                relevancyComboBox.getItems().indexOf(StaticData.getRelevancy(currentFunctionalAbility.getRelevancy())));
+
+        performanceComboBox.getItems().clear();
+        performanceComboBox.getItems().addAll(StaticData.getPerformanceObservableList());
+        performanceComboBox.getSelectionModel().select(
+                performanceComboBox.getItems().indexOf(StaticData.getPerformance(currentFunctionalAbility.getPerformance())));
+
+        meaningComboBox.getItems().clear();
+        meaningComboBox.getItems().addAll(StaticData.getMeaningObservableList());
+        meaningComboBox.getSelectionModel().select(
+                meaningComboBox.getItems().indexOf(StaticData.getMeaning(currentFunctionalAbility.getMeaning())));
+
+    }
+
+    public static void fillFunctionalAbilityNotAssessed(ComboBox<String> relevancyComboBox, ComboBox<String> performanceComboBox, ComboBox<String> meaningComboBox) {
+        relevancyComboBox.getItems().clear();
+        relevancyComboBox.getItems().addAll(StaticData.getRelevancyObservableList());
+
+        performanceComboBox.getItems().clear();
+        performanceComboBox.getItems().addAll(StaticData.getPerformanceObservableList());
+
+        meaningComboBox.getItems().clear();
+        meaningComboBox.getItems().addAll(StaticData.getMeaningObservableList());
+    }
+
+
+    public static void setUpSelectionIndicatorsAssessed(List<ImageView> indicatorsCurrent, List<ImageView> indicatorsExpected, FunctionalAbility currentFunctionalAbility) {
+        for(ImageView indicator : indicatorsCurrent){
+            if(currentFunctionalAbility.getCurrentLevel() == indicatorsCurrent.indexOf(indicator)+1){
+                indicator.setDisable(false);
+            }else indicator.setDisable(true);
+        }
+
+        for(ImageView indicator : indicatorsExpected){
+            if(currentFunctionalAbility.getExpectedLevel() == indicatorsExpected.indexOf(indicator)+1){
+                indicator.setDisable(false);
+            }else indicator.setDisable(true);
+        }
+    }
+
+    public static void setUpSelectionIndicatorsNotAssessed(List<ImageView> indicatorsCurrent, List<ImageView> indicatorsExpected) {
+        for(ImageView indicator : indicatorsCurrent){
+            indicator.setDisable(true);
+        }
+        for(ImageView indicator : indicatorsExpected){
+            indicator.setDisable(true);
+        }
+    }
+
+    public static void changeIndicatorCurrent(List<ImageView> indicatorsCurrent, int currentLevel){
+        for(ImageView indicator : indicatorsCurrent){
+            if(currentLevel == indicatorsCurrent.indexOf(indicator)){
+                indicator.setDisable(true);
+            }else indicator.setDisable(false);
+        }
+    }
+
+    public static void changeIndicatorExpected(List<ImageView> indicatorsExpected, int expectedLevel){
+        for(ImageView indicator : indicatorsExpected){
+            if(expectedLevel == indicatorsExpected.indexOf(indicator)+1){
+                indicator.setDisable(true);
+            }else indicator.setDisable(false);
+        }
+    }
+
+    public static boolean FunctionalAbilityFieldsAreFilled(ComboBox<String> relevancyComboBox, ComboBox<String> performanceComboBox,
+                                                                   ComboBox<String> meaningComboBox, TextArea goalTextArea,
+                                                                   TextArea observationsTextArea) {
+
+        if (relevancyComboBox.getSelectionModel().isEmpty() || relevancyComboBox.hasProperties()) {
+            SoftAlert.displayAlert("Please introduce a level of relevancy for the Functional ability disorder");
+            return false;
+        }
+        else if (performanceComboBox.getSelectionModel().isEmpty() || performanceComboBox.hasProperties()) {
+            SoftAlert.displayAlert("Please introduce a level of performance for the functional ability disorder");
+            return false;
+        }else if (meaningComboBox.getSelectionModel().isEmpty() || meaningComboBox.hasProperties()) {
+            SoftAlert.displayAlert("Please introduce a level of meaning for the functional ability disorder");
+            return false;
+        }else if (goalTextArea.getText().isEmpty()) {
+            SoftAlert.displayAlert("Please introduce a valid goal");
+            return false;
+        }else if (observationsTextArea.getText().isEmpty()) {
+            SoftAlert.displayAlert("Please introduce a valid observation");
+            return false;
+        }else return true;
+    }
+
+
+    public static void updateVariablesOfFunctionalAbility(FunctionalAbility currentFunctionalAbility, int currentLevel,
+                                                          int expectedLevel, ComboBox<String> relevancyComboBox,
+                                                          ComboBox<String> performanceComboBox,
+                                                          ComboBox<String> meaningComboBox, TextArea goalTextArea,
+                                                          TextArea observationsTextArea) {
+        currentFunctionalAbility.setCurrentLevel(currentLevel);
+        currentFunctionalAbility.setExpectedLevel(expectedLevel);
+        currentFunctionalAbility.setMeaning(StaticData.parseMeaningToInt(meaningComboBox.getValue()));
+        currentFunctionalAbility.setPerformance(StaticData.parsePerformanceToInt(performanceComboBox.getValue()));
+        currentFunctionalAbility.setRelevancy(StaticData.parseRelevancyToInt(relevancyComboBox.getValue()));
+        currentFunctionalAbility.setCitizenGoal(goalTextArea.getText());
+        currentFunctionalAbility.setProfessionalNote(observationsTextArea.getText());
     }
 }

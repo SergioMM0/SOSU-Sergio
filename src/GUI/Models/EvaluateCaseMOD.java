@@ -1,9 +1,6 @@
 package GUI.Models;
 
-import BE.Case;
-import BE.Category;
-import BE.Patient;
-import BE.Subcategory;
+import BE.*;
 import BLL.BLLFacade;
 import BLL.BLLManager;
 import DAL.Exceptions.DALException;
@@ -58,5 +55,9 @@ public class EvaluateCaseMOD {
         subcategoriesHC.clear();
         subcategoriesHC.addAll(bllFacade.getSubcategoriesHC(currentCategory,currentPatient));
         return subcategoriesHC;
+    }
+
+    public FunctionalAbility getCurrentFunctionalAbility(Subcategory currentSubcategory, Patient patient) throws DALException {
+        return bllFacade.getFunctionalAbility(currentSubcategory, patient);
     }
 }

@@ -35,16 +35,27 @@ public class StaticData {
     public static boolean isEditing(){
         return true;
     }
+
     public static boolean isNotEditing(){
         return false;
     }
 
-    public static ObservableList<String> getRelevancyObservableList(int relevancyInt){
+    public static ObservableList<String> getRelevancyObservableList(){
         ObservableList<String> relevancies = FXCollections.observableArrayList();
         relevancies.add("Irrelevant");
         relevancies.add("Potentielt");
         relevancies.add("Akute");
         return relevancies;
+    }
+
+    public static String getRelevancy(int rel){
+        String string = null;
+        return switch (rel){
+            case 1 -> "Irrelevant";
+            case 2 -> "Potentielt";
+            case 3 -> "Akute";
+            default -> string;
+        };
     }
 
     public static int parseRelevancyToInt(String relevancy){
@@ -57,13 +68,24 @@ public class StaticData {
         };
     }
 
-    public static ObservableList<String> getPerformanceObservableList(int performance){
+    public static ObservableList<String> getPerformanceObservableList(){
         ObservableList<String> performances = FXCollections.observableArrayList();
         performances.add("Udfører selv");
         performances.add("Udfører dele selv");
         performances.add("Udfører ikke selv");
         performances.add("Ikke relevant");
         return performances;
+    }
+
+    public static String getPerformance(int perf){
+        String string = null;
+        return switch (perf){
+            case 1 -> "Udfører selv";
+            case 2 -> "Udfører dele selv";
+            case 3 -> "Udfører ikke selv";
+            case 4 -> "Ikke relevant";
+            default -> string;
+        };
     }
 
     public static int parsePerformanceToInt(String performance){
@@ -77,11 +99,20 @@ public class StaticData {
         };
     }
 
-    public static ObservableList<String> getMeaningObservableList(int meaning){
+    public static ObservableList<String> getMeaningObservableList(){
         ObservableList<String> meanings = FXCollections.observableArrayList();
         meanings.add("Oplever ikke begransing");
         meanings.add("Oplever begransing");
         return meanings;
+    }
+
+    public static String getMeaning(int mean){
+        String string = null;
+        return switch (mean){
+            case 1 -> "Oplever ikke begransing";
+            case 2 -> "Oplever begransing";
+            default -> string;
+        };
     }
 
     public static int parseMeaningToInt(String meaning){
