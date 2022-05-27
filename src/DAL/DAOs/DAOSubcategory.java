@@ -82,7 +82,6 @@ public class DAOSubcategory {
                 ));
             }
 
-
             st2.setInt(1, currentCategory.getId());
             st2.setInt(2, currentPatient.getId());
             st2.execute();

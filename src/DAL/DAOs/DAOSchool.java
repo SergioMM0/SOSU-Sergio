@@ -2,7 +2,6 @@ package DAL.DAOs;
 
 import BE.School;
 import DAL.DataAccess.ConnectionProvider;
-import DAL.DataAccess.JDBCConnectionPool;
 import DAL.Exceptions.DALException;
 
 import java.sql.*;

@@ -79,6 +79,10 @@ public interface BLLFacade {
     List<Subcategory> getSubcategoriesFA(Category currentCategory,Patient currentPatient) throws DALException;
 
     List<Subcategory> getSubcategoriesHC(Category currentCategory,Patient currentPatient) throws DALException;
+
+    FunctionalAbility getFunctionalAbility(Subcategory subcategory, Patient patient) throws DALException;
+
+    HealthCondition getHealthCondition(Subcategory subcategory, Patient patient) throws DALException;
 }
 
 

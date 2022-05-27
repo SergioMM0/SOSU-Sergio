@@ -8,7 +8,7 @@ public class HealthCondition {
     private String goal;
     private int expectations;
     private String professionalNote;
-    private int isEditing;
+    private boolean isEditing;
 
     public HealthCondition(int relevancy, String assessment, String goal, int expectations, String professionalNote) {
         this.relevancy = relevancy;
@@ -18,13 +18,17 @@ public class HealthCondition {
         this.professionalNote = professionalNote;
     }
 
-    public HealthCondition(int id, int relevancy, String assessment, String goal, int expectations, String professionalNote, int isEditing) {
+    public HealthCondition(int id, int relevancy, String assessment, String goal, int expectations, String professionalNote, boolean isEditing) {
         this.id = id;
         this.relevancy = relevancy;
         this.assessment = assessment;
         this.goal = goal;
         this.expectations = expectations;
         this.professionalNote = professionalNote;
+        this.isEditing = isEditing;
+    }
+
+    public HealthCondition(boolean isEditing){
         this.isEditing = isEditing;
     }
 
@@ -76,11 +80,11 @@ public class HealthCondition {
         this.professionalNote = professionalNote;
     }
 
-    public int getIsEditing() {
+    public boolean isEditing() {
         return isEditing;
     }
 
-    public void setIsEditing(int isEditing) {
-        this.isEditing = isEditing;
+    public void setEditing(boolean editing) {
+        isEditing = editing;
     }
 }

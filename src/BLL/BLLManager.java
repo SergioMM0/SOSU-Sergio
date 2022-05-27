@@ -5,6 +5,7 @@ import BLL.Exceptions.BLLException;
 import DAL.DALFacade;
 import DAL.DALManager;
 import DAL.Exceptions.DALException;
+import GUI.Util.StaticData;
 
 import java.security.InvalidParameterException;
 import java.util.List;
@@ -213,5 +214,23 @@ public class BLLManager implements BLLFacade {
     @Override
     public List<Subcategory> getSubcategoriesHC(Category currentCategory,Patient currentPatient) throws DALException {
         return dalFacade.getSubcategoriesHC(currentCategory,currentPatient);
+    }
+
+    @Override
+    public FunctionalAbility getFunctionalAbility(Subcategory subcategory, Patient patient) throws DALException {
+        FunctionalAbility functionalAbility = dalFacade.getFunctionalAbility(subcategory,patient);
+        if( functionalAbility == null){
+            return new FunctionalAbility(StaticData.isNotEditing());
+        }
+        else return functionalAbility;
+    }
+
+    @Override
+    public HealthCondition getHealthCondition(Subcategory subcategory, Patient patient) throws DALException {
+        HealthCondition healthCondition = dalFacade.getHealthCondition(subcategory,patient);
+        if(healthCondition == null){
+            return new HealthCondition(StaticData.isNotEditing());
+        }
+        else return healthCondition;
     }
 }

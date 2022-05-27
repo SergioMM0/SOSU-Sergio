@@ -10,7 +10,7 @@ public class FunctionalAbility {
     private int meaning;
     private String citizenGoal;
     private String professionalNote;
-    private int isEditing;
+    private boolean isEditing;
 
     public FunctionalAbility(int relevancy, int currentLevel, int expectedLevel, int performance, int meaning, String citizenGoal, String professionalNote) {
         this.relevancy = relevancy;
@@ -22,7 +22,7 @@ public class FunctionalAbility {
         this.professionalNote = professionalNote;
     }
 
-    public FunctionalAbility(int id, int relevancy, int currentLevel, int expectedLevel, int performance, int meaning, String citizenGoal, String professionalNote, int isEditing) {
+    public FunctionalAbility(int id, int relevancy, int currentLevel, int expectedLevel, int performance, int meaning, String citizenGoal, String professionalNote, boolean isEditing) {
         this.id = id;
         this.relevancy = relevancy;
         this.currentLevel = currentLevel;
@@ -31,6 +31,10 @@ public class FunctionalAbility {
         this.meaning = meaning;
         this.citizenGoal = citizenGoal;
         this.professionalNote = professionalNote;
+        this.isEditing = isEditing;
+    }
+
+    public FunctionalAbility(boolean isEditing) {
         this.isEditing = isEditing;
     }
 
@@ -98,11 +102,11 @@ public class FunctionalAbility {
         this.professionalNote = professionalNote;
     }
 
-    public int getIsEditing() {
+    public boolean isEditing() {
         return isEditing;
     }
 
-    public void setIsEditing(int isEditing) {
-        this.isEditing = isEditing;
+    public void setEditing(boolean editing) {
+        isEditing = editing;
     }
 }

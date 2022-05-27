@@ -32,6 +32,13 @@ public class StaticData {
         return false;
     }
 
+    public static boolean isEditing(){
+        return true;
+    }
+    public static boolean isNotEditing(){
+        return false;
+    }
+
     public static ObservableList<String> getRelevancyObservableList(int relevancyInt){
         ObservableList<String> relevancies = FXCollections.observableArrayList();
         relevancies.add("Irrelevant");

@@ -191,7 +191,6 @@ public class EvaluateCaseCTLL {
         categoryNameFA.setCellValueFactory(new PropertyValueFactory<>("name"));
         subCategoryNameFA.setCellValueFactory(new PropertyValueFactory<>("name"));
         subCategoryNameHC.setCellValueFactory(new PropertyValueFactory<>("name"));
-
         assessedColFA.setCellValueFactory(subcategory -> {
                     boolean assessed = subcategory.getValue().isAssessed();
                     String isAssessed;
@@ -212,8 +211,6 @@ public class EvaluateCaseCTLL {
             }
             return new ReadOnlyStringWrapper(isAssessed);
         });
-
-
     }
 
     private void populateSubcategoriesFA() {

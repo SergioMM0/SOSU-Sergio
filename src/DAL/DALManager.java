@@ -208,4 +208,14 @@ public class DALManager implements DALFacade {
     public List<Subcategory> getSubcategoriesHC(Category currentCategory,Patient currentPatient) throws DALException {
         return daoSubcategory.getSubcategoriesHC(currentCategory,currentPatient);
     }
+
+    @Override
+    public FunctionalAbility getFunctionalAbility(Subcategory subcategory, Patient patient) throws DALException {
+        return daoFunctionalAbility.getFunctionalAbility(subcategory,patient);
+    }
+
+    @Override
+    public HealthCondition getHealthCondition(Subcategory subcategory, Patient patient) throws DALException {
+        return daoHealthCondition.getHealthCondition(subcategory,patient);
+    }
 }
