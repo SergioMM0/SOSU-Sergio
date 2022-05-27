@@ -90,4 +90,8 @@ public interface DALFacade {
     void addHealthCondition(HealthCondition currentHealthCondition, Subcategory subcategory, Patient patient) throws DALException;
 
     void updateHealthCondition(HealthCondition healthCondition, Subcategory subcategory, Patient patient) throws DALException;
+
+    Case duplicateCase(Case currentCase) throws DALException;
+
+    Patient duplicatePatient(Patient currentPatient) throws DALException;
 }

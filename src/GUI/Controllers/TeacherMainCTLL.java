@@ -4,6 +4,7 @@ import BE.Case;
 import BE.Group;
 import BE.Patient;
 import BE.User;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.TeacherMainMOD;
@@ -377,12 +378,26 @@ public class TeacherMainCTLL {
 
     @FXML
     private void duplicateCase(ActionEvent event) {
-
+        if(casesListGV.getSelectionModel().getSelectedItem() != null){
+            try{
+                model.addCaseToList(model.duplicateCase(casesListGV.getSelectionModel().getSelectedItem()));
+                refreshCasesList();
+            }catch (DALException | BLLException exception){
+                SoftAlert.displayAlert(exception.getMessage());
+            }
+        }
     }
 
     @FXML
     private void duplicatePatient(ActionEvent event) {
-
+        if(patientsListGV.getSelectionModel().getSelectedItem() != null){
+            try{
+                model.addPatientToList(model.duplicatePatient(patientsListGV.getSelectionModel().getSelectedItem()));
+                refreshPatientsList();
+            }catch (DALException | BLLException exception){
+                SoftAlert.displayAlert(exception.getMessage());
+            }
+        }
     }
 
     @FXML
@@ -431,12 +446,12 @@ public class TeacherMainCTLL {
 
     @FXML
     private void openGradeCase(ActionEvent event) {
-        openView("GUI/Views/StudentQuestion.fxml", "Question Overview", 880, 660, 0);
+        openView("GUI/Views/EvaluateCase.fxml", "Evaluating case", 880, 660, 0);
     }
 
     @FXML
     private void openGradedCase(ActionEvent event) {
-
+        openView("GUI/Views/EvaluateCase.fxml", "Evaluating case", 880, 660, 0);
     }
 
     @FXML
@@ -771,6 +786,12 @@ public class TeacherMainCTLL {
             loader.<AssignCaseCTLL>getController().setCase(casesListGV.getSelectionModel().getSelectedItem());
             loader.<AssignCaseCTLL>getController().setController(this);
             loader.<AssignCaseCTLL>getController().initializeView();
+        }
+        if (resource.equals("GUI/Views/EvaluateCase.fxml")) {
+            loader.<EvaluateCaseCTLL>getController().setCase(currentCase);
+            loader.<EvaluateCaseCTLL>getController().setGroup(currentGroup);
+            loader.<EvaluateCaseCTLL>getController().setPatient(currentPatient);
+            loader.<EvaluateCaseCTLL>getController().initializeView();
         }
         root.getStylesheets().add("GUI/Views/CSS/GeneralCSS.css");
         Stage stage = new Stage();

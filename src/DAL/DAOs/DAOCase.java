@@ -6,6 +6,8 @@ import BE.Patient;
 import DAL.DataAccess.ConnectionProvider;
 import DAL.Util.CopyChecker;
 import DAL.Exceptions.DALException;
+
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +15,11 @@ import java.util.List;
 public class DAOCase {
 
     private final ConnectionProvider connectionProvider;
-    //private final CopyChecker copyChecker;
     private final int isFalse = 0;
     private final int isTrue = 1;
 
     public DAOCase() {
         connectionProvider = new ConnectionProvider();
-        //copyChecker = CopyChecker.getInstance();
     }
 
     public List<Case> getAllCases(int SchoolID) throws DALException {
@@ -243,8 +243,44 @@ public class DAOCase {
                         ));
             }
             return listOfGradedCases;
-        } catch (SQLException e) {
-            throw new DALException("Not able to get the cases graded for the group" , e);
+        } catch (SQLException sqlException) {
+            throw new DALException("Not able to get the cases graded for the group" , sqlException);
         }
+    }
+
+    public Case duplicateCase(Case currentCase) throws DALException{
+        try(Connection connection = connectionProvider.getConnection()){
+            String checkName = "SELECT [NAME] FROM [Cases] WHERE [Name] = ?";
+            String sql = "INSERT INTO [Cases] ([Name], [Description],[schoolid],[isCopy]) VALUES (?,?,?,?)";
+            String sql2 = "SELECT [ID] FROM [Cases] WHERE [Name] = ?";
+
+            PreparedStatement safeCopy = connection.prepareStatement(checkName);
+            PreparedStatement st = connection.prepareStatement(sql);
+            PreparedStatement st2 = connection.prepareStatement(sql2);
+
+            safeCopy.setString(1,currentCase.getName());
+            safeCopy.execute();
+            ResultSet rs0 = safeCopy.getResultSet();
+            if(rs0.next()){
+                currentCase = null;
+                return currentCase;
+            }
+
+            st.setString(1,currentCase.getName());
+            st.setString(2,currentCase.getConditionDescription());
+            st.setInt(3,currentCase.getSchoolID());
+            st.setInt(4,currentCase.getIsCopyDB());
+            st.execute();
+
+            st2.setString(1,currentCase.getName());
+            st2.execute();
+            ResultSet rs = st2.getResultSet();
+            while(rs.next()){
+                currentCase.setId(rs.getInt("ID"));
+            }
+        }catch (SQLException sqlException){
+            throw new DALException("Not able to duplicate the case", sqlException);
+        }
+        return currentCase;
     }
 }

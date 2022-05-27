@@ -253,4 +253,35 @@ public class BLLManager implements BLLFacade {
     public void updateHealthCondition(HealthCondition healthCondition, Subcategory subcategory, Patient patient) throws DALException {
         dalFacade.updateHealthCondition(healthCondition,subcategory,patient);
     }
+
+    @Override
+    public Case duplicateCase(Case currentCase) throws DALException, BLLException {
+        Case duplicated = new Case(
+                currentCase.getName() + " copy",
+                currentCase.getConditionDescription(),
+                currentCase.getSchoolID(),
+                currentCase.isCopy()
+        );
+        duplicated = dalFacade.duplicateCase(duplicated);
+        if(duplicated == null){
+            throw new BLLException("The case is already duplicated, it can't be duplicated", new InvalidParameterException());
+        }else return duplicated;
+    }
+
+    @Override
+    public Patient duplicatePatient(Patient currentPatient) throws DALException, BLLException {
+        Patient duplicated = new Patient(
+                currentPatient.getFirst_name() + " copy",
+                currentPatient.getLast_name(),
+                currentPatient.getDateOfBirth(),
+                currentPatient.getGender(),
+                null,
+                currentPatient.getSchoolId()
+        );
+        duplicated = dalFacade.duplicatePatient(duplicated);
+        if (duplicated == null) {
+            throw new BLLException("The case is already duplicated, it can't be duplicated", new InvalidParameterException());
+        }
+        return duplicated;
+    }
 }

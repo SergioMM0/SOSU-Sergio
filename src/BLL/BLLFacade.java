@@ -91,6 +91,10 @@ public interface BLLFacade {
     void addHealthCondition(HealthCondition currentHealthCondition, Subcategory subcategory, Patient patient) throws DALException;
 
     void updateHealthCondition(HealthCondition healthCondition, Subcategory subcategory, Patient patient) throws DALException;
+
+    Case duplicateCase(Case currentCase) throws DALException, BLLException;
+
+    Patient duplicatePatient(Patient currentPatient) throws DALException, BLLException;
 }
 
 

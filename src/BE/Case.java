@@ -78,14 +78,7 @@ public class Case {
         isCopy = copy;
     }
 
-    @Override
-    public String toString() {
-        return "Case{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", conditionDescription='" + conditionDescription + '\'' +
-                ", schoolID=" + schoolID +
-                ", isCopy=" + isCopy +
-                '}';
+    public boolean isCopy() {
+        return isCopy;
     }
 }

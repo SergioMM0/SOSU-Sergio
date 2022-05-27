@@ -6,6 +6,8 @@ import BE.Patient;
 import DAL.DataAccess.ConnectionProvider;
 import DAL.Util.CopyChecker;
 import DAL.Exceptions.DALException;
+
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -174,5 +176,43 @@ public class DAOPatient {
             throw new DALException("Not able to get the patient for the case", sqlException);
         }
         return null;
+    }
+
+    public Patient duplicatePatient(Patient currentPatient) throws DALException {
+        try(Connection connection = dataAccess.getConnection()){
+            String checkCopy = "SELECT [FirstName] FROM [Patient] WHERE [FirstName] = ?";
+            String sql = "INSERT INTO [Patient] ([FirstName],[LastName],[DateofBirth],[Gender],[Schoolid],[IsCopy]) VALUES (?,?,?,?,?,?)";
+            String sql2 = "SELECT [ID] FROM [Patient] WHERE [Firstname] = ?";
+
+            PreparedStatement safeCopy = connection.prepareStatement(checkCopy);
+            PreparedStatement st = connection.prepareStatement(sql);
+            PreparedStatement st2 = connection.prepareStatement(sql2);
+
+            safeCopy.setString(1,currentPatient.getFirst_name());
+            safeCopy.execute();
+            ResultSet rs0 = safeCopy.getResultSet();
+            if(rs0.next()){
+                currentPatient = null;
+                return currentPatient;
+            }
+
+            st.setString(1,currentPatient.getFirst_name());
+            st.setString(2,currentPatient.getLast_name());
+            st.setDate(3, Date.valueOf(currentPatient.getDateOfBirth()));
+            st.setString(4, currentPatient.getGender());
+            st.setInt(5,currentPatient.getSchoolId());
+            st.setInt(6,currentPatient.getIsCopyDB());
+            st.execute();
+
+            st2.setString(1,currentPatient.getFirst_name());
+            st2.execute();
+            ResultSet rs = st2.getResultSet();
+            while(rs.next()){
+                currentPatient.setId(rs.getInt("ID"));
+            }
+        }catch (SQLException sqlException){
+            throw new DALException("Not able to duplicate the patient", sqlException);
+        }
+        return currentPatient;
     }
 }

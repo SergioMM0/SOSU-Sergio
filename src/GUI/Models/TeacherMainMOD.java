@@ -6,6 +6,7 @@ import BE.Patient;
 import BE.User;
 import BLL.BLLFacade;
 import BLL.BLLManager;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -270,5 +271,13 @@ public class TeacherMainMOD {
         allPatients.clear();
         allStudents.clear();
         groupParticipants.clear();
+    }
+
+    public Case duplicateCase(Case currentCase) throws DALException, BLLException {
+        return bllFacade.duplicateCase(currentCase);
+    }
+
+    public Patient duplicatePatient(Patient currentPatient) throws DALException, BLLException {
+        return bllFacade.duplicatePatient(currentPatient);
     }
 }

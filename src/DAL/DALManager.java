@@ -239,4 +239,14 @@ public class DALManager implements DALFacade {
     public void updateHealthCondition(HealthCondition healthCondition, Subcategory subcategory, Patient patient) throws DALException {
         daoHealthCondition.updateHealthCondition(healthCondition,subcategory,patient);
     }
+
+    @Override
+    public Case duplicateCase(Case currentCase) throws DALException {
+        return daoCase.duplicateCase(currentCase);
+    }
+
+    @Override
+    public Patient duplicatePatient(Patient currentPatient) throws DALException {
+        return daoPatient.duplicatePatient(currentPatient);
+    }
 }
