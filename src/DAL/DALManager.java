@@ -3,6 +3,8 @@ package DAL;
 import BE.*;
 import DAL.DAOs.*;
 import DAL.Exceptions.DALException;
+
+import java.security.InvalidParameterException;
 import java.util.List;
 
 public class DALManager implements DALFacade {
@@ -36,13 +38,13 @@ public class DALManager implements DALFacade {
     }
 
     @Override
-    public Case createCase(Case c) throws DALException {
-        return daoCase.createCase(c);
+    public Case createCase(Case newCase) throws DALException, InvalidParameterException {
+        return daoCase.createCase(newCase);
     }
 
     @Override
-    public void updateCase(Case c) throws DALException {
-        daoCase.updateCase(c);
+    public void updateCase(Case newCase) throws DALException, InvalidParameterException {
+        daoCase.updateCase(newCase);
     }
 
     @Override
@@ -61,7 +63,7 @@ public class DALManager implements DALFacade {
     }
 
     @Override
-    public void updateUser(User student) throws DALException {
+    public void updateUser(User student) throws DALException, InvalidParameterException {
         daoUser.updateUser(student);
     }
 
@@ -71,7 +73,7 @@ public class DALManager implements DALFacade {
     }
 
     @Override
-    public User addNewUser(User student) throws DALException {
+    public User addNewUser(User student) throws DALException, InvalidParameterException {
         return daoUser.addUser(student);
     }
 
@@ -81,12 +83,12 @@ public class DALManager implements DALFacade {
     }
 
     @Override
-    public Patient createPatient(Patient patient) throws DALException {
+    public Patient createPatient(Patient patient) throws DALException{
         return daoPatient.createPatient(patient);
     }
 
     @Override
-    public void updatePatient(Patient patient) throws DALException {
+    public void updatePatient(Patient patient) throws DALException, InvalidParameterException {
         daoPatient.updatepatient(patient);
     }
 
@@ -101,12 +103,12 @@ public class DALManager implements DALFacade {
     }
 
     @Override
-    public Group createGroup(Group group) throws DALException {
+    public Group createGroup(Group group) throws DALException, InvalidParameterException {
         return daoGroup.createGroup(group);
     }
 
     @Override
-    public void updateGroup(Group group) throws DALException {
+    public void updateGroup(Group group) throws DALException, InvalidParameterException {
         daoGroup.updateGroup(group);
     }
 
@@ -241,17 +243,22 @@ public class DALManager implements DALFacade {
     }
 
     @Override
-    public Case duplicateCase(Case currentCase) throws DALException {
+    public Case duplicateCase(Case currentCase) throws DALException, InvalidParameterException {
         return daoCase.duplicateCase(currentCase);
     }
 
     @Override
-    public Patient duplicatePatient(Patient currentPatient) throws DALException {
+    public Patient duplicatePatient(Patient currentPatient) throws DALException, InvalidParameterException {
         return daoPatient.duplicatePatient(currentPatient);
     }
 
     @Override
     public School updateSchool(School currenSchool) throws DALException {
         return daoSchool.updateSchool(currenSchool);
+    }
+
+    @Override
+    public List<User> getParticipantsOf(Group group) throws DALException {
+        return daoGroup.getUsersInGroup(group.getId());
     }
 }

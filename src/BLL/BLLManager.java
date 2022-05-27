@@ -28,13 +28,21 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public Case createCase(Case newCase) throws DALException {
-        return dalFacade.createCase(newCase);
+    public Case createCase(Case newCase) throws DALException, BLLException {
+        try{
+            return dalFacade.createCase(newCase);
+        }catch (InvalidParameterException invalidParameterException){
+            throw new BLLException("The case already exists in the system", invalidParameterException);
+        }
     }
 
     @Override
-    public Patient createPatient(Patient patient) throws DALException {
-        return dalFacade.createPatient(patient);
+    public Patient createPatient(Patient patient) throws DALException, BLLException {
+        try{
+            return dalFacade.createPatient(patient);
+        }catch (InvalidParameterException invalidParameterException){
+            throw new BLLException("The patient already exists in the system", invalidParameterException);
+        }
     }
 
     @Override
@@ -53,13 +61,22 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public User addNewUser(User user) throws DALException {
-        return dalFacade.addNewUser(user);
+    public User addNewUser(User user) throws DALException, BLLException{
+        try{
+            return dalFacade.addNewUser(user);
+        }catch (InvalidParameterException invalidParameterException){
+            throw new BLLException("User already exists in the system", invalidParameterException);
+        }
     }
 
     @Override
-    public void updateUser(User student) throws DALException {
-        dalFacade.updateUser(student);
+    public void updateUser(User student) throws DALException, BLLException {
+        try{
+            dalFacade.updateUser(student);
+        }catch(InvalidParameterException invalidParameterException){
+            throw new BLLException("User already exists in the system", invalidParameterException);
+        }
+
     }
 
     @Override
@@ -73,18 +90,30 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public void updatePatient(Patient patient) throws DALException {
-        dalFacade.updatePatient(patient);
+    public void updatePatient(Patient patient) throws DALException, BLLException {
+        try{
+            dalFacade.updatePatient(patient);
+        }catch (InvalidParameterException invalidParameterException){
+            throw new BLLException("The patient already exists in the Database", invalidParameterException);
+        }
     }
 
     @Override
-    public Group createNewGroup(Group group) throws DALException {
-        return dalFacade.createGroup(group);
+    public Group createNewGroup(Group group) throws DALException, BLLException {
+        try{
+            return dalFacade.createGroup(group);
+        }catch (InvalidParameterException invalidParameterException){
+            throw new BLLException("The group already exists", invalidParameterException);
+        }
     }
 
     @Override
-    public void updateGroup(Group selectedGroup) throws DALException {
-        dalFacade.updateGroup(selectedGroup);
+    public void updateGroup(Group selectedGroup) throws DALException, BLLException {
+        try{
+            dalFacade.updateGroup(selectedGroup);
+        }catch (InvalidParameterException invalidParameterException){
+            throw new BLLException("The name of the group already exists in the system", invalidParameterException);
+        }
     }
 
 
@@ -101,13 +130,15 @@ public class BLLManager implements BLLFacade {
     @Override
     public void removeParticipant(Group group, User user) throws DALException {
         dalFacade.removeParticipant(user, group);
-        //TODO Implement
     }
 
     @Override
-    public void updateCase(Case newCase) throws DALException {
-        dalFacade.updateCase(newCase);
-        //TODO implement
+    public void updateCase(Case newCase) throws DALException, BLLException {
+        try{
+            dalFacade.updateCase(newCase);
+        }catch (InvalidParameterException invalidParameterException){
+            throw new BLLException("The name of the case already exists in the system", invalidParameterException);
+        }
     }
 
     @Override
@@ -262,10 +293,12 @@ public class BLLManager implements BLLFacade {
                 currentCase.getSchoolID(),
                 currentCase.isCopy()
         );
-        duplicated = dalFacade.duplicateCase(duplicated);
-        if(duplicated == null){
+        try{
+            duplicated = dalFacade.duplicateCase(duplicated);
+        }catch (InvalidParameterException invalidParameterException){
             throw new BLLException("The case is already duplicated, it can't be duplicated", new InvalidParameterException());
-        }else return duplicated;
+        }
+        return duplicated;
     }
 
     @Override
@@ -278,8 +311,9 @@ public class BLLManager implements BLLFacade {
                 null,
                 currentPatient.getSchoolId()
         );
-        duplicated = dalFacade.duplicatePatient(duplicated);
-        if (duplicated == null) {
+        try{
+            duplicated = dalFacade.duplicatePatient(duplicated);
+        }catch (InvalidParameterException invalidParameterException){
             throw new BLLException("The case is already duplicated, it can't be duplicated", new InvalidParameterException());
         }
         return duplicated;
@@ -288,5 +322,10 @@ public class BLLManager implements BLLFacade {
     @Override
     public School updateSchool(School currenSchool) throws DALException {
         return dalFacade.updateSchool(currenSchool);
+    }
+
+    @Override
+    public List<User> getParticipantsOf(Group group) throws DALException {
+        return dalFacade.getParticipantsOf(group);
     }
 }

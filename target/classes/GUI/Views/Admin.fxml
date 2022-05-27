@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="anchorpaneNodeID" prefHeight="660.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.AdminCTLL">
@@ -30,7 +29,6 @@
       <Label layoutX="73.0" layoutY="60.0" prefHeight="18.0" prefWidth="94.0" text="Schools" />
       <Label layoutX="317.0" layoutY="61.0" prefHeight="17.0" prefWidth="146.0" text="Teachers" />
       <Label layoutX="717.0" layoutY="61.0" prefHeight="18.0" prefWidth="101.0" text="Students" />
-      <TextField fx:id="filterField" layoutX="580.0" layoutY="21.0" prefHeight="30.0" prefWidth="375.0" />
       <Label layoutX="24.0" layoutY="634.0" />
       <Button layoutX="835.0" layoutY="604.0" mnemonicParsing="false" onAction="#logOut" prefHeight="35.0" prefWidth="120.0" text="Close session" />
       <Button layoutX="580.0" layoutY="529.0" mnemonicParsing="false" onAction="#addStudent" prefHeight="35.0" prefWidth="164.0" text="Add student" />

@@ -3,6 +3,7 @@ package GUI.Models;
 import BE.User;
 import BLL.BLLFacade;
 import BLL.BLLManager;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 
 public class ManageStudentMOD {
@@ -13,11 +14,11 @@ public class ManageStudentMOD {
         bllFacade = new BLLManager();
     }
 
-    public User addNewStudent(User user) throws DALException {
+    public User addNewStudent(User user) throws DALException, BLLException {
         return bllFacade.addNewUser(user);
     }
 
-    public void updateStudent(User student) throws DALException {
+    public void updateStudent(User student) throws DALException, BLLException{
         bllFacade.updateUser(student);
     }
 }

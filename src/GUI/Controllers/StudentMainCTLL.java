@@ -175,6 +175,7 @@ public class StudentMainCTLL {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/Login.fxml"));
             root1 = (Parent) fxmlLoader.load();
+            root1.getStylesheets().add("GUI/Views/CSS/GeneralCSS.css");
             stage.setScene(new Scene(root1));
             stage.show();
         } catch (IOException e) {

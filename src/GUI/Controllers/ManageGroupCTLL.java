@@ -2,6 +2,7 @@ package GUI.Controllers;
 
 import BE.Group;
 import BE.User;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.ManageGroupMOD;
@@ -47,9 +48,8 @@ public class ManageGroupCTLL {
                     );
                     teacherMainCTLL.addGroupToList(model.createNewGroup(group));
                     closeWindow();
-                }catch (DALException dalException){
-                    dalException.printStackTrace();
-                    SoftAlert.displayAlert(dalException.getMessage());
+                }catch (DALException | BLLException exception){
+                    SoftAlert.displayAlert(exception.getMessage());
                 }
             }
         }
@@ -61,8 +61,8 @@ public class ManageGroupCTLL {
                     teacherMainCTLL.updateGroupInList(selectedGroup);
                     teacherMainCTLL.setUpGroup(selectedGroup);
                     closeWindow();
-                }catch (DALException dalException){
-                    SoftAlert.displayAlert(dalException.getMessage());
+                }catch (DALException | BLLException exception){
+                    SoftAlert.displayAlert(exception.getMessage());
                 }
             }
         }

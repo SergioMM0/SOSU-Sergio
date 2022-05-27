@@ -6,6 +6,7 @@ import DAL.DataAccess.ConnectionProvider;
 import DAL.Exceptions.DALException;
 import GUI.Util.StaticData;
 
+import java.security.InvalidParameterException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,8 +66,9 @@ public class DAOUser {
         return allStudents;
     }
 
-    public void updateUser(User student) throws DALException {
+    public void updateUser(User student) throws DALException, InvalidParameterException {
         try (Connection con = connectionProvider.getConnection()) {
+            duplicateCheck(con,student);
             String sql = "UPDATE [Users] SET [Username] = ?, [Password] = ?, [Email] = ? WHERE [ID] = ? ";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1, student.getName());
@@ -90,13 +92,16 @@ public class DAOUser {
         }
     }
 
-    public User addUser(User user) throws DALException {
+    public User addUser(User user) throws DALException, InvalidParameterException{
         try (Connection con = connectionProvider.getConnection()) {
+            duplicateCheck(con,user);
             String sql = "INSERT INTO [Users]([Username] , [Password], [Email] , [Usertype] , [Schoolid])" +
                     "VALUES  (?,?,?,?,?)";
             String sql2 = "SELECT [ID] FROM [Users] WHERE [Username] = ? AND [Password] = ? AND [Email] = ? AND [Usertype] = ? AND [schoolid] = ?";
+
             PreparedStatement prs = con.prepareStatement(sql);
             PreparedStatement prs2 = con.prepareStatement(sql2);
+
             prs.setString(1, user.getName());
             prs.setString(2, user.getName());
             prs.setString(3, user.getEmail());
@@ -141,6 +146,18 @@ public class DAOUser {
             throw new DALException("Not able to retrieve all the users", sqlException);
         }
         return allUsers;
+    }
+
+    private void duplicateCheck(Connection connection,User user) throws SQLException, InvalidParameterException {
+        String duplicateCheck = "SELECT [UserName],[Email] FROM [Users] WHERE [UserName] = ? AND [Email] = ? ";
+        PreparedStatement safeInsert = connection.prepareStatement(duplicateCheck);
+        safeInsert.setString(1,user.getName());
+        safeInsert.setString(2,user.getEmail());
+        safeInsert.execute();
+        ResultSet rs0 = safeInsert.getResultSet();
+        if(rs0.next()){
+           throw new InvalidParameterException();
+        }
     }
 }
 

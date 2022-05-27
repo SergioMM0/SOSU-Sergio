@@ -5,6 +5,7 @@ import BE.User;
 import DAL.DataAccess.ConnectionProvider;
 import DAL.Exceptions.DALException;
 
+import java.security.InvalidParameterException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +31,12 @@ public class DAOGroup {
 
             ResultSet rs = statement.getResultSet();
             while(rs.next()){
-                int id = rs.getInt("ID");
-                String name = rs.getString("Name");
-                Group group = new Group(id , name , getUsersInGroup(id) , schoolID);
-                listOfGroups.add(group);
+                listOfGroups.add(
+                        new Group(
+                                rs.getInt("ID"),
+                                rs.getString("Name"),
+                                new ArrayList<>(),
+                                schoolID));
             }
             return listOfGroups;
         } catch (SQLException sqlException) {
@@ -42,8 +45,9 @@ public class DAOGroup {
     }
 
 
-    public Group createGroup(Group group)throws DALException {
+    public Group createGroup(Group group)throws DALException, InvalidParameterException {
         try(Connection connection = connectionProvider.getConnection()) {
+            duplicateCheck(connection,group);
 
             String sql = "INSERT INTO Groups ([Name],[Schoolid]) VALUES (?,?)";
             String sql2 = "SELECT [ID] FROM [Groups] WHERE [Name] = ?";
@@ -70,8 +74,9 @@ public class DAOGroup {
     }
 
 
-    public void updateGroup(Group group) throws DALException {
+    public void updateGroup(Group group) throws DALException, InvalidParameterException {
         try(Connection connection = connectionProvider.getConnection()){
+            duplicateCheck(connection,group);
             String sql = "UPDATE [Groups] SET [Name] = ?  WHERE [ID] = ?";
             PreparedStatement prs = connection.prepareStatement(sql);
             prs.setString(1, group.getName());
@@ -96,7 +101,6 @@ public class DAOGroup {
 
 
     public List<User> getUsersInGroup(int id) throws DALException {
-
         ArrayList<User> listOfUsersInGroup = new ArrayList<>();
         try(Connection con = connectionProvider.getConnection()) {
 
@@ -137,18 +141,6 @@ public class DAOGroup {
         }
     }
 
-
-    public void removeUserFromGroup(User user) throws DALException {
-        try (Connection con = connectionProvider.getConnection()) {
-            String sql = "DELETE FROM [UsersInGroup] WHERE [Studentid] = ? ";
-            PreparedStatement prs = con.prepareStatement(sql);
-            prs.setInt(1, user.getId());
-            prs.executeUpdate();
-        } catch (SQLException sqlException) {
-            throw new DALException("Not able to remove the student from the group" , sqlException);
-        }
-    }
-
     public void removeParticipant(User user, Group group)throws DALException {
         try(Connection con = connectionProvider.getConnection()) {
             String sql = "DELETE FROM [UsersInGroup] WHERE [Studentid] = ? AND [Groupid] = ?";
@@ -179,5 +171,16 @@ public class DAOGroup {
             throw new DALException("Not able to get the group of the student", sqlException);
         }
         return group;
+    }
+
+    private void duplicateCheck(Connection connection,Group group) throws SQLException, InvalidParameterException {
+        String duplicateCheck = "SELECT [Name] FROM [Groups] WHERE [Name] = ?";
+        PreparedStatement safeInsert = connection.prepareStatement(duplicateCheck);
+        safeInsert.setString(1,group.getName());
+        safeInsert.execute();
+        ResultSet rs0 = safeInsert.getResultSet();
+        if(rs0.next()){
+            throw new InvalidParameterException();
+        }
     }
 }

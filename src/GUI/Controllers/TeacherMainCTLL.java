@@ -90,7 +90,7 @@ public class TeacherMainCTLL {
     private TextField nameField;
 
     @FXML
-    private TableColumn<Patient, String> nameColPatientsGV;
+    private TableColumn<Patient, String> nameColPatientsGV, lastNameCol;
 
     @FXML
     private TableColumn<Group, String> studentNameCol;
@@ -169,6 +169,7 @@ public class TeacherMainCTLL {
         try {
             patientsListGV.getItems().addAll(model.getAllPatients(logedUser.getSchoolID()));
             nameColPatientsGV.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+            lastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
         } catch (DALException dalException) {
             dalException.printStackTrace();
             SoftAlert.displayAlert(dalException.getMessage());
@@ -234,9 +235,8 @@ public class TeacherMainCTLL {
                         updatePatientInDB(currentPatient);
                         FieldsManager.displayPatientInfo(patientOverviewTab, currentPatient,nameField,familyNameField,
                                 dateOfBirthPicker,genderComboBox,medicalHistoryTextArea);
-                    } catch (DALException dalException) {
-                        dalException.printStackTrace();
-                        SoftAlert.displayAlert(dalException.getMessage());
+                    } catch (DALException | BLLException exception) {
+                        SoftAlert.displayAlert(exception.getMessage());
                     }
                 }else {
                     try {
@@ -245,9 +245,8 @@ public class TeacherMainCTLL {
                         refreshPatientsList();
                         FieldsManager.displayPatientInfo(patientOverviewTab, currentPatient,nameField,familyNameField,
                                 dateOfBirthPicker,genderComboBox,medicalHistoryTextArea);
-                    } catch (DALException dalException) {
-                        dalException.printStackTrace();
-                        SoftAlert.displayAlert(dalException.getMessage());
+                    } catch (DALException | BLLException exception) {
+                        SoftAlert.displayAlert(exception.getMessage());
                     }
                 }
             }
@@ -281,8 +280,13 @@ public class TeacherMainCTLL {
         if(groupsTable.getSelectionModel().getSelectedItem() != null){
             this.currentGroup = groupsTable.getSelectionModel().getSelectedItem();
             if(currentGroup.getMembers() != null){
-                populateParticipantsTable(groupsTable.getSelectionModel().getSelectedItem());
-                populateGroupsTab(groupsTable.getSelectionModel().getSelectedItem());
+                try{
+                    currentGroup.setMembers(model.getParticipantsOf(currentGroup));
+                    populateParticipantsTable(groupsTable.getSelectionModel().getSelectedItem());
+                    populateGroupsTab(groupsTable.getSelectionModel().getSelectedItem());
+                }catch (DALException dalException){
+                    SoftAlert.displayAlert(dalException.getMessage());
+                }
             }
         }
     }
@@ -408,6 +412,7 @@ public class TeacherMainCTLL {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/Login.fxml"));
             root1 = (Parent) fxmlLoader.load();
+            root1.getStylesheets().add("GUI/Views/CSS/GeneralCSS.css");
             stage.setScene(new Scene(root1));
             stage.show();
         } catch (IOException e) {
@@ -472,9 +477,8 @@ public class TeacherMainCTLL {
                         currentCase.setConditionDescription(descriptionOfConditionText.getText());
                         model.updateCase(currentCase);
                         FieldsManager.displayCaseInfo(caseTab,currentCase,caseNameField,descriptionOfConditionText);
-                    } catch (DALException dalException) {
-                        dalException.printStackTrace();
-                        SoftAlert.displayAlert(dalException.getMessage());
+                    } catch (DALException | BLLException exception) {
+                        SoftAlert.displayAlert(exception.getMessage());
                     }
                 }
                 else{
@@ -485,9 +489,8 @@ public class TeacherMainCTLL {
                         model.updateCaseInTable(currentCase);
                         refreshCasesList();
                         FieldsManager.displayCaseInfo(caseTab,currentCase,caseNameField,descriptionOfConditionText);
-                    } catch (DALException dalException) {
-                        dalException.printStackTrace();
-                        SoftAlert.displayAlert(dalException.getMessage());
+                    } catch (DALException | BLLException exception) {
+                        SoftAlert.displayAlert(exception.getMessage());
                     }
                 }
             }
@@ -530,7 +533,7 @@ public class TeacherMainCTLL {
         casesListGV.getItems().addAll(model.getObservableCases());
     }
 
-    private void updatePatientInDB(Patient patient) throws DALException {
+    private void updatePatientInDB(Patient patient) throws DALException, BLLException{
         FieldsManager.updateVariablesOfPatient(currentPatient, nameField,familyNameField,dateOfBirthPicker,genderComboBox);
         model.updatePatient(patient);
     }

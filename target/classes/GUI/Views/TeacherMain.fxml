@@ -66,7 +66,12 @@
                   </TableView>
                   <TableView fx:id="patientsListGV" layoutX="350.0" layoutY="45.0" onMouseClicked="#patientIsSelected" prefHeight="550.0" prefWidth="270.0">
                      <columns>
-                        <TableColumn fx:id="nameColPatientsGV" prefWidth="269.6000122070312" text="Patient templates" />
+                        <TableColumn fx:id="nameColPatientsGV1" prefWidth="269.6000122070312" text="Patient templates">
+                           <columns>
+                              <TableColumn fx:id="nameColPatientsGV" prefWidth="135.20001220703125" text="Patient Name" />
+                              <TableColumn fx:id="lastNameCol" prefWidth="135.20001220703125" text="Last Name" />
+                           </columns>
+                        </TableColumn>
                      </columns>
                   </TableView>
                </children>

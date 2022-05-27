@@ -3,6 +3,7 @@ package GUI.Models;
 import BE.Case;
 import BLL.BLLFacade;
 import BLL.BLLManager;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +20,7 @@ public class NewCaseMOD {
         allSubcategories = FXCollections.observableArrayList();
     }
 
-    public Case createCase(Case newCase) throws DALException {
+    public Case createCase(Case newCase) throws DALException, BLLException {
         return bllFacade.createCase(newCase);
     }
 }

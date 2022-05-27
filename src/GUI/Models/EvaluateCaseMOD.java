@@ -3,6 +3,7 @@ package GUI.Models;
 import BE.*;
 import BLL.BLLFacade;
 import BLL.BLLManager;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,11 +38,7 @@ public class EvaluateCaseMOD {
         bllFacade.addObservationToPatient(observation,patient);
     }
 
-    public void updateCase(Case currentCase) throws DALException {
-        bllFacade.updateCase(currentCase);
-    }
-
-    public void updatePatient(Patient currentPatient) throws DALException{
+    public void updatePatient(Patient currentPatient) throws DALException, BLLException {
         bllFacade.updatePatient(currentPatient);
     }
 

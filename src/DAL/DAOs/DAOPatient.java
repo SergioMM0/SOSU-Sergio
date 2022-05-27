@@ -8,6 +8,7 @@ import DAL.Util.CopyChecker;
 import DAL.Exceptions.DALException;
 
 import javax.xml.transform.Result;
+import java.security.InvalidParameterException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -55,8 +56,9 @@ public class DAOPatient {
         return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
     }
 
-    public Patient createPatient(Patient patient) throws DALException {
+    public Patient createPatient(Patient patient) throws DALException, InvalidParameterException {
         try (Connection con = dataAccess.getConnection()){
+            duplicateCheck(con,patient);
             String sql = "INSERT INTO [Patient] ([FirstName], [LastName], [DateofBirth], [Gender], [Schoolid], [isCopy]) " +
                     "VALUES (?,?,?,?,?,?)";
 
@@ -104,8 +106,9 @@ public class DAOPatient {
         }
     }
 
-    public void updatepatient(Patient patient) throws DALException {
+    public void updatepatient(Patient patient) throws DALException, InvalidParameterException{
         try (Connection con = dataAccess.getConnection()){
+            duplicateCheck(con,patient);
             String sql = "UPDATE Patient SET [FirstName] = ? , [LastName] = ? , [DateofBirth] = ? ,[Gender] = ? WHERE id = ? ";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , patient.getFirst_name());
@@ -118,7 +121,6 @@ public class DAOPatient {
             throw new DALException("Not able to update the patient" , sqlException);
         }
     }
-
 
     public void deletePatient(Patient patient) throws DALException {
         try(Connection con = dataAccess.getConnection()){
@@ -180,21 +182,12 @@ public class DAOPatient {
 
     public Patient duplicatePatient(Patient currentPatient) throws DALException {
         try(Connection connection = dataAccess.getConnection()){
-            String checkCopy = "SELECT [FirstName] FROM [Patient] WHERE [FirstName] = ?";
+            duplicateCheck(connection,currentPatient);
             String sql = "INSERT INTO [Patient] ([FirstName],[LastName],[DateofBirth],[Gender],[Schoolid],[IsCopy]) VALUES (?,?,?,?,?,?)";
             String sql2 = "SELECT [ID] FROM [Patient] WHERE [Firstname] = ?";
 
-            PreparedStatement safeCopy = connection.prepareStatement(checkCopy);
             PreparedStatement st = connection.prepareStatement(sql);
             PreparedStatement st2 = connection.prepareStatement(sql2);
-
-            safeCopy.setString(1,currentPatient.getFirst_name());
-            safeCopy.execute();
-            ResultSet rs0 = safeCopy.getResultSet();
-            if(rs0.next()){
-                currentPatient = null;
-                return currentPatient;
-            }
 
             st.setString(1,currentPatient.getFirst_name());
             st.setString(2,currentPatient.getLast_name());
@@ -214,5 +207,17 @@ public class DAOPatient {
             throw new DALException("Not able to duplicate the patient", sqlException);
         }
         return currentPatient;
+    }
+
+    private void duplicateCheck(Connection con, Patient patient) throws SQLException, InvalidParameterException{
+        String duplicateCheck = "SELECT [FirstName], [LastName] FROM [Patient] WHERE [FirstName] = ? AND [LastName] = ?";
+        PreparedStatement safeInsert = con.prepareStatement(duplicateCheck);
+        safeInsert.setString(1,patient.getFirst_name());
+        safeInsert.setString(2, patient.getLast_name());
+        safeInsert.execute();
+        ResultSet rs0 = safeInsert.getResultSet();
+        if(rs0.next()){
+            throw new InvalidParameterException();
+        }
     }
 }

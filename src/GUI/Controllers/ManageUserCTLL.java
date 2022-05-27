@@ -1,6 +1,7 @@
 package GUI.Controllers;
 
 import BE.User;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.AdminMOD;
@@ -39,8 +40,8 @@ public class ManageUserCTLL {
                         adminCTLL.addStudentToTable(model.addUser(user));
                         adminCTLL.refreshStudentsTable();
                         closeWindow();
-                    }catch (DALException dalException){
-                        SoftAlert.displayAlert(dalException.getMessage());
+                    }catch (DALException | BLLException exception){
+                        SoftAlert.displayAlert(exception.getMessage());
                     }
                 } break;
             case 2:
@@ -52,8 +53,8 @@ public class ManageUserCTLL {
                         adminCTLL.updateStudentInTable(student);
                         adminCTLL.refreshStudentsTable();
                         closeWindow();
-                    }catch (DALException dalException){
-                        SoftAlert.displayAlert(dalException.getMessage());
+                    }catch (DALException | BLLException exception){
+                        SoftAlert.displayAlert(exception.getMessage());
                     }
                 } break;
             case 3:
@@ -63,8 +64,8 @@ public class ManageUserCTLL {
                         adminCTLL.addTeacherToTable(model.addUser(user));
                         adminCTLL.refreshTeachersTable();
                         closeWindow();
-                    }catch (DALException dalException){
-                        SoftAlert.displayAlert(dalException.getMessage());
+                    }catch (DALException | BLLException exception){
+                        SoftAlert.displayAlert(exception.getMessage());
                     }
                 } break;
             case 4:
@@ -76,7 +77,7 @@ public class ManageUserCTLL {
                         adminCTLL.updateTeacherInTable(teacher);
                         adminCTLL.refreshTeachersTable();
                         closeWindow();
-                    }catch (DALException dalException){
+                    }catch (DALException | BLLException dalException){
                         SoftAlert.displayAlert(dalException.getMessage());
                     }
                 } break;

@@ -2,6 +2,7 @@ package GUI.Controllers;
 
 import BE.Patient;
 import BE.User;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.NewPatientMOD;
@@ -79,9 +80,8 @@ public class NewPatientCTLL implements Initializable {
                 );
                 teacherMainCTLL.addPatientToList(model.createPatient(patient));
                 closeWindow();
-            } catch(DALException dalException){
-                dalException.printStackTrace();
-                SoftAlert.displayAlert(dalException.getMessage());
+            } catch(DALException | BLLException exception){
+                SoftAlert.displayAlert(exception.getMessage());
             }
         }
     }

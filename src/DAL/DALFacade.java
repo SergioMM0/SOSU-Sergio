@@ -1,8 +1,10 @@
 package DAL;
 
 import BE.*;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 
 public interface DALFacade {
@@ -19,25 +21,25 @@ public interface DALFacade {
 
     List<User> getAllStudents(int schoolid) throws DALException;
 
-    void updateUser(User user) throws DALException;
+    void updateUser(User user) throws DALException, InvalidParameterException;
 
     void deleteUser(User user) throws DALException;
 
-    User addNewUser(User user) throws DALException;
+    User addNewUser(User user) throws DALException, InvalidParameterException;
 
     List<Patient> getAllPatients(int schoolid) throws DALException;
 
-    Patient createPatient(Patient patient) throws DALException;
+    Patient createPatient(Patient patient) throws DALException, InvalidParameterException;
 
-    void updatePatient(Patient patient) throws DALException;
+    void updatePatient(Patient patient) throws DALException, InvalidParameterException;
 
     void deletePatient(Patient patient) throws DALException;
 
     List<Group> getAllGroups(int schoolID) throws DALException;
 
-    Group createGroup(Group group) throws DALException;
+    Group createGroup(Group group) throws DALException, InvalidParameterException;
 
-    void updateGroup(Group group) throws DALException;
+    void updateGroup(Group group) throws DALException, InvalidParameterException;
 
     void deleteGroup(Group group) throws DALException;
 
@@ -96,4 +98,6 @@ public interface DALFacade {
     Patient duplicatePatient(Patient currentPatient) throws DALException;
 
     School updateSchool(School currenSchool) throws DALException;
+
+    List<User> getParticipantsOf(Group group) throws DALException;
 }

@@ -1,6 +1,7 @@
 package GUI.Controllers;
 
 import BE.User;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.ManageStudentMOD;
@@ -48,7 +49,7 @@ public class ManageStudentCTLL {
                     );
                     teacherMainCTLL.addStudentToTable(model.addNewStudent(user));
                     closeWindow();
-                } catch (DALException dalException) {
+                } catch (DALException | BLLException dalException) {
                     SoftAlert.displayAlert(dalException.getMessage());
                 }
             }
@@ -61,9 +62,8 @@ public class ManageStudentCTLL {
                     model.updateStudent(student);
                     teacherMainCTLL.updateStudentInTable(student);
                     closeWindow();
-                }catch (DALException dalException){
-                    dalException.printStackTrace();
-                    SoftAlert.displayAlert(dalException.getMessage());
+                }catch (DALException | BLLException exception){
+                    SoftAlert.displayAlert(exception.getMessage());
                 }
             }
             if(fieldsAreFilled() && isTheSame()){

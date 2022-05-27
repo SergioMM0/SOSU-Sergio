@@ -6,6 +6,7 @@ import BE.Patient;
 import BE.User;
 import BLL.BLLFacade;
 import BLL.BLLManager;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,26 +49,5 @@ public class StudentMOD {
     public void clearLists() {
         casesGraded.clear();
         casesAssigned.clear();
-    }
-
-    public ObservableList<Case> getObservableCasesAssigned() {
-        return casesAssigned;
-    }
-
-    public void updateCase(Case currentCase) throws DALException {
-        bllFacade.updateCase(currentCase);
-    }
-
-    public void updateCaseInTable(Case currentCase) {
-        for (Case c : casesAssigned) {
-            if (c.getName().equals(currentCase.getName())) {
-                c.setName(currentCase.getName());
-                c.setConditionDescription(currentCase.getConditionDescription());
-            }
-        }
-    }
-
-    public void updatePatient(Patient currentPatient) throws DALException {
-        bllFacade.updatePatient(currentPatient);
     }
 }

@@ -1,6 +1,7 @@
 package GUI.Controllers;
 
 import BE.*;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.EvaluateCaseMOD;
@@ -174,8 +175,8 @@ public class EvaluateCaseCTLL {
                 try {
                     FieldsManager.updateVariablesOfPatient(currentPatient, nameField,familyNameField,dateOfBirthPicker,genderComboBox);
                     model.updatePatient(currentPatient);
-                } catch (DALException dalException) {
-                    SoftAlert.displayAlert(dalException.getMessage());
+                } catch (DALException | BLLException exception) {
+                    SoftAlert.displayAlert(exception.getMessage());
                 }
             }
         }

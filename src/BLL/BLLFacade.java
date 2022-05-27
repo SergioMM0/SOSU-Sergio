@@ -10,9 +10,9 @@ public interface BLLFacade {
 
     User checkCredentials(String email, String password) throws DALException, BLLException;
 
-    Case createCase(Case newCase) throws DALException;
+    Case createCase(Case newCase) throws DALException, BLLException;
 
-    Patient createPatient(Patient patient) throws DALException;
+    Patient createPatient(Patient patient) throws DALException, BLLException;
 
     List<Group> getAllGroups(int schoolID) throws DALException;
 
@@ -20,19 +20,19 @@ public interface BLLFacade {
 
     List<Patient> getAllPatients(int schoolID) throws DALException;
 
-    User addNewUser(User user) throws DALException;
+    User addNewUser(User user) throws DALException, BLLException;
 
-    void updateUser(User student) throws DALException;
+    void updateUser(User student) throws DALException, BLLException;
 
     void deleteUser(User user) throws DALException;
 
     List<User> getAllStudent(int schoolID) throws DALException;
 
-    void updatePatient(Patient patient) throws DALException;
+    void updatePatient(Patient patient) throws DALException, BLLException;
 
-    Group createNewGroup(Group group) throws DALException;
+    Group createNewGroup(Group group) throws DALException, BLLException;
 
-    void updateGroup(Group selectedGroup) throws DALException;
+    void updateGroup(Group selectedGroup) throws DALException, BLLException;
 
     void addStudentToGroup(Group group, User student) throws DALException;
 
@@ -40,7 +40,7 @@ public interface BLLFacade {
 
     void removeParticipant(Group group, User user) throws DALException;
 
-    void updateCase(Case newCase) throws DALException;
+    void updateCase(Case newCase) throws DALException, BLLException;
 
     void deleteCase(Case selectedCase) throws DALException;
 
@@ -97,6 +97,8 @@ public interface BLLFacade {
     Patient duplicatePatient(Patient currentPatient) throws DALException, BLLException;
 
     School updateSchool(School currenSchool) throws DALException;
+
+    List<User> getParticipantsOf(Group group) throws DALException;
 }
 
 

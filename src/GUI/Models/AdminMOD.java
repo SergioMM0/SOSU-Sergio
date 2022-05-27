@@ -73,7 +73,7 @@ public class AdminMOD {
         allSchools.remove(currentSchool);
     }
 
-    public User addUser(User currentStudent) throws DALException{
+    public User addUser(User currentStudent) throws DALException, BLLException{
         return bllFacade.addNewUser(currentStudent);
     }
 
@@ -105,7 +105,7 @@ public class AdminMOD {
         return allTeachers;
     }
 
-    public void updateUser(User user)throws DALException{
+    public void updateUser(User user)throws DALException, BLLException{
         bllFacade.updateUser(user);
     }
 

@@ -8,6 +8,7 @@ import DAL.Util.CopyChecker;
 import DAL.Exceptions.DALException;
 
 import javax.xml.transform.Result;
+import java.security.InvalidParameterException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,8 +131,9 @@ public class DAOCase {
     }
 
 
-    public Case createCase(Case newCase) throws DALException {
+    public Case createCase(Case newCase) throws DALException, InvalidParameterException {
         try(Connection con = connectionProvider.getConnection()) {
+            duplicateCheck(con,newCase);
             String sql = "INSERT INTO [Cases] ( [Name] ,[Description],[schoolid], isCopy) " +
                     "VALUES (?,?,?,?);" ;
             String sql2 = "SELECT [ID] FROM [Cases] WHERE [Name] = ? AND [Description] = ? AND [schoolid] = ?";
@@ -160,8 +162,9 @@ public class DAOCase {
         }
     }
 
-    public void updateCase(Case updatedCase) throws DALException {
+    public void updateCase(Case updatedCase) throws DALException, InvalidParameterException{
         try(Connection con = connectionProvider.getConnection()){
+            duplicateCheck(con,updatedCase);
             String sql = "UPDATE [Cases] SET [Name] = ? , [Description] = ? WHERE [ID] = ?";
 
             PreparedStatement statement = con.prepareStatement(sql);
@@ -248,23 +251,14 @@ public class DAOCase {
         }
     }
 
-    public Case duplicateCase(Case currentCase) throws DALException{
+    public Case duplicateCase(Case currentCase) throws DALException, InvalidParameterException{
         try(Connection connection = connectionProvider.getConnection()){
-            String checkName = "SELECT [NAME] FROM [Cases] WHERE [Name] = ?";
+            duplicateCheck(connection, currentCase);
             String sql = "INSERT INTO [Cases] ([Name], [Description],[schoolid],[isCopy]) VALUES (?,?,?,?)";
             String sql2 = "SELECT [ID] FROM [Cases] WHERE [Name] = ?";
 
-            PreparedStatement safeCopy = connection.prepareStatement(checkName);
             PreparedStatement st = connection.prepareStatement(sql);
             PreparedStatement st2 = connection.prepareStatement(sql2);
-
-            safeCopy.setString(1,currentCase.getName());
-            safeCopy.execute();
-            ResultSet rs0 = safeCopy.getResultSet();
-            if(rs0.next()){
-                currentCase = null;
-                return currentCase;
-            }
 
             st.setString(1,currentCase.getName());
             st.setString(2,currentCase.getConditionDescription());
@@ -282,5 +276,16 @@ public class DAOCase {
             throw new DALException("Not able to duplicate the case", sqlException);
         }
         return currentCase;
+    }
+
+    private void duplicateCheck(Connection connection,Case currentCase) throws SQLException, InvalidParameterException {
+        String duplicateCheck = "SELECT [Name] FROM [Cases] WHERE [Name] = ?";
+        PreparedStatement safeInsert = connection.prepareStatement(duplicateCheck);
+        safeInsert.setString(1,currentCase.getName());
+        safeInsert.execute();
+        ResultSet rs0 = safeInsert.getResultSet();
+        if(rs0.next()){
+            throw new InvalidParameterException();
+        }
     }
 }

@@ -2,6 +2,7 @@ package GUI.Controllers;
 
 import BE.Case;
 import BE.User;
+import BLL.Exceptions.BLLException;
 import DAL.Exceptions.DALException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.NewCaseMOD;
@@ -55,8 +56,8 @@ public class NewCaseCTLL implements Initializable {
                         false);
                 closeWindow();
                 teacherMainCTLL.addCaseToList(model.createCase(newCase));
-            } catch (DALException dalException) {
-                SoftAlert.displayAlert(dalException.getMessage());
+            } catch (DALException | BLLException exception) {
+                SoftAlert.displayAlert(exception.getMessage());
             }
         }
     }

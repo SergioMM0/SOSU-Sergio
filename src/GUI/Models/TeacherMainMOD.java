@@ -11,6 +11,8 @@ import DAL.Exceptions.DALException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 public class TeacherMainMOD {
 
     private BLLFacade bllFacade;
@@ -72,7 +74,7 @@ public class TeacherMainMOD {
         return allCases;
     }
 
-    public void updateCase(Case newCase) throws DALException {
+    public void updateCase(Case newCase) throws DALException, BLLException {
         bllFacade.updateCase(newCase);
     }
 
@@ -123,7 +125,7 @@ public class TeacherMainMOD {
         return allStudents;
     }
 
-    public void updatePatient(Patient patient) throws DALException {
+    public void updatePatient(Patient patient) throws DALException, BLLException{
         bllFacade.updatePatient(patient);
     }
 
@@ -279,5 +281,9 @@ public class TeacherMainMOD {
 
     public Patient duplicatePatient(Patient currentPatient) throws DALException, BLLException {
         return bllFacade.duplicatePatient(currentPatient);
+    }
+
+    public List<User> getParticipantsOf(Group currentGroup) throws DALException{
+        return bllFacade.getParticipantsOf(currentGroup);
     }
 }
