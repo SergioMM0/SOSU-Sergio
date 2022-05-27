@@ -48,7 +48,6 @@ public class StudentMainCTLL {
     private Patient currentPatient;
     private Case currentCase;
     private StudentMOD model;
-    private final String generalCSS = "";
     private ArrayList<Stage> listOfStages = new ArrayList<>();
 
     public StudentMainCTLL() {
@@ -124,12 +123,12 @@ public class StudentMainCTLL {
 
     @FXML
     private void evaluateCase(ActionEvent event) {
-        openView("GUI/Views/EvaluateCase.fxml", generalCSS, "Evaluate case", 880, 660, false);
+        openView("GUI/Views/EvaluateCase.fxml", "Evaluate case", 880, 660);
     }
 
     @FXML
     private void seeGradedCase(ActionEvent event) {
-        openView("GUI/Views/EvaluateCase.fxml", generalCSS, "Evaluate case", 880, 660, false);
+        openView("GUI/Views/EvaluateCase.fxml", "Evaluate case", 880, 660);
     }
 
     public void getLogedGroup() {
@@ -144,7 +143,7 @@ public class StudentMainCTLL {
         this.currentStudent = user;
     }
 
-    private void openView(String resource, String css, String title, int width, int height, boolean resizable) {
+    private void openView(String resource, String title, int width, int height) {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(resource));
         Parent root = null;
         try {
@@ -159,12 +158,12 @@ public class StudentMainCTLL {
             loader.<EvaluateCaseCTLL>getController().setPatient(currentPatient);
             loader.<EvaluateCaseCTLL>getController().initializeView();
         }
-        root.getStylesheets().add(css);
+        root.getStylesheets().add("GUI/Views/CSS/GeneralCSS.css");
         Stage stage = new Stage();
         stage.setTitle(title);
         listOfStages.add(stage);
         stage.setScene(new Scene(root, width, height));
-        stage.setResizable(resizable);
+        stage.setResizable(false);
         stage.showAndWait();
     }
 
