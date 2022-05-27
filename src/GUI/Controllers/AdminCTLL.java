@@ -25,9 +25,6 @@ import java.util.ArrayList;
 public class AdminCTLL {
 
     @FXML
-    private TextField filterField;
-
-    @FXML
     private TableColumn<School, Integer> idColumn;
 
     @FXML
@@ -65,14 +62,14 @@ public class AdminCTLL {
     private ArrayList<Stage> listOfStages = new ArrayList<>();
 
     public AdminCTLL(){
-        model = new AdminMOD();
+        model = AdminMOD.getInstance();
     }
 
     public void initializeView(){
         initializeTables();
         populateSchools();
         setUPContextMenus();
-        //initializeStudentsFilter();
+        setUPLabel();
     }
 
     private void initializeTables() {
@@ -91,29 +88,6 @@ public class AdminCTLL {
             exception.printStackTrace();
             SoftAlert.displayAlert(exception.getMessage());
         }
-    }
-
-    public void initializeStudentsFilter(){
-        FilteredList<User> filteredStudents = new FilteredList<>(model.getObservableStudents(), b -> true);
-        FilteredList<User> filteredTeachers = new FilteredList<>(model.getObservableTeachers(), b -> true);
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredStudents.setPredicate(user ->{
-                if(newValue == null || newValue.isEmpty()){
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-                if(user.getName().toLowerCase().contains(lowerCaseFilter)){
-                    return true;
-                }
-                else return user.getName().toLowerCase().contains(lowerCaseFilter);
-            });
-        });
-        SortedList<User> sortedStudents = new SortedList<>(filteredStudents);
-        sortedStudents.comparatorProperty().bind(studentTableView.comparatorProperty());
-        SortedList<User> sortedTeachers = new SortedList<>(filteredTeachers);
-        sortedStudents.comparatorProperty().bind(studentTableView.comparatorProperty());
-        studentTableView.setItems(sortedStudents);
-        teacherTableView.setItems(sortedTeachers);
     }
 
     private void setUPContextMenus() {
@@ -149,7 +123,9 @@ public class AdminCTLL {
 
         updateSchool.setOnAction(t -> {
             menu1.hide();
-            openView("GUI/Views/ManageSchool.fxml","Add new school", 400,220,2);
+            if(schoolTableView.getSelectionModel().getSelectedItem() != null){
+                openView("GUI/Views/ManageSchool.fxml","Add new school", 400,220,2);
+            }
         });
 
         updateTeacher.setOnAction(t -> {
@@ -264,6 +240,10 @@ public class AdminCTLL {
         teacherTableView.getItems().addAll(model.getObservableTeachers());
     }
 
+    private void setUPLabel() {
+        welcomeLBL.setText("Welcome back " + currentUser.getName());
+    }
+
     public void addStudentToTable(User addUser) {
         model.addObservableStudent(addUser);
     }
@@ -313,6 +293,16 @@ public class AdminCTLL {
             loader.<ManageUserCTLL>getController().setOperationType(operationType);
             loader.<ManageUserCTLL>getController().populateTeacherFields();
         }
+        if (resource.equals("GUI/Views/ManageSchool.fxml") && operationType == 1) {
+            loader.<ManageSchoolCTLL>getController().setOperationType(operationType);
+            loader.<ManageSchoolCTLL>getController().setMainController(this);
+        }
+        if (resource.equals("GUI/Views/ManageSchool.fxml") && operationType == 2) {
+            loader.<ManageSchoolCTLL>getController().setSchool(currentSchool);
+            loader.<ManageSchoolCTLL>getController().setMainController(this);
+            loader.<ManageSchoolCTLL>getController().setOperationType(operationType);
+            loader.<ManageSchoolCTLL>getController().initializeView();
+        }
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setScene(new Scene(root, width, height));
@@ -342,5 +332,8 @@ public class AdminCTLL {
         }
         listOfStages.clear();
         model.clearLists();
+    }
+
+    public void setUser(User user) {this.currentUser = user;
     }
 }

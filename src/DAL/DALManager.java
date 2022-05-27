@@ -249,4 +249,9 @@ public class DALManager implements DALFacade {
     public Patient duplicatePatient(Patient currentPatient) throws DALException {
         return daoPatient.duplicatePatient(currentPatient);
     }
+
+    @Override
+    public School updateSchool(School currenSchool) throws DALException {
+        return daoSchool.updateSchool(currenSchool);
+    }
 }

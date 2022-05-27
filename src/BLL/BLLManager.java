@@ -284,4 +284,9 @@ public class BLLManager implements BLLFacade {
         }
         return duplicated;
     }
+
+    @Override
+    public School updateSchool(School currenSchool) throws DALException {
+        return dalFacade.updateSchool(currenSchool);
+    }
 }

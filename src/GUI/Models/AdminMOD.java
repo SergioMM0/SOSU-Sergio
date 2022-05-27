@@ -19,8 +19,15 @@ public class AdminMOD {
     private ObservableList<School> allSchools;
     private ObservableList<User> allStudents;
     private ObservableList<User> allTeachers;
+    private static AdminMOD instance;
 
-    public AdminMOD(){
+    public static AdminMOD getInstance(){
+        if(instance == null){
+            instance = new AdminMOD();
+        }return instance;
+    }
+
+    private AdminMOD(){
         bllFacade = new BLLManager();
         allSchools = FXCollections.observableArrayList();
         allStudents = FXCollections.observableArrayList();
@@ -122,5 +129,17 @@ public class AdminMOD {
         allTeachers.clear();
         allStudents.clear();
         allSchools.clear();
+    }
+
+    public School updateSchool(School currenSchool) throws DALException {
+        return bllFacade.updateSchool(currenSchool);
+    }
+
+    public void updateObservableSchool(School currentSchool) {
+        for(School school : allSchools){
+            if(school.getId() == currentSchool.getId()){
+                school = currentSchool;
+            }
+        }
     }
 }

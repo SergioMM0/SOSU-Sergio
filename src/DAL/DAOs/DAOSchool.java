@@ -37,7 +37,7 @@ public class DAOSchool {
 
     public School addSchool(School currentSchool) throws DALException{
         try(Connection connection = connectionProvider.getConnection()){
-            String sql = "INSERT INTO [School] (Name) VALUES ?";
+            String sql = "INSERT INTO [School] ([Name]) VALUES (?);";
             String sql2 = "SELECT * FROM [School] WHERE [Name] = ?";
 
             PreparedStatement st = connection.prepareStatement(sql);
@@ -66,5 +66,18 @@ public class DAOSchool {
         }catch (SQLException sqlException){
             throw new DALException("Not able to delete the school", sqlException);
         }
+    }
+
+    public School updateSchool(School currenSchool) throws DALException {
+        try(Connection connection = connectionProvider.getConnection()){
+            String sql = "UPDATE [School] SET [Name] = ? WHERE [ID] = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1,currenSchool.getName());
+            st.setInt(2, currenSchool.getId());
+            st.execute();
+        }catch (SQLException sqlException){
+            throw new DALException("Not able to update the school", sqlException);
+        }
+        return currenSchool;
     }
 }

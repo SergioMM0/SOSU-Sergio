@@ -20,7 +20,7 @@ public class ManageUserCTLL {
     private int operationType;
 
     public ManageUserCTLL(){
-        model = new AdminMOD();
+        model = AdminMOD.getInstance();
     }
 
     @FXML

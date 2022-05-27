@@ -94,4 +94,6 @@ public interface DALFacade {
     Case duplicateCase(Case currentCase) throws DALException;
 
     Patient duplicatePatient(Patient currentPatient) throws DALException;
+
+    School updateSchool(School currenSchool) throws DALException;
 }

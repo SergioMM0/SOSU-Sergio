@@ -95,6 +95,8 @@ public interface BLLFacade {
     Case duplicateCase(Case currentCase) throws DALException, BLLException;
 
     Patient duplicatePatient(Patient currentPatient) throws DALException, BLLException;
+
+    School updateSchool(School currenSchool) throws DALException;
 }
 
 
