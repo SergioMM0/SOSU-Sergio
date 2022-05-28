@@ -182,6 +182,11 @@ public class EvaluateCaseCTLL {
         }
     }
 
+    @FXML
+    void close(ActionEvent event) {
+        closeWindow();
+    }
+
     private void initializeTables() {
         categoryNameHC.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryNameFA.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -286,5 +291,10 @@ public class EvaluateCaseCTLL {
         stage.setScene(new Scene(root, width, height));
         stage.setResizable(false);
         stage.showAndWait();
+    }
+
+    private void closeWindow(){
+        Stage st = (Stage) tabPane.getScene().getWindow();
+        st.close();
     }
 }

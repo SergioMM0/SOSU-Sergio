@@ -1,54 +1,186 @@
+/*
+*****************   Buttons       ************
+ */
+
 .button{
-    -fx-background-color: #FE776F;
+    -fx-background-color: #71d772;
+    -fx-text-fill: #002800;
+    -fx-border-color: green;
 }
 .button:hover{
-    -fx-background-color: #ff3c2f;
+    -fx-background-color: #66cc67;
 }
+
+/*
+****************    Pane     ************
+ */
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: green}
+
+.root {
+    -tab-text-color: -fx-text-base-color ;
+}
+
+.tab-label {
+    -fx-text-fill: #004200;
+    -fx-font-weight: bold;
+}
+
+/*
+****************    TableView     ************
+ */
+
 .table-row-cell:odd:hover{
-    -fx-background-color: #FE776F;
+    -fx-background-color: #71d772;
 }
 .table-row-cell:even:hover{
-    -fx-background-color: #FE776F;
+    -fx-background-color: #71d772;
 }
 .table-row-cell:selected {
-    -fx-background-color: #FE776F;
-    -fx-text-fill: white;
+    -fx-background-color: #71d772;
     -fx-background-insets: 0;
 }
 .table-row-cell:selected:hover{
-    -fx-background-color: #484848;
+    -fx-background-color: #71d772;
+    -fx-text-fill: black;
+}
+
+.table-view .column-header {
+    -fx-background-color: #71d772;
+    -fx-text-fill: #002800;
+    -fx-border-color: green;
+}
+
+.table-view{
+    -fx-background-color: white;
+    -fx-border-color: green;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: #004b00;
+}
+
+.table-view:focused{
+    -fx-background-color: green;
+}
+
+/*
+****** ***********
+ */
+
+#loginIMG{
+    -fx-image: url("/res/fs3.png");
+}
+
+#loginPane{
+    -fx-background-color: white;
+}
+
+#loginBtn{
+     -fx-background-color: #BDECB6;
+    -fx-text-fill: black;
+ }
+
+.loginBtn:hover{
+    -fx-background-color: #A9E9a4;
+    -fx-text-fill: black;
+}
+
+.text-field:focused{
+    -fx-border-color: green;
+}
+
+.text-area:focused{
+    -fx-border-color: green;
+}
+
+.text-area{
+    -fx-text-fill: #004b00;
+}
+
+.label{
+    -fx-font-weight: bold;
+    -fx-text-fill: #004b00;
+}
+
+.combo-box:focused{
+    -fx-border-color: green;
+}
+
+.combo-box:expanded:hover{
+    -fx-border-color: green;
+}
+
+.combo-box{
+    -fx-border-color: green;
+    -fx-font-weight: bold;
+}
+
+.combo-box-popup .list-view .list-cell{
+    -fx-padding: 4 0 4 5;
+    -fx-background-color: green;
+    -fx-text-fill:  white;
+    -fx-font-weight: bold;
+}
+.combo-box-popup .list-view .list-cell:hover{
+    -fx-padding: 4 0 4 5;
+    -fx-background-color: #71d772;
+}
+
+.text-field{
+    -fx-text-fill: #004b00;
+    -fx-font-weight: bold;
 }
 
 
+
+
+/*
+    *******  IMGs *******
+*/
 
 #dependenceButton1{
     -fx-background-image: url("/res/one.png");
     -fx-background-color: white;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top;
 }
 
 #dependenceButton2{
     -fx-background-image: url("/res/two.png");
     -fx-background-color: white;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top;
 }
 
 #dependenceButton3{
     -fx-background-image: url("/res/three.png");
     -fx-background-color: white;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top;
 }
 
 #dependenceButton4{
     -fx-background-image: url("/res/four.png");
     -fx-background-color: white;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top;
 }
 
 #dependenceButton5{
     -fx-background-image: url("/res/five.png");
     -fx-background-color: white;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top;
 }
 
 #dependenceButton6{
     -fx-background-image: url("/res/one.png");
     -fx-background-color: white;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top;
 }
 
 
@@ -56,31 +188,43 @@
 #expectedButton1{
     -fx-background-image: url("/res/one.png");
     -fx-background-color: white;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top;
 }
 
 #expectedButton2{
     -fx-background-image: url("/res/two.png");
     -fx-background-color: white;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top;
 }
 
 #expectedButton3{
     -fx-background-image: url("/res/three.png");
     -fx-background-color: white;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top;
 }
 
 #expectedButton4{
     -fx-background-image: url("/res/four.png");
     -fx-background-color: white;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top;
 }
 
 #expectedButton5{
     -fx-background-image: url("/res/five.png");
     -fx-background-color: white;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top;
 }
 
 #expectedButton6{
     -fx-background-image: url("/res/one.png");
     -fx-background-color: white;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top;
 }
 
 
