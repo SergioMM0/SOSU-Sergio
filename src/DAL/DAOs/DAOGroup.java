@@ -180,7 +180,7 @@ public class DAOGroup {
         safeInsert.execute();
         ResultSet rs0 = safeInsert.getResultSet();
         if(rs0.next()){
-            throw new InvalidParameterException();
+            throw new InvalidParameterException("The group already exists");
         }
     }
 }

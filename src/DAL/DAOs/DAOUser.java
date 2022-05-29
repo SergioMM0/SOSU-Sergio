@@ -157,7 +157,7 @@ public class DAOUser {
         safeInsert.execute();
         ResultSet rs0 = safeInsert.getResultSet();
         if(rs0.next()){
-           throw new InvalidParameterException();
+           throw new InvalidParameterException("User already exists in the system");
         }
     }
 }
