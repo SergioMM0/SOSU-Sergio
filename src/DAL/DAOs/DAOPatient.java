@@ -52,7 +52,7 @@ public class DAOPatient {
 
     }
 
-    public LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {
+    private LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {
         return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
     }
 

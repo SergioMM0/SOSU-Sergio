@@ -177,7 +177,7 @@
 }
 
 #dependenceButton6{
-    -fx-background-image: url("/res/one.png");
+    -fx-background-image: url("/res/white.png");
     -fx-background-color: white;
     -fx-background-repeat: no-repeat;
     -fx-background-position: top;
@@ -221,7 +221,7 @@
 }
 
 #expectedButton6{
-    -fx-background-image: url("/res/one.png");
+    -fx-background-image: url("/res/white.png");
     -fx-background-color: white;
     -fx-background-repeat: no-repeat;
     -fx-background-position: top;

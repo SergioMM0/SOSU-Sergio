@@ -54,7 +54,7 @@ public class LoginCTLL implements Initializable {
     }
 
     @FXML
-    void loginAct(ActionEvent event) {
+    private void loginAct(ActionEvent event) {
         if(!emailField.getText().isEmpty() && !passwordField.getText().isEmpty()){
             try{
                 logedUser = loginMOD.checkCredentials(emailField.getText(),passwordField.getText());

@@ -28,7 +28,7 @@ public class ManageSchoolCTLL {
     }
 
     @FXML
-    void save(ActionEvent event) {
+    private void save(ActionEvent event) {
         switch (operationType){
             case 1:
                 if(fieldsAreFilled()){
@@ -60,7 +60,7 @@ public class ManageSchoolCTLL {
     }
 
     @FXML
-    void cancel(ActionEvent event) {
+    private void cancel(ActionEvent event) {
         closeWindow();
     }
 
@@ -71,15 +71,15 @@ public class ManageSchoolCTLL {
         }else return true;
     }
 
-    public void setOperationType(int operationType) {
+    protected void setOperationType(int operationType) {
         this.operationType = operationType;
     }
 
-    public void setMainController(AdminCTLL adminCTLL) {
+    protected void setMainController(AdminCTLL adminCTLL) {
         this.adminCTLL = adminCTLL;
     }
 
-    public void setSchool(School school) {
+    protected void setSchool(School school) {
         this.currenSchool = school;
     }
 

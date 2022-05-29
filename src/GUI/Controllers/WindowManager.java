@@ -13,6 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WindowManager {
+    /**
+     * Implementation of this class was not finished, it was a try of making a class that would manage the windows in the app
+     * in order to delete de duplication of code and make it more dynamic but the time was not helping when "the group issue"
+     * popped off
+     */
 
     private static WindowManager instance;
     private List<Stage> allStages;

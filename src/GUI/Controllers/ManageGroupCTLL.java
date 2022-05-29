@@ -31,12 +31,12 @@ public class ManageGroupCTLL {
     }
 
     @FXML
-    void cancel(ActionEvent event) {
+    private void cancel(ActionEvent event) {
         closeWindow();
     }
 
     @FXML
-    void save(ActionEvent event) {
+    private void save(ActionEvent event) {
         if(operationType == 1){
             if(fieldsAreFilled()){
                 try{
@@ -84,23 +84,23 @@ public class ManageGroupCTLL {
         st.close();
     }
 
-    public void setUser(User logedUser) {
+    protected void setUser(User logedUser) {
         this.logedUser = logedUser;
     }
 
-    public void setGroup(Group group){
+    protected void setGroup(Group group){
         this.selectedGroup = group;
     }
 
-    public void setController(TeacherMainCTLL teacherMainCTLL) {
+    protected void setController(TeacherMainCTLL teacherMainCTLL) {
         this.teacherMainCTLL = teacherMainCTLL;
     }
 
-    public void setOperationType(int operationType) {
+    protected void setOperationType(int operationType) {
         this.operationType = operationType;
     }
 
-    public void populateGroupField() {
+    protected void populateGroupField() {
         nameField.setText(selectedGroup.getName());
     }
 }

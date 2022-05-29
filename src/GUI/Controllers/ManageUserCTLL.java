@@ -31,7 +31,7 @@ public class ManageUserCTLL {
     private TextField nameField;
 
     @FXML
-    void save(ActionEvent event) {
+    private void save(ActionEvent event) {
         switch(operationType){
             case 1:
                 if(fieldsAreFilled()){
@@ -85,7 +85,7 @@ public class ManageUserCTLL {
     }
 
     @FXML
-    void cancel(ActionEvent event) {
+    private void cancel(ActionEvent event) {
         closeWindow();
     }
 
@@ -104,33 +104,33 @@ public class ManageUserCTLL {
         st.close();
     }
 
-    public void populateStudentFields(){
+    protected void populateStudentFields(){
         nameField.setText(student.getName());
         emailField.setText(student.getEmail());
     }
 
-    public void populateTeacherFields(){
+    protected void populateTeacherFields(){
         nameField.setText(teacher.getName());
         emailField.setText(teacher.getName());
     }
 
-    public void setTeacher(User teacher) {
+    protected void setTeacher(User teacher) {
         this.teacher = teacher;
     }
 
-    public void setOperationType(int operationType) {
+    protected void setOperationType(int operationType) {
         this.operationType = operationType;
     }
 
-    public void setMainController(AdminCTLL adminCTLL) {
+    protected void setMainController(AdminCTLL adminCTLL) {
         this.adminCTLL = adminCTLL;
     }
 
-    public void setStudent(User student) {
+    protected void setStudent(User student) {
         this.student = student;
     }
 
-    public void setSchoolId(int id){
+    protected void setSchoolId(int id){
         this.schoolId = id;
     }
 }

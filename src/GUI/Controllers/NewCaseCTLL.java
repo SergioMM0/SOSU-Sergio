@@ -42,12 +42,12 @@ public class NewCaseCTLL implements Initializable {
     }
 
     @FXML
-    void cancelCreate(ActionEvent event) {
+    private void cancelCreate(ActionEvent event) {
         closeWindow();
     }
 
     @FXML
-    void saveNewCase(ActionEvent event) {
+    private void saveNewCase(ActionEvent event) {
         if(fieldsAreFiled()){
             try {
                 Case newCase = new Case(nameField.getText(),
@@ -79,11 +79,11 @@ public class NewCaseCTLL implements Initializable {
         st.close();
     }
 
-    public void setController(TeacherMainCTLL teacherMainCTLL) {
+    protected void setController(TeacherMainCTLL teacherMainCTLL) {
         this.teacherMainCTLL = teacherMainCTLL;
     }
 
-    public void setUser(User user){
+    protected void setUser(User user){
         this.logedUser = user;
     }
 }

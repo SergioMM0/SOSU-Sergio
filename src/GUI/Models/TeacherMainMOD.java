@@ -102,14 +102,6 @@ public class TeacherMainMOD {
                 user.setEmail(student.getEmail());
             }
         }
-        for(Group g : allGroups){
-            for(User user : g.getMembers()){
-                if(user.getId() == student.getId()){
-                    user.setName(student.getName());
-                    user.setEmail(student.getEmail());
-                }
-            }
-        }
     }
 
     public void deleteStudent(User student) throws DALException {
@@ -179,12 +171,6 @@ public class TeacherMainMOD {
 
     public void removeObservableGroup(Group group) {
         allGroups.remove(group);
-    }
-
-    public void deleteStudentFromGroups(User student) {
-        for (Group group : allGroups) {
-            group.removeMember(student);
-        }
     }
 
     public void deleteCase(Case selectedCase) throws DALException {

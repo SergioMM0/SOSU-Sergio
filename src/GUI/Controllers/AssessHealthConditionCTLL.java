@@ -40,12 +40,12 @@ public class AssessHealthConditionCTLL {
         model = new AssessHealthConditionMOD();
     }
 
-    public void initializeView() {
+    protected void initializeView() {
         setUpFields();
     }
 
     @FXML
-    void save(ActionEvent event) {
+    private void save(ActionEvent event) {
         if(FieldsManager.healthConditionFieldsArefilled(relevancyComboBox,expectationsComboBox,
                 assessmentText,goalText,observationsText)){
             if(currentSubcategory.isAssessed()){
@@ -74,7 +74,7 @@ public class AssessHealthConditionCTLL {
     }
 
     @FXML
-    void cancel(ActionEvent event) {
+    private void cancel(ActionEvent event) {
         closeWindow();
     }
 
@@ -91,21 +91,19 @@ public class AssessHealthConditionCTLL {
         st.close();
     }
 
-    public void setPatient(Patient patient) {
+    protected void setPatient(Patient patient) {
         this.currentPatient = patient;
     }
 
-
-    public void setSubCategory(Subcategory subcategory) {
+    protected void setSubCategory(Subcategory subcategory) {
         this.currentSubcategory = subcategory;
     }
 
-
-    public void setHealthCondition(HealthCondition healthCondition) {
+    protected void setHealthCondition(HealthCondition healthCondition) {
         this.currentHealthCondition = healthCondition;
     }
 
-    public void setEvaluateCaseCTLL(EvaluateCaseCTLL evaluateCaseCTLL){
+    protected void setEvaluateCaseCTLL(EvaluateCaseCTLL evaluateCaseCTLL){
         this.evaluateCaseCTLL = evaluateCaseCTLL;
     }
 }

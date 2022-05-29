@@ -59,12 +59,12 @@ public class NewPatientCTLL implements Initializable {
     }
 
     @FXML
-    void cancel(ActionEvent event) {
+    private void cancel(ActionEvent event) {
         closeWindow();
     }
 
     @FXML
-    void createPatient(ActionEvent event) {
+    private void createPatient(ActionEvent event) {
         if(fieldsAreFiled()){
             ArrayList<String> observations = new ArrayList<>();
             try{
@@ -112,11 +112,11 @@ public class NewPatientCTLL implements Initializable {
         st.close();
     }
 
-    public void setController(TeacherMainCTLL teacherMainCTLL) {
+    protected void setController(TeacherMainCTLL teacherMainCTLL) {
         this.teacherMainCTLL = teacherMainCTLL;
     }
 
-    public void setUser(User logedUser) {
+    protected void setUser(User logedUser) {
         this.user = logedUser;
     }
 }

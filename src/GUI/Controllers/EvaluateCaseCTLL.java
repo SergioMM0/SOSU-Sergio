@@ -111,7 +111,7 @@ public class EvaluateCaseCTLL {
     }
 
     @FXML
-    void categoryFAIsSelected(MouseEvent event) {
+    private void categoryFAIsSelected(MouseEvent event) {
         if(categoryFATableView.getSelectionModel().getSelectedItem() != null){
             this.currentCategory = categoryFATableView.getSelectionModel().getSelectedItem();
             populateSubcategoriesFA();
@@ -119,7 +119,7 @@ public class EvaluateCaseCTLL {
     }
 
     @FXML
-    void categoryHCIsSelected(MouseEvent event) {
+    private void categoryHCIsSelected(MouseEvent event) {
         if(categoryHCTableView.getSelectionModel().getSelectedItem() != null){
             this.currentCategory = categoryHCTableView.getSelectionModel().getSelectedItem();
             populateSubcategoriesHC();
@@ -127,21 +127,21 @@ public class EvaluateCaseCTLL {
     }
 
     @FXML
-    void subcategoryFAIsSelected(MouseEvent event) {
+    private void subcategoryFAIsSelected(MouseEvent event) {
         if(subcategoryFATableView.getSelectionModel().getSelectedItem() != null){
             this.currentSubcategory = subcategoryFATableView.getSelectionModel().getSelectedItem();
         }
     }
 
     @FXML
-    void subcategoryHCIsSelected(MouseEvent event) {
+    private void subcategoryHCIsSelected(MouseEvent event) {
         if(subcategoryHCTableView.getSelectionModel().getSelectedItem() != null){
             this.currentSubcategory = subcategoryHCTableView.getSelectionModel().getSelectedItem();
         }
     }
 
     @FXML
-    void assessFA(ActionEvent event) {
+    private void assessFA(ActionEvent event) {
         try{
             this.currentFunctionalAbility = model.getCurrentFunctionalAbility(currentSubcategory, currentPatient);
             openView("GUI/Views/AssessFunctionalAbility.fxml","Functional Ability", 710,680);
@@ -151,7 +151,7 @@ public class EvaluateCaseCTLL {
     }
 
     @FXML
-    void assessHC(ActionEvent event) {
+    private void assessHC(ActionEvent event) {
         try{
             this.currentHealthCondition = model.getCurrentHealthCondition(currentSubcategory, currentPatient);
             openView("GUI/Views/AssesHealthCondition.fxml","Health Condition", 680,450);
@@ -161,12 +161,12 @@ public class EvaluateCaseCTLL {
     }
 
     @FXML
-    void newObservation(ActionEvent event) {
+    private void newObservation(ActionEvent event) {
         FieldsManager.handleObservationEvaluatingCase(newObservationTextArea,model,currentPatient,medicalHistoryTextArea);
     }
 
     @FXML
-    void updatePatient(ActionEvent event) {
+    private void updatePatient(ActionEvent event) {
         if (FieldsManager.patientFieldsAreFilled(nameField,familyNameField,dateOfBirthPicker,genderComboBox)) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to update this patient?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
@@ -183,7 +183,7 @@ public class EvaluateCaseCTLL {
     }
 
     @FXML
-    void close(ActionEvent event) {
+    private void close(ActionEvent event) {
         closeWindow();
     }
 
@@ -250,15 +250,15 @@ public class EvaluateCaseCTLL {
         }
     }
 
-    public void setGroup(Group group){
+    protected void setGroup(Group group){
         this.currentGroup = group;
     }
 
-    public void setCase(Case currentCase){
+    protected void setCase(Case currentCase){
         this.currentCase = currentCase;
     }
 
-    public void setPatient(Patient patient){
+    protected void setPatient(Patient patient){
         this.currentPatient = patient;
     }
 

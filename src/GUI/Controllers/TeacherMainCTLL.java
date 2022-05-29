@@ -649,7 +649,6 @@ public class TeacherMainCTLL {
     protected void updateStudentInTable(User student) {
         model.updateStudentInLists(student);
         refreshStudentsTable();
-        refreshGroupList();
         participantsTable.getItems().clear();
     }
 

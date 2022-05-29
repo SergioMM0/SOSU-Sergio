@@ -32,12 +32,12 @@ public class ManageStudentCTLL {
     }
 
     @FXML
-    void cancel(ActionEvent event) {
+    private void cancel(ActionEvent event) {
         closeWindow();
     }
 
     @FXML
-    void save(ActionEvent event) {
+    private void save(ActionEvent event) {
         if (operationType == 1) {
             if (fieldsAreFilled()) {
                 try {
@@ -92,19 +92,19 @@ public class ManageStudentCTLL {
         st.close();
     }
 
-    public void setUser(User logedUser) {
+    protected void setUser(User logedUser) {
         this.logedUser = logedUser;
     }
 
-    public void setOperationType(int operationType) {
+    protected void setOperationType(int operationType) {
         this.operationType = operationType;
     }
 
-    public void setMainController(TeacherMainCTLL teacherMainCTLL) {
+    protected void setMainController(TeacherMainCTLL teacherMainCTLL) {
         this.teacherMainCTLL = teacherMainCTLL;
     }
 
-    public void setStudent(User student) {
+    protected void setStudent(User student) {
         this.student = student;
     }
 

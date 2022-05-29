@@ -145,7 +145,7 @@ public class AdminCTLL {
     }
 
     @FXML
-    void schoolIsSelected(MouseEvent event) {
+    private void schoolIsSelected(MouseEvent event) {
         if(schoolTableView.getSelectionModel().getSelectedItem() != null){
             this.currentSchool = schoolTableView.getSelectionModel().getSelectedItem();
             try{
@@ -160,40 +160,40 @@ public class AdminCTLL {
     }
 
     @FXML
-    void studentIsSelected(MouseEvent event) {
+    private void studentIsSelected(MouseEvent event) {
         if(studentTableView.getSelectionModel().getSelectedItem() != null){
             this.currentStudent = studentTableView.getSelectionModel().getSelectedItem();
         }
     }
 
     @FXML
-    void teacherIsSelected(MouseEvent event) {
+    private void teacherIsSelected(MouseEvent event) {
         if(teacherTableView.getSelectionModel().getSelectedItem() != null){
             this.currentTeacher = teacherTableView.getSelectionModel().getSelectedItem();
         }
     }
 
     @FXML
-    void addSchool(ActionEvent event) {
+    private void addSchool(ActionEvent event) {
         openView("GUI/Views/ManageSchool.fxml","Add new school", 400,220,1);
     }
 
     @FXML
-    void addStudent(ActionEvent event) {
+    private void addStudent(ActionEvent event) {
         if(currentSchool!=null){
             openView("GUI/Views/ManageUser.fxml","Add new student", 400,220,1);
         }else SoftAlert.displayAlert("Please select a school");
     }
 
     @FXML
-    void addTeacher(ActionEvent event) {
+    private void addTeacher(ActionEvent event) {
         if(currentSchool!=null){
             openView("GUI/Views/ManageUser.fxml","Add new teacher", 400,220,3);
         }else SoftAlert.displayAlert("PLease select a school");
     }
 
     @FXML
-    void deleteSchool(ActionEvent event) {
+    private void deleteSchool(ActionEvent event) {
         try{
             model.deleteSchool(currentSchool);
             model.removeObservableSchool(currentSchool);
@@ -204,7 +204,7 @@ public class AdminCTLL {
     }
 
     @FXML
-    void deleteStudent(ActionEvent event) {
+    private void deleteStudent(ActionEvent event) {
         try{
             model.removeUser(currentStudent);
             model.removeObservableStudent(currentStudent);
@@ -215,7 +215,7 @@ public class AdminCTLL {
     }
 
     @FXML
-    void deleteTeacher(ActionEvent event) {
+    private void deleteTeacher(ActionEvent event) {
         try{
             model.removeUser(currentTeacher);
             model.removeObservableTeacher(currentTeacher);
@@ -244,19 +244,19 @@ public class AdminCTLL {
         welcomeLBL.setText("Welcome back " + currentUser.getName());
     }
 
-    public void addStudentToTable(User addUser) {
+    protected void addStudentToTable(User addUser) {
         model.addObservableStudent(addUser);
     }
 
-    public void updateStudentInTable(User student) {
+    protected void updateStudentInTable(User student) {
         model.updateObservableStudent(student);
     }
 
-    public void addTeacherToTable(User addUser) {
+    protected void addTeacherToTable(User addUser) {
         model.addObservableTeacher(addUser);
     }
 
-    public void updateTeacherInTable(User teacher) {
+    protected void updateTeacherInTable(User teacher) {
         model.updateObservableTeacher(teacher);
     }
 
@@ -312,7 +312,7 @@ public class AdminCTLL {
     }
 
     @FXML
-    void logOut(ActionEvent event) {
+    private void logOut(ActionEvent event) {
         closeWindows();
         Parent root1;
         Stage stage = (Stage) schoolTableView.getScene().getWindow();
@@ -335,6 +335,6 @@ public class AdminCTLL {
         model.clearLists();
     }
 
-    public void setUser(User user) {this.currentUser = user;
+    protected void setUser(User user) {this.currentUser = user;
     }
 }

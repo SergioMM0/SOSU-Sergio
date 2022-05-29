@@ -118,8 +118,11 @@ public class AssessFunctionalAbilityCTLL {
     private EvaluateCaseCTLL evaluateCaseCTLL;
     private int currentLevel = 6;
     private int expectedLevel = 6;
+    /*
     private final File file = new File("/res/green.png");
     private final Image green = new Image(file.toURI().toString());
+
+     */
 
     public AssessFunctionalAbilityCTLL() {
         model = new AssessFunctionalAbilityMOD();
@@ -133,84 +136,84 @@ public class AssessFunctionalAbilityCTLL {
     }
 
     @FXML
-    void dependenceButton1(ActionEvent event) {
+    private void dependenceButton1(ActionEvent event) {
         this.currentLevel = 1;
         FieldsManager.changeIndicatorCurrent(indicatorsCurrent, currentLevel);
     }
 
     @FXML
-    void dependenceButton2(ActionEvent event) {
+    private void dependenceButton2(ActionEvent event) {
         this.currentLevel = 2;
         FieldsManager.changeIndicatorCurrent(indicatorsCurrent, currentLevel);
     }
 
     @FXML
-    void dependenceButton3(ActionEvent event) {
+    private void dependenceButton3(ActionEvent event) {
         this.currentLevel = 3;
         FieldsManager.changeIndicatorCurrent(indicatorsCurrent, currentLevel);
     }
 
     @FXML
-    void dependenceButton4(ActionEvent event) {
+    private void dependenceButton4(ActionEvent event) {
         this.currentLevel = 4;
         FieldsManager.changeIndicatorCurrent(indicatorsCurrent, currentLevel);
     }
 
     @FXML
-    void dependenceButton5(ActionEvent event) {
+    private void dependenceButton5(ActionEvent event) {
         this.currentLevel = 5;
         FieldsManager.changeIndicatorCurrent(indicatorsCurrent, currentLevel);
     }
 
     @FXML
-    void dependenceButton6(ActionEvent event) {
+    private void dependenceButton6(ActionEvent event) {
         this.currentLevel = 6;
         FieldsManager.changeIndicatorCurrent(indicatorsCurrent, currentLevel);
     }
 
     @FXML
-    void expectedButton1(ActionEvent event) {
+    private void expectedButton1(ActionEvent event) {
         this.expectedLevel = 1;
         FieldsManager.changeIndicatorExpected(indicatorsExpected, expectedLevel);
     }
 
     @FXML
-    void expectedButton2(ActionEvent event) {
+    private void expectedButton2(ActionEvent event) {
         this.expectedLevel = 2;
         FieldsManager.changeIndicatorExpected(indicatorsExpected, expectedLevel);
     }
 
     @FXML
-    void expectedButton3(ActionEvent event) {
+    private void expectedButton3(ActionEvent event) {
         this.expectedLevel = 3;
         FieldsManager.changeIndicatorExpected(indicatorsExpected, expectedLevel);
     }
 
     @FXML
-    void expectedButton4(ActionEvent event) {
+    private void expectedButton4(ActionEvent event) {
         this.expectedLevel = 4;
         FieldsManager.changeIndicatorExpected(indicatorsExpected, expectedLevel);
     }
 
     @FXML
-    void expectedButton5(ActionEvent event) {
+    private void expectedButton5(ActionEvent event) {
         this.expectedLevel = 5;
         FieldsManager.changeIndicatorExpected(indicatorsExpected, expectedLevel);
     }
 
     @FXML
-    void expectedButton6(ActionEvent event) {
+    private void expectedButton6(ActionEvent event) {
         this.expectedLevel = 6;
         FieldsManager.changeIndicatorExpected(indicatorsExpected, expectedLevel);
     }
 
     @FXML
-    void cancel(ActionEvent event) {
+    private void cancel(ActionEvent event) {
         closeWindow();
     }
 
     @FXML
-    void save(ActionEvent event) {
+    private void save(ActionEvent event) {
         if (FieldsManager.FunctionalAbilityFieldsAreFilled(
                 relevancyComboBox, performanceComboBox, meaningComboBox, goalTextArea, observationsTextArea)) {
             if (currentSubcategory.isAssessed()) {
@@ -237,7 +240,7 @@ public class AssessFunctionalAbilityCTLL {
         }
     }
 
-    public void setUpFields() {
+    protected void setUpFields() {
         if (currentSubcategory.isAssessed()) {
             FieldsManager.fillFunctionalAbilityAssessed(relevancyComboBox, performanceComboBox,
                     meaningComboBox, currentFunctionalAbility,goalTextArea,observationsTextArea);
@@ -245,7 +248,7 @@ public class AssessFunctionalAbilityCTLL {
                 meaningComboBox);
     }
 
-    public void setUpSelectionIndicator() {
+    private void setUpSelectionIndicator() {
         indicatorsCurrent.add(selectionIndicator1);
         indicatorsCurrent.add(selectionIndicator2);
         indicatorsCurrent.add(selectionIndicator3);
@@ -265,19 +268,19 @@ public class AssessFunctionalAbilityCTLL {
         }
     }
 
-    public void setPatient(Patient patient) {
+    protected void setPatient(Patient patient) {
         this.currentPatient = patient;
     }
 
-    public void setSubcategory(Subcategory subcategory) {
+    protected void setSubcategory(Subcategory subcategory) {
         this.currentSubcategory = subcategory;
     }
 
-    public void setFunctionalAbility(FunctionalAbility functionalAbility) {
+    protected void setFunctionalAbility(FunctionalAbility functionalAbility) {
         this.currentFunctionalAbility = functionalAbility;
     }
 
-    public void setEvaluateCaseCTLL(EvaluateCaseCTLL evaluateCaseCTLL){
+    protected void setEvaluateCaseCTLL(EvaluateCaseCTLL evaluateCaseCTLL){
         this.evaluateCaseCTLL = evaluateCaseCTLL;
     }
 

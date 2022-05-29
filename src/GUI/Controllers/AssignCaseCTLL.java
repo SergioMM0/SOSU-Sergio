@@ -48,7 +48,7 @@ public class AssignCaseCTLL {
     }
 
     @FXML
-    void assignCase(ActionEvent event) {
+    private void assignCase(ActionEvent event) {
         Group group = allGroups.getSelectionModel().getSelectedItem();
         Patient patient = allPatients.getSelectionModel().getSelectedItem();
         if(group != null && patient != null){
@@ -65,7 +65,7 @@ public class AssignCaseCTLL {
     }
 
     @FXML
-    void cancel(ActionEvent event) {
+    private void cancel(ActionEvent event) {
         closeView();
     }
 
@@ -74,11 +74,11 @@ public class AssignCaseCTLL {
         st.close();
     }
 
-    public void setCase(Case selectedCase){
+    protected void setCase(Case selectedCase){
         this.selectedCase = selectedCase;
     }
 
-    public void setController(TeacherMainCTLL teacherMainCTLL){
+    protected void setController(TeacherMainCTLL teacherMainCTLL){
         this.teacherMainCTLL = teacherMainCTLL;
     }
 
