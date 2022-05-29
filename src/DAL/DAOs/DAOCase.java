@@ -134,6 +134,7 @@ public class DAOCase {
     public Case createCase(Case newCase) throws DALException, InvalidParameterException {
         try(Connection con = connectionProvider.getConnection()) {
             duplicateCheck(con,newCase);
+
             String sql = "INSERT INTO [Cases] ( [Name] ,[Description],[schoolid], isCopy) " +
                     "VALUES (?,?,?,?);" ;
             String sql2 = "SELECT [ID] FROM [Cases] WHERE [Name] = ? AND [Description] = ? AND [schoolid] = ?";
@@ -253,7 +254,10 @@ public class DAOCase {
 
     public Case duplicateCase(Case currentCase) throws DALException, InvalidParameterException{
         try(Connection connection = connectionProvider.getConnection()){
+
+
             duplicateCheck(connection, currentCase);
+
             String sql = "INSERT INTO [Cases] ([Name], [Description],[schoolid],[isCopy]) VALUES (?,?,?,?)";
             String sql2 = "SELECT [ID] FROM [Cases] WHERE [Name] = ?";
 
@@ -278,7 +282,7 @@ public class DAOCase {
         return currentCase;
     }
 
-    private void duplicateCheck(Connection connection,Case currentCase) throws SQLException, InvalidParameterException {
+   /* private void duplicateCheck(Connection connection,Case currentCase) throws SQLException, InvalidParameterException {
         String duplicateCheck = "SELECT [Name] FROM [Cases] WHERE [Name] = ?";
         PreparedStatement safeInsert = connection.prepareStatement(duplicateCheck);
         safeInsert.setString(1,currentCase.getName());
@@ -287,5 +291,16 @@ public class DAOCase {
         if(rs0.next()){
             throw new InvalidParameterException();
         }
+    }*/
+    private void duplicateCheck(Connection connection,Case currentCase) throws SQLException, InvalidParameterException {
+        String duplicateCheck = "SELECT [Name] FROM [Cases] WHERE [Name] = ?";
+        PreparedStatement safeInsert = connection.prepareStatement(duplicateCheck);
+        safeInsert.setString(1,currentCase.getName());
+        safeInsert.execute();
+        ResultSet rs0 = safeInsert.getResultSet();
+        if(rs0.next()){
+            throw new InvalidParameterException("The case already exists in the system");
+        }
+
     }
 }

@@ -36,6 +36,7 @@ public class DAOUser {
                         rs.getInt("Usertype")
                         );
             }
+
         } catch (SQLException sqlException) {
             throw new DALException("Not able to verify the user", sqlException);
         }

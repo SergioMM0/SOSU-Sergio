@@ -375,7 +375,6 @@ public class TeacherMainCTLL {
             SoftAlert.displayAlert(dalException.getMessage());
         }
         model.deleteObservableStudent(student);
-        model.deleteStudentFromGroups(student);
         refreshStudentsTable();
         refreshGroupList();
     }

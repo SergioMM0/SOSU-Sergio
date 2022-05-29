@@ -1,33 +1,52 @@
 package BLL;
 
+import BE.Case;
+import BE.User;
+import BLL.Exceptions.BLLException;
+import DAL.DALFacade;
+import DAL.DALManager;
+import DAL.Exceptions.DALException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class BLLManagerTest {
+import java.security.InvalidParameterException;
 
+class BLLManagerTest {
+    BLLManager manager;
+    DALFacade dalFacade;
     @Test
     void checkCredentials() {
-        /*
+
+        manager = new BLLManager();
+
+        User actualuser = null;
         try {
-            BLLManager manager = new BLLManager();
-            User actualuser = manager.checkCredentials(".",".");
-            User expecteduser =  new User(1,".",".",".");
+            actualuser = manager.checkCredentials(".",".");
 
-
-            Assertions.assertEquals(expecteduser , actualuser);
-        } catch (DalException | BLLException e) {
+        } catch (DALException | BLLException e) {
             e.printStackTrace();
         }
+        User expecteduser =  new User(1,"Dotted",".",2);
+        expecteduser.setId(1);
+        Assertions.assertEquals(expecteduser.getId() , actualuser.getId());
 
-         */
 
     }
 
     @Test
     void createCase() {
+        dalFacade = new DALManager();
+        Case newCase = new Case(1,"First case","Some conditions",1);
+
+        InvalidParameterException ex = Assertions.assertThrows(InvalidParameterException.class,()-> dalFacade.createCase(newCase));
+        String actualMessage = ex.getMessage();
+        String expectedMessage = "The case already exists in the system";
+        Assertions.assertEquals(expectedMessage,actualMessage);
     }
 
     @Test
     void createPatient() {
+
     }
 
     @Test

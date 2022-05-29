@@ -217,7 +217,7 @@ public class DAOPatient {
         safeInsert.execute();
         ResultSet rs0 = safeInsert.getResultSet();
         if(rs0.next()){
-            throw new InvalidParameterException();
+            throw new InvalidParameterException("The patient already exists in the system");
         }
     }
 }
