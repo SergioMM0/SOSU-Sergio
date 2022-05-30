@@ -1,0 +1,41 @@
+HOW TO USE:
+
+The system can be run in intellij and VMOptions are under.
+
+To log into the application, credentials that already exists in the application are:
+
+Admin:
+
+email: admin
+password: admin
+
+
+Teacher:
+
+email: teacher
+password: teacher
+
+
+Student:
+
+email: student
+password: student
+
+
+
+VMOPTIONS:
+
+-XX:ReservedCodeCacheSize=512m
+-Xmx2048m
+-Xms128m
+-XX:+UseG1GC
+-XX:SoftRefLRUPolicyMSPerMB=50
+-XX:CICompilerCount=2
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:-OmitStackTraceInFastThrow
+-ea
+-Dsun.io.useCanonCaches=false
+-Djdk.http.auth.tunneling.disabledSchemes=""
+-Djdk.attach.allowAttachSelf=true
+-Djdk.module.illegalAccess.silent=true
+-Dkotlinx.coroutines.debug=off

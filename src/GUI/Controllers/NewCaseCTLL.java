@@ -54,8 +54,8 @@ public class NewCaseCTLL implements Initializable {
                         descriptionOfConditionText.getText(),
                         logedUser.getSchoolID(),
                         false);
-                closeWindow();
                 teacherMainCTLL.addCaseToList(model.createCase(newCase));
+                closeWindow();
             } catch (DALException | BLLException exception) {
                 SoftAlert.displayAlert(exception.getMessage());
             }

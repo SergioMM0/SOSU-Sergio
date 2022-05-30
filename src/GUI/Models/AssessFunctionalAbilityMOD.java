@@ -15,7 +15,8 @@ public class AssessFunctionalAbilityMOD {
         bllFacade = new BLLManager();
     }
 
-    public void addFunctionalAbility(FunctionalAbility currentFunctionalAbility, Patient currentPatient, Subcategory currentSubcategory) throws DALException{
+    public void addFunctionalAbility(FunctionalAbility currentFunctionalAbility, Patient currentPatient,
+                                     Subcategory currentSubcategory) throws DALException{
         bllFacade.addFunctionalAbility(currentFunctionalAbility,currentPatient,currentSubcategory);
     }
 

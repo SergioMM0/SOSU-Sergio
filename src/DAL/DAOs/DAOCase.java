@@ -134,14 +134,12 @@ public class DAOCase {
     public Case createCase(Case newCase) throws DALException, InvalidParameterException {
         try(Connection con = connectionProvider.getConnection()) {
             duplicateCheck(con,newCase);
-
             String sql = "INSERT INTO [Cases] ( [Name] ,[Description],[schoolid], isCopy) " +
                     "VALUES (?,?,?,?);" ;
             String sql2 = "SELECT [ID] FROM [Cases] WHERE [Name] = ? AND [Description] = ? AND [schoolid] = ?";
 
             PreparedStatement statement1 = con.prepareStatement(sql);
             PreparedStatement statement2 = con.prepareStatement(sql2);
-
             statement1.setString(1, newCase.getName());
             statement1.setString(2, newCase.getConditionDescription());
             statement1.setInt(3, newCase.getSchoolID());

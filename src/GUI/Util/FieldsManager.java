@@ -25,7 +25,8 @@ public class FieldsManager {
     }
      */
 
-    public static boolean patientFieldsAreFilled(TextField name, TextField familyName, DatePicker dateOfBirth, ComboBox<String> gender) {
+    public static boolean patientFieldsAreFilled(TextField name, TextField familyName, DatePicker dateOfBirth,
+                                                 ComboBox<String> gender) {
         if (name.getText().isEmpty()) {
             SoftAlert.displayAlert("Please introduce a new name for the patient");
             return false;
@@ -65,20 +66,6 @@ public class FieldsManager {
         }
     }
 
-    public static void handleObservationStudentView(TextArea newObservation, StudentMOD model, Patient patient, TextArea medicalHistory) {
-        if (!newObservation.getText().isEmpty()) {
-            String observation = LocalDate.now() + ": " + newObservation.getText();
-            try {
-                model.addObservationToPatient(observation, patient);
-            } catch (DALException dalException) {
-                SoftAlert.displayAlert(dalException.getMessage());
-            }
-            patient.addObservation(observation);
-            medicalHistory.setText(handleObservationsOfPatient(patient));
-            newObservation.clear();
-        }
-    }
-
     public static void handleObservationEvaluatingCase(TextArea newObservation, EvaluateCaseMOD model, Patient patient, TextArea medicalHistory) {
         if (!newObservation.getText().isEmpty()) {
             String observation = LocalDate.now() + ": " + newObservation.getText();
@@ -101,8 +88,9 @@ public class FieldsManager {
         return sb.toString();
     }
 
-    public static void displayPatientInfo(Tab patientTab, Patient patient, TextField nameField, TextField familyNameField, DatePicker dateOfBirthPicker,
-                                   ComboBox<String> genderComboBox, TextArea medicalHistoryTextArea){
+    public static void displayPatientInfo(Tab patientTab, Patient patient, TextField nameField, TextField familyNameField,
+                                          DatePicker dateOfBirthPicker,ComboBox<String> genderComboBox,
+                                          TextArea medicalHistoryTextArea){
         if (patientTab.isDisabled()) {
             patientTab.setDisable(false);
         }
