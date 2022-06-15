@@ -620,8 +620,8 @@ public class TeacherMainCTLL {
                 this.currentPatient = model.getPatientOfCaseInGroup(currentCase,currentGroup);
                 FieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,
                         genderComboBox,medicalHistoryTextArea);
-            }catch (DALException dalException){
-                SoftAlert.displayAlert(dalException.getMessage());
+            }catch (DALException ignored){
+                //SoftAlert.displayAlert(dalException.getMessage());
             }
         }
     }
