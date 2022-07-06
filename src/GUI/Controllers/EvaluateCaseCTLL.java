@@ -187,6 +187,8 @@ public class EvaluateCaseCTLL {
         closeWindow();
     }
 
+    //Yes/no for FA & HC
+
     private void initializeTables() {
         categoryNameHC.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryNameFA.setCellValueFactory(new PropertyValueFactory<>("name"));
